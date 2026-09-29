@@ -1,74 +1,60 @@
-/// KPI-definities uit de bron; vaste AI-vervolgvragen buiten de workshopbasis.
 table Dim_KPI
-	lineageTag: 0b72c746-ed41-4dd5-a15d-2806f02c52d7
+	lineageTag: 4b412825-7a1e-51f9-adc4-f8406fddba42
 
 	column KPI_ID
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 8d272cd9-26d4-495c-a521-e04b0f57e41d
+		lineageTag: e8a7b70a-0d5d-580a-ab65-7775387588ac
 		summarizeBy: none
 		sourceColumn: KPI_ID
 
 	column KPI_Code
 		dataType: string
-		lineageTag: 27d39625-dffa-40b7-8f53-2bae7fcaf58b
+		lineageTag: 05062bb6-0a84-54f7-a8d1-ec68832e6232
 		summarizeBy: none
 		sourceColumn: KPI_Code
 
 	column KPI_Naam
 		dataType: string
-		lineageTag: 55c7591b-7b4f-4e29-a71c-d8e1c6546c60
+		lineageTag: c7109054-499e-58fb-ac00-dab4da9cea7a
 		summarizeBy: none
 		sourceColumn: KPI_Naam
 		sortByColumn: Volgorde
 
 	column Eenheid
 		dataType: string
-		lineageTag: e34379e8-fadd-44c2-b222-f6a0de9c8fc0
+		lineageTag: 31698770-24ba-593d-a86d-08e2d93a1462
 		summarizeBy: none
 		sourceColumn: Eenheid
 
-	column Aggregatie
+	column Domein
 		dataType: string
-		lineageTag: bdfaecb3-9ffd-474f-bd7c-4618925c2242
+		lineageTag: 3d02cacd-bc84-5f95-a8ff-fdbfb38fd067
 		summarizeBy: none
-		sourceColumn: Aggregatie
-
-	column Is_Ratio
-		dataType: int64
-		formatString: 0
-		lineageTag: e3ab0564-b196-4115-a8ac-417a4ff6fac0
-		summarizeBy: none
-		sourceColumn: Is_Ratio
+		sourceColumn: Domein
 
 	column Hoger_Is_Beter
 		dataType: int64
+		isHidden
 		formatString: 0
-		lineageTag: 6be10554-9773-4732-ba8e-0ddd21ecb6c4
+		lineageTag: a52194eb-5b48-52cb-a0e5-58ec5f0d7178
 		summarizeBy: none
 		sourceColumn: Hoger_Is_Beter
 
-	column Thema
+	column Periode
 		dataType: string
-		lineageTag: 91bc1f5f-17c3-46e7-a3b9-820278de140b
+		lineageTag: 8d86035f-8edb-5725-ac99-156caadd59ec
 		summarizeBy: none
-		sourceColumn: Thema
+		sourceColumn: Periode
 
 	column Volgorde
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 9b8bc0c1-dab7-41f2-b74e-43c0b77edc7a
+		lineageTag: 4eeb50b8-69da-5da2-ab86-0549e0e9470d
 		summarizeBy: none
 		sourceColumn: Volgorde
-
-	/// Rekenkolom: 1 voor KPI's in procenten (trend in procentpunt).
-	column Is_Percentage = IF ( Dim_KPI[Eenheid] = "%", 1, 0 )
-		dataType: int64
-		formatString: 0
-		lineageTag: cb7bc0c8-15f0-48e8-a1e4-065de65ae5b5
-		summarizeBy: none
 
 	partition Dim_KPI = m
 		mode: import
@@ -76,10 +62,8 @@ table Dim_KPI
 				let
 				    Bron = Csv.Document(LeesBron("dim_kpi.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
 				    Kop = Table.PromoteHeaders(Bron, [PromoteAllScalars = true]),
-				    Typen = Table.TransformColumnTypes(Kop, {{"KPI_ID", Int64.Type}, {"KPI_Code", type text}, {"KPI_Naam", type text}, {"Eenheid", type text}, {"Aggregatie", type text}, {"Is_Ratio", Int64.Type}, {"Hoger_Is_Beter", Int64.Type}, {"Thema", type text}, {"Volgorde", Int64.Type}}, "en-US"),
-				    Benoemd = Table.TransformColumns(Typen, {{"KPI_Naam", each if _ = "Bevolkingsgroei" then "Inwoners" else if _ = "Energieverbruik per huishouden" then "Gemiddeld maandverbruik per huishouden" else _, type text}})
+				    Typen = Table.TransformColumnTypes(Kop, {{"KPI_ID", Int64.Type}, {"KPI_Code", type text}, {"KPI_Naam", type text}, {"Eenheid", type text}, {"Domein", type text}, {"Hoger_Is_Beter", Int64.Type}, {"Periode", type text}, {"Volgorde", Int64.Type}}, "en-US")
 				in
-				    Benoemd
+				    Typen
 
 	annotation PBI_ResultType = Table
-

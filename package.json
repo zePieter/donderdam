@@ -1,17 +1,20 @@
 {
   "name": "donderdam-workshop",
-  "version": "0.99.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "Donderdam: BI-data en echte LLM-output voor een Power BI-workshop",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "start": "node server.js",
     "build": "node scripts/check.js",
     "test": "node --test",
-    "contexts": "node scripts/export-contexts.js",
     "snapshots": "node scripts/export-snapshots.js",
     "prepare:powerbi": "node scripts/prepare-powerbi.js",
-    "generate": "node --env-file-if-exists=.env scripts/generate.js"
+    "generate": "node --env-file-if-exists=.env scripts/generate.js",
+    "build:powerbi": "node scripts/build-powerbi.js",
+    "build:data": "node scripts/build-domain.js"
   }
 }

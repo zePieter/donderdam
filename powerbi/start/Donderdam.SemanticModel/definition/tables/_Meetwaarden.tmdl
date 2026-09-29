@@ -1,175 +1,188 @@
-/// Kernmeasures hergebruikt en begrensd voor een eenduidige KPI- en periodecontext.
+/// Alle measures. Mappen: 1-4 domein, 5 doelen, 6 KPI-keuze (voor de KPI-slicer), 7 opmaak.
 table _Meetwaarden
-	lineageTag: 5f95cd3d-6723-4cf1-8d88-89ca80612ee6
+	lineageTag: f9010661-5cfb-56b5-a335-ccdc9edabe4c
+
+	measure 'Woningen Opgeleverd' =
+			SUM ( Fact_Oplevering[Opgeleverd] )
+		formatString: #,0
+		displayFolder: 1 Woningbouw
+		lineageTag: aba5258d-0098-5a79-a16f-4ccf2c0001b9
+
+	measure 'Woningen Opgeleverd YTD' =
+			CALCULATE ( [Woningen Opgeleverd], DATESYTD ( Dim_Datum[Datum] ) )
+		formatString: #,0
+		displayFolder: 1 Woningbouw
+		lineageTag: ef583b13-6793-55a9-a37f-6adb60323a8a
+
+	measure 'Woningen Gepland YTD' =
+			CALCULATE ( SUM ( Fact_Oplevering[Gepland] ), DATESYTD ( Dim_Datum[Datum] ) )
+		formatString: #,0
+		displayFolder: 1 Woningbouw
+		lineageTag: 4f5b5e97-b40d-5e47-a236-aaf2f1e49b85
+
+	measure 'Woningen Achterstand YTD' =
+			[Woningen Gepland YTD] - [Woningen Opgeleverd YTD]
+		formatString: #,0
+		displayFolder: 1 Woningbouw
+		lineageTag: 6be6ee84-9dcb-5732-a84d-d41e65847ff5
+
+	measure 'Inwoners' =
+			VAR _m = CALCULATE ( MAX ( Fact_Bevolking[Datum] ) )
+			RETURN CALCULATE ( SUM ( Fact_Bevolking[Inwoners] ), Dim_Datum[Datum] = _m )
+		formatString: #,0
+		displayFolder: 2 Bevolking
+		lineageTag: 004a12e4-5e84-5861-ad9f-2db38d5c4272
+
+	measure 'Huishoudens' =
+			VAR _m = CALCULATE ( MAX ( Fact_Bevolking[Datum] ) )
+			RETURN CALCULATE ( SUM ( Fact_Bevolking[Huishoudens] ), Dim_Datum[Datum] = _m )
+		formatString: #,0
+		displayFolder: 2 Bevolking
+		lineageTag: 9e58c249-ad80-576b-a83d-3af4e48ed7ce
+
+	measure 'Werkloosheid' =
+			VAR _m = CALCULATE ( MAX ( Fact_Werkloosheid[Datum] ) )
+			RETURN CALCULATE ( DIVIDE ( SUM ( Fact_Werkloosheid[Werkzoekenden] ), SUM ( Fact_Werkloosheid[Beroepsbevolking] ) ), Dim_Datum[Datum] = _m )
+		formatString: 0.0%
+		displayFolder: 3 Werk
+		lineageTag: fce4dc12-2313-5a9c-a045-97507210ac73
+
+	measure 'Werkzoekenden' =
+			VAR _m = CALCULATE ( MAX ( Fact_Werkloosheid[Datum] ) )
+			RETURN CALCULATE ( SUM ( Fact_Werkloosheid[Werkzoekenden] ), Dim_Datum[Datum] = _m )
+		formatString: #,0
+		displayFolder: 3 Werk
+		lineageTag: fee5106a-b493-5b2a-aeaa-d86cc92654d0
+
+	measure 'Vacatures' =
+			VAR _m = CALCULATE ( MAX ( Fact_Vacatures[Datum] ) )
+			RETURN CALCULATE ( SUM ( Fact_Vacatures[Vacatures] ), Dim_Datum[Datum] = _m )
+		formatString: #,0
+		displayFolder: 3 Werk
+		lineageTag: 8ad858ea-c4e5-5996-a8ab-4555a3023606
+
+	measure 'CO2 Ton' =
+			SUM ( Fact_CO2[Ton] )
+		formatString: #,0
+		displayFolder: 4 Duurzaamheid
+		lineageTag: c31534ca-0650-5010-a3dd-526adade7e6f
+
+	measure 'CO2 YTD' =
+			CALCULATE ( [CO2 Ton], DATESYTD ( Dim_Datum[Datum] ) )
+		formatString: #,0
+		displayFolder: 4 Duurzaamheid
+		lineageTag: 095efcb9-a3f1-5af4-a05f-d4247dfa02b7
+
+	measure 'Peildatum' =
+			VAR _laatste = CALCULATE ( MAX ( Fact_Bevolking[Datum] ), REMOVEFILTERS () )
+			RETURN MIN ( MAX ( Dim_Datum[Datum] ), EOMONTH ( _laatste, 0 ) )
+		formatString: dd-mm-yyyy
+		displayFolder: 5 Doel
+		lineageTag: 2fb836c7-1a9a-545a-af43-6de397802c41
+
+	measure 'Doel' =
+			VAR _code = SELECTEDVALUE ( Dim_KPI[KPI_Code] )
+			VAR _d = [Peildatum]
+			VAR _jaardoel = CALCULATE ( IF ( _code = "WLH", AVERAGE ( Fact_Doel[Doel] ), SUM ( Fact_Doel[Doel] ) ), REMOVEFILTERS ( Dim_Datum ), Fact_Doel[Jaar] = YEAR ( _d ) )
+			RETURN IF ( ISBLANK ( _code ), BLANK (), IF ( _code IN { "WON", "CO2" }, _jaardoel * MONTH ( _d ) / 12, _jaardoel ) )
+		formatString: #,0.00
+		displayFolder: 5 Doel
+		lineageTag: 812e9597-ebdc-53e3-a761-eea6f42f2e88
+
+	measure 'Doel Woningen YTD' =
+			CALCULATE ( [Doel], REMOVEFILTERS ( Dim_KPI ), Dim_KPI[KPI_Code] = "WON" )
+		formatString: #,0
+		displayFolder: 5 Doel
+		lineageTag: 2672cdf3-dc62-5c51-acfa-09012623b8a7
+
+	measure 'Doel Werkloosheid' =
+			CALCULATE ( [Doel], REMOVEFILTERS ( Dim_KPI ), Dim_KPI[KPI_Code] = "WLH" )
+		formatString: 0.0%
+		displayFolder: 5 Doel
+		lineageTag: 1067db0e-d9eb-5b19-ae20-89cdb7386575
+
+	measure 'Doel CO2 YTD' =
+			CALCULATE ( [Doel], REMOVEFILTERS ( Dim_KPI ), Dim_KPI[KPI_Code] = "CO2" )
+		formatString: #,0
+		displayFolder: 5 Doel
+		lineageTag: 19d6b295-8aa0-55c2-a39e-1ff5753d186a
+
+	measure 'Doel Inwoners' =
+			CALCULATE ( [Doel], REMOVEFILTERS ( Dim_KPI ), Dim_KPI[KPI_Code] = "INW" )
+		formatString: #,0
+		displayFolder: 5 Doel
+		lineageTag: 3c766203-3ee8-57a1-a95c-755c66552b5e
 
 	measure 'KPI Waarde' =
-			VAR _agg = SELECTEDVALUE ( Dim_KPI[Aggregatie] )
-			VAR _ratio = SELECTEDVALUE ( Dim_KPI[Is_Ratio] ) = 1
-			VAR _laatste = MAX ( Fact_KPI[Datum] )
-			VAR _jaarstart = DATE ( YEAR ( _laatste ), 1, 1 )
-			VAR _t =
-			    IF (
-			        _agg = "stand",
-			        CALCULATE ( SUM ( Fact_KPI[Teller] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] = _laatste ),
-			        CALCULATE ( SUM ( Fact_KPI[Teller] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] >= _jaarstart && Dim_Datum[Datum] <= _laatste )
-			    )
-			VAR _n =
-			    IF (
-			        _agg = "stand",
-			        CALCULATE ( SUM ( Fact_KPI[Noemer] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] = _laatste ),
-			        CALCULATE ( SUM ( Fact_KPI[Noemer] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] >= _jaarstart && Dim_Datum[Datum] <= _laatste )
-			    )
-			RETURN
-			    IF ( NOT HASONEVALUE ( Dim_KPI[KPI_ID] ) || ISBLANK ( _agg ) || ISBLANK ( _laatste ), BLANK (), IF ( _ratio, DIVIDE ( _t, _n ), _t ) )
+			SWITCH ( SELECTEDVALUE ( Dim_KPI[KPI_Code] ), "WON", [Woningen Opgeleverd YTD], "WLH", [Werkloosheid], "CO2", [CO2 YTD], "INW", [Inwoners] )
 		formatString: #,0.00
-		displayFolder: 2 KPI
-		lineageTag: 555f2492-b5b5-4519-aec7-126cd68fc1bf
-
-	measure 'KPI Waarde VJ' =
-			VAR _agg = SELECTEDVALUE ( Dim_KPI[Aggregatie] )
-			VAR _ratio = SELECTEDVALUE ( Dim_KPI[Is_Ratio] ) = 1
-			VAR _huidig = MAX ( Fact_KPI[Datum] )
-			VAR _laatste = IF ( NOT ISBLANK ( _huidig ), EDATE ( _huidig, -12 ) )
-			VAR _jaarstart = DATE ( YEAR ( _laatste ), 1, 1 )
-			VAR _t =
-			    IF (
-			        _agg = "stand",
-			        CALCULATE ( SUM ( Fact_KPI[Teller] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] = _laatste ),
-			        CALCULATE ( SUM ( Fact_KPI[Teller] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] >= _jaarstart && Dim_Datum[Datum] <= _laatste )
-			    )
-			VAR _n =
-			    IF (
-			        _agg = "stand",
-			        CALCULATE ( SUM ( Fact_KPI[Noemer] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] = _laatste ),
-			        CALCULATE ( SUM ( Fact_KPI[Noemer] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] >= _jaarstart && Dim_Datum[Datum] <= _laatste )
-			    )
-			RETURN
-			    IF ( NOT HASONEVALUE ( Dim_KPI[KPI_ID] ) || ISBLANK ( _agg ) || ISBLANK ( _laatste ), BLANK (), IF ( _ratio, DIVIDE ( _t, _n ), _t ) )
-		formatString: #,0.00
-		displayFolder: 2 KPI
-		lineageTag: 09636bbc-d3ca-4990-a006-432f1aadd02f
-
-	measure 'KPI Jaartarget' =
-			VAR _ratio = SELECTEDVALUE ( Dim_KPI[Is_Ratio] ) = 1
-			VAR _datum = MAX ( Fact_KPI[Datum] )
-			VAR _jaar = YEAR ( _datum )
-			RETURN
-			    IF ( NOT HASONEVALUE ( Dim_KPI[KPI_ID] ) || ISBLANK ( _datum ), BLANK (), CALCULATE (
-			        IF ( _ratio, AVERAGE ( Fact_Target[Target] ), SUM ( Fact_Target[Target] ) ),
-			        REMOVEFILTERS ( Dim_Datum ),
-			        Dim_Datum[Datum] = DATE ( _jaar, 1, 1 )
-			    ) )
-		formatString: #,0.00
-		displayFolder: 3 Target
-		lineageTag: 747d6db3-9102-45d9-85d0-264b36daf894
+		displayFolder: 6 KPI-keuze
+		lineageTag: c7a5a335-d5c7-5e30-a876-87ebc81a7e1f
 
 	measure 'KPI Target' =
-			VAR _agg = SELECTEDVALUE ( Dim_KPI[Aggregatie] )
-			VAR _ratio = SELECTEDVALUE ( Dim_KPI[Is_Ratio] ) = 1
-			VAR _maand = MONTH ( MAX ( Fact_KPI[Datum] ) )
-			RETURN
-			    IF ( _agg = "cumulatief" && NOT _ratio, [KPI Jaartarget] * _maand / 12, [KPI Jaartarget] )
+			[Doel]
 		formatString: #,0.00
-		displayFolder: 3 Target
-		lineageTag: 2bbc9738-c13d-4dea-9e69-04d878fc8977
+		displayFolder: 6 KPI-keuze
+		lineageTag: 8b26dbac-3ca1-5770-a2a8-868972d77b68
+
+	measure 'KPI Waarde VJ' =
+			CALCULATE ( [KPI Waarde], SAMEPERIODLASTYEAR ( Dim_Datum[Datum] ) )
+		formatString: #,0.00
+		displayFolder: 6 KPI-keuze
+		lineageTag: 5430391e-ba6b-5eb1-a4e0-8dd67102f158
 
 	measure 'KPI Trend' =
-			VAR _ratio = SELECTEDVALUE ( Dim_KPI[Is_Percentage] ) = 1
 			VAR _nu = [KPI Waarde]
 			VAR _vj = [KPI Waarde VJ]
-			RETURN
-			    IF ( ISBLANK ( _nu ) || ISBLANK ( _vj ), BLANK (), IF ( _ratio, _nu - _vj, DIVIDE ( _nu - _vj, _vj ) ) )
+			RETURN IF ( ISBLANK ( _nu ) || ISBLANK ( _vj ), BLANK (), IF ( SELECTEDVALUE ( Dim_KPI[Eenheid] ) = "%", _nu - _vj, DIVIDE ( _nu - _vj, _vj ) ) )
 		formatString: 0.0%
-		displayFolder: 2 KPI
-		lineageTag: dd582270-55d3-4aa8-8458-b8d47c809ca4
+		displayFolder: 6 KPI-keuze
+		lineageTag: c9a5095f-2dd4-55d6-a17b-d3653e6819f3
 
 	measure 'KPI Op Koers' =
-			VAR _hoger = SELECTEDVALUE ( Dim_KPI[Hoger_Is_Beter] ) = 1
 			VAR _v = [KPI Waarde]
 			VAR _t = [KPI Target]
-			RETURN
-			    IF ( ISBLANK ( _v ) || ISBLANK ( _t ), BLANK (), IF ( IF ( _hoger, _v >= _t, _v <= _t ), 1, 0 ) )
+			RETURN IF ( ISBLANK ( _v ) || ISBLANK ( _t ), BLANK (), IF ( IF ( SELECTEDVALUE ( Dim_KPI[Hoger_Is_Beter] ) = 1, _v >= _t, _v <= _t ), 1, 0 ) )
 		formatString: 0
-		displayFolder: 2 KPI
-		lineageTag: fd0b43c4-6c53-448f-b282-d0252a1abc7e
+		displayFolder: 6 KPI-keuze
+		lineageTag: 429e9fca-fb2c-5b5e-a759-8f1265ad4758
 
 	measure 'KPI Waarde Tekst' =
 			VAR _code = SELECTEDVALUE ( Dim_KPI[KPI_Code] )
 			VAR _v = [KPI Waarde]
-			RETURN
-			    IF (
-			        ISBLANK ( _v ),
-			        BLANK (),
-			        SWITCH (
-			            _code,
-			            "INW", FORMAT ( _v / 1000, "0.0" ) & "K",
-			            "WLH", FORMAT ( _v * 100, "0.0" ) & "%",
-			            "ZON", FORMAT ( _v * 100, "0" ) & "%",
-			            "CO2", FORMAT ( _v, "#,0" ) & "t",
-			            "ENE", FORMAT ( _v, "0" ) & " kWh",
-			            FORMAT ( _v, "#,0" )
-			        )
-			    )
-		displayFolder: 7 Opmaak\Tekst
-		lineageTag: b768c7ba-b4dd-42d8-902d-4824c1c6c817
+			RETURN IF ( ISBLANK ( _v ), BLANK (), SWITCH ( _code, "INW", FORMAT ( _v / 1000, "0.0" ) & "K", "WLH", FORMAT ( _v * 100, "0.0" ) & "%", "CO2", FORMAT ( _v, "#,0" ) & "t", FORMAT ( _v, "#,0" ) ) )
+		displayFolder: 7 Opmaak
+		lineageTag: 4ab430c2-d46a-57b7-a49d-99702e0d4d6b
 
 	measure 'KPI Target Tekst' =
 			VAR _code = SELECTEDVALUE ( Dim_KPI[KPI_Code] )
 			VAR _v = [KPI Target]
-			RETURN
-			    IF (
-			        ISBLANK ( _v ),
-			        BLANK (),
-			        SWITCH (
-			            _code,
-			            "INW", FORMAT ( _v / 1000, "0.0" ) & "K",
-			            "WLH", FORMAT ( _v * 100, "0.0" ) & "%",
-			            "ZON", FORMAT ( _v * 100, "0" ) & "%",
-			            "CO2", FORMAT ( _v, "#,0" ) & "t",
-			            "ENE", FORMAT ( _v, "0" ) & " kWh",
-			            FORMAT ( _v, "#,0" )
-			        )
-			    )
-		displayFolder: 7 Opmaak\Tekst
-		lineageTag: 9f6bbddf-4115-4ec4-90ea-a8d9b2b43c6d
-
-	measure Teller = SUM ( Fact_KPI[Teller] )
-		formatString: #,0.0
-		displayFolder: 1 Basis
-		lineageTag: c75fc804-f46c-4fa5-b11e-f81a2fd1989b
-
-	measure Noemer = SUM ( Fact_KPI[Noemer] )
-		formatString: #,0.0
-		displayFolder: 1 Basis
-		lineageTag: a15c7844-dcc3-4048-84c5-261d8a259374
-
-	measure 'CO2 Sector Ton' = SUM ( Fact_CO2_Sector[Ton] )
-		formatString: #,0
-		displayFolder: 8 Thema\Duurzaamheid
-		lineageTag: 2c5c7073-5eb3-4210-942c-2d9d854a2a91
-
-	measure 'KPI Afwijking' = IF ( ISBLANK ( [KPI Waarde] ) || ISBLANK ( [KPI Target] ), BLANK (), [KPI Waarde] - [KPI Target] )
-		formatString: #,0.00
-		displayFolder: 2 KPI
-		lineageTag: 91fca7b6-4af4-4d3d-a0db-9c08c7ffd9f5
+			RETURN IF ( ISBLANK ( _v ), BLANK (), SWITCH ( _code, "INW", FORMAT ( _v / 1000, "0.0" ) & "K", "WLH", FORMAT ( _v * 100, "0.0" ) & "%", "CO2", FORMAT ( _v, "#,0" ) & "t", FORMAT ( _v, "#,0" ) ) )
+		displayFolder: 7 Opmaak
+		lineageTag: 42c55317-751f-5bb7-abbc-dbce6fd460f7
 
 	measure 'KPI Trend Tekst' =
 			VAR _v = [KPI Trend]
-			RETURN IF ( ISBLANK ( _v ), "Geen vergelijkbare historie", IF ( SELECTEDVALUE ( Dim_KPI[Is_Percentage] ) = 1, FORMAT ( _v * 100, "+0.0;-0.0;0.0" ) & " procentpunt", FORMAT ( _v, "+0.0%;-0.0%;0.0%" ) ) )
-		displayFolder: 7 Opmaak\Tekst
-		lineageTag: 237010be-5c45-4ee9-bec0-ae7b151c2dd1
+			RETURN IF ( ISBLANK ( _v ), "Geen vergelijkbare historie", IF ( SELECTEDVALUE ( Dim_KPI[Eenheid] ) = "%", FORMAT ( _v * 100, "+0.0;-0.0;0.0" ) & " procentpunt", FORMAT ( _v, "+0.0%;-0.0%;0.0%" ) ) )
+		displayFolder: 7 Opmaak
+		lineageTag: e9cd80e8-90a5-566f-a215-2143acb88d9a
 
-	measure Contextlabel =
+	measure 'KPI Kleur' =
+			IF ( [KPI Op Koers] = 0, "#E8603C", "#4A9FA0" )
+		displayFolder: 7 Opmaak
+		lineageTag: c11d068f-b7f9-5c4e-ae74-ad3b1777a724
+
+	measure 'Contextlabel' =
 			VAR _p = SELECTEDVALUE ( Dim_Datum[Maand], "Kies een maand" )
 			VAR _k = SELECTEDVALUE ( Dim_KPI[KPI_Naam], "Kies een KPI" )
 			RETURN _k & " | " & _p & " | " & IF ( ISFILTERED ( Dim_Wijk ), "Wijkselectie", "Gemeente: alle acht wijken" )
-		displayFolder: 7 Opmaak\Tekst
-		lineageTag: 9c186415-b7e6-4e31-8592-59c9512693b2
+		displayFolder: 7 Opmaak
+		lineageTag: 1e1c6c25-dc41-5a91-a59e-6dc5c374e176
 
 	column Sleutel
 		dataType: int64
 		isHidden
-		lineageTag: fe91c379-b027-4b63-a416-f1ca1c46c2ec
+		lineageTag: c98d4ebe-4913-5962-a555-1ca55311c128
 		summarizeBy: none
 		sourceColumn: Sleutel
 
@@ -178,4 +191,3 @@ table _Meetwaarden
 		source = #table(type table [Sleutel = Int64.Type], {})
 
 	annotation PBI_ResultType = Table
-

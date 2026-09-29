@@ -1,0 +1,67 @@
+table Dim_Project
+	lineageTag: 15a6daeb-a358-52e0-ae5e-dbd502b484e1
+
+	column Project_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d81fdf6a-73a7-5cfd-a555-5b480a0e4a86
+		summarizeBy: none
+		sourceColumn: Project_ID
+
+	column Project_Code
+		dataType: string
+		lineageTag: 85f33b9b-a3d3-5a78-a76a-e43610007f75
+		summarizeBy: none
+		sourceColumn: Project_Code
+
+	column Projectnaam
+		dataType: string
+		lineageTag: ef617cbb-702c-5f52-a570-d576c7186fe4
+		summarizeBy: none
+		sourceColumn: Projectnaam
+
+	column Aannemer
+		dataType: string
+		lineageTag: 9d99add5-9a76-5fad-ae9b-e51c83188416
+		summarizeBy: none
+		sourceColumn: Aannemer
+
+	column Segment
+		dataType: string
+		lineageTag: eadcc7e3-2520-5127-ab36-2c66f2856749
+		summarizeBy: none
+		sourceColumn: Segment
+
+	column Woningen_Gepland
+		dataType: int64
+		formatString: 0
+		lineageTag: a0623c8c-522a-5781-a06d-ba2a4c893a25
+		summarizeBy: none
+		sourceColumn: Woningen_Gepland
+
+	column Start_Bouw
+		dataType: dateTime
+		formatString: dd-mm-yyyy
+		lineageTag: 56951c5d-6b80-5ae2-ad2e-a43179fd2ff5
+		summarizeBy: none
+		sourceColumn: Start_Bouw
+
+	column Geplande_Oplevering_Tot
+		dataType: dateTime
+		formatString: dd-mm-yyyy
+		lineageTag: 56695504-6dfc-5d00-a00f-88dcc27a5542
+		summarizeBy: none
+		sourceColumn: Geplande_Oplevering_Tot
+
+	partition Dim_Project = m
+		mode: import
+		source =
+				let
+				    Bron = Csv.Document(LeesBron("dim_project.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Kop = Table.PromoteHeaders(Bron, [PromoteAllScalars = true]),
+				    Typen = Table.TransformColumnTypes(Kop, {{"Project_ID", Int64.Type}, {"Project_Code", type text}, {"Projectnaam", type text}, {"Aannemer", type text}, {"Segment", type text}, {"Woningen_Gepland", Int64.Type}, {"Start_Bouw", type date}, {"Geplande_Oplevering_Tot", type date}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table

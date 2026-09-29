@@ -1,0 +1,33 @@
+table AI_Aanbeveling_Wijk
+	lineageTag: eecb3b15-d90e-505e-ae22-729403fa4947
+
+	column Aanbeveling_ID
+		dataType: string
+		lineageTag: 81fbf5b9-930d-5074-ac11-e7064bbf8b7b
+		summarizeBy: none
+		sourceColumn: Aanbeveling_ID
+
+	column Wijk_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 2aaa7baf-cbcf-5974-ac47-ed0a55565fe1
+		summarizeBy: none
+		sourceColumn: Wijk_ID
+
+	column Wijk_Naam
+		dataType: string
+		lineageTag: af4cecee-9ee5-554e-a3d2-04cb94816ed4
+		summarizeBy: none
+		sourceColumn: Wijk_Naam
+
+	partition AI_Aanbeveling_Wijk = m
+		mode: import
+		source =
+				let
+				    Bron = LeesAI("aanbeveling-wijken"),
+				    Tabel = Table.FromRecords(Bron, {"Aanbeveling_ID","Wijk_ID","Wijk_Naam"}, MissingField.UseNull),
+				    Typen = Table.TransformColumnTypes(Tabel, {{"Aanbeveling_ID", type text}, {"Wijk_ID", Int64.Type}, {"Wijk_Naam", type text}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table

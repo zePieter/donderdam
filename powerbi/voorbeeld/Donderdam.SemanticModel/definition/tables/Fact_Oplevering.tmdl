@@ -1,0 +1,54 @@
+table Fact_Oplevering
+	lineageTag: afa9e002-daa6-5bc1-a5e9-938d0fc9eb57
+
+	column Datum
+		dataType: dateTime
+		isHidden
+		formatString: dd-mm-yyyy
+		lineageTag: 6d37c8d6-6d4b-524a-a440-b43819088b08
+		summarizeBy: none
+		sourceColumn: Datum
+
+	column Project_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 62cda1c5-f6c5-5726-a0bc-e49b16d0e1f8
+		summarizeBy: none
+		sourceColumn: Project_ID
+
+	column Wijk_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a2ac8af9-48b9-542a-a9c1-35cb8dfdff1c
+		summarizeBy: none
+		sourceColumn: Wijk_ID
+
+	column Gepland
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 3c0a6a57-4eb1-5b7c-ac51-92e2fdda88ee
+		summarizeBy: none
+		sourceColumn: Gepland
+
+	column Opgeleverd
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 0c9f0bfb-0ff7-5c4a-a6c9-b55583fc48fe
+		summarizeBy: none
+		sourceColumn: Opgeleverd
+
+	partition Fact_Oplevering = m
+		mode: import
+		source =
+				let
+				    Bron = Csv.Document(LeesBron("fact_oplevering.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Kop = Table.PromoteHeaders(Bron, [PromoteAllScalars = true]),
+				    Typen = Table.TransformColumnTypes(Kop, {{"Datum", type date}, {"Project_ID", Int64.Type}, {"Wijk_ID", Int64.Type}, {"Gepland", type number}, {"Opgeleverd", type number}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table

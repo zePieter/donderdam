@@ -1,8 +1,5 @@
-KPI_ID,KPI_Code,KPI_Naam,Eenheid,Aggregatie,Is_Ratio,Hoger_Is_Beter,Thema,Volgorde
-1,INW,Bevolkingsgroei,inwoners,stand,0,1,Wonen,1
-2,WON,Nieuwe woningen,woningen,cumulatief,0,1,Wonen,2
-3,WLH,Werkloosheid,%,stand,1,0,Economie,3
-4,CO2,CO2-uitstoot,ton,cumulatief,0,0,Duurzaamheid,4
-5,ZON,Woningen met zonnepanelen,%,stand,1,1,Duurzaamheid,5
-6,ENE,Energieverbruik per huishouden,kWh,cumulatief,1,0,Duurzaamheid,6
-7,IAB,Woningen in aanbouw,woningen,stand,0,1,Wonen,7
+KPI_ID,KPI_Code,KPI_Naam,Eenheid,Domein,Hoger_Is_Beter,Periode,Volgorde
+1,INW,Inwoners,inwoners,Bevolking,1,stand in maand,4
+2,WON,Nieuwe woningen,woningen,Woningbouw,1,jaar t/m maand,1
+3,WLH,Werkloosheid,%,Werk,0,stand in maand,2
+4,CO2,CO2-uitstoot,ton,Duurzaamheid,0,jaar t/m maand,3

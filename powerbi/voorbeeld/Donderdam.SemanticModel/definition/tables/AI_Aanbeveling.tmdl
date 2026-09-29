@@ -1,0 +1,95 @@
+table AI_Aanbeveling
+	lineageTag: 10c1ae93-e434-5662-afd3-3def46dff103
+
+	column Aanbeveling_ID
+		dataType: string
+		lineageTag: 19856f72-e27e-5990-ade0-be6b63150134
+		summarizeBy: none
+		sourceColumn: Aanbeveling_ID
+
+	column Peilmaand
+		dataType: dateTime
+		formatString: dd-mm-yyyy
+		lineageTag: f5127a33-485e-5766-a0c6-28a430bfc9df
+		summarizeBy: none
+		sourceColumn: Peilmaand
+
+	column KPI_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: dae8e1c7-4455-58c2-aa14-095b0da1987b
+		summarizeBy: none
+		sourceColumn: KPI_ID
+
+	column KPI_Code
+		dataType: string
+		lineageTag: 3c3e4d34-7ea8-56a2-ad4c-cbd09183cc82
+		summarizeBy: none
+		sourceColumn: KPI_Code
+
+	column Volgorde
+		dataType: int64
+		formatString: 0
+		lineageTag: 73b1139d-89dd-530c-aa28-321379711218
+		summarizeBy: none
+		sourceColumn: Volgorde
+
+	column Titel
+		dataType: string
+		lineageTag: 7f0d26d8-3b72-5710-abcc-7cda8a35d99a
+		summarizeBy: none
+		sourceColumn: Titel
+
+	column Voorstel
+		dataType: string
+		lineageTag: f4875412-41dd-502a-a86e-49fce6c4aa06
+		summarizeBy: none
+		sourceColumn: Voorstel
+
+	column Waarom
+		dataType: string
+		lineageTag: da09e673-c80a-5143-a056-85459f4e432e
+		summarizeBy: none
+		sourceColumn: Waarom
+
+	column Te_Toetsen
+		dataType: string
+		lineageTag: e5fcf11c-efd6-5cd9-ad87-64236eb5927d
+		summarizeBy: none
+		sourceColumn: Te_Toetsen
+
+	column Run_ID
+		dataType: string
+		lineageTag: 0c8f5301-0feb-5d85-a915-ba879b5d772a
+		summarizeBy: none
+		sourceColumn: Run_ID
+
+	column Model
+		dataType: string
+		lineageTag: e1de7bdf-0a58-5af2-ab03-c0a0e9e57698
+		summarizeBy: none
+		sourceColumn: Model
+
+	column Gegenereerd_Op
+		dataType: string
+		lineageTag: eb87fe7c-855b-58cc-a663-3fe4788be14a
+		summarizeBy: none
+		sourceColumn: Gegenereerd_Op
+
+	column Review_Status
+		dataType: string
+		lineageTag: 84cfc189-948d-5759-a958-751b92f164aa
+		summarizeBy: none
+		sourceColumn: Review_Status
+
+	partition AI_Aanbeveling = m
+		mode: import
+		source =
+				let
+				    Bron = LeesAI("aanbevelingen"),
+				    Tabel = Table.FromRecords(Bron, {"Aanbeveling_ID","Peilmaand","KPI_ID","KPI_Code","Volgorde","Titel","Voorstel","Waarom","Te_Toetsen","Run_ID","Model","Gegenereerd_Op","Review_Status"}, MissingField.UseNull),
+				    Typen = Table.TransformColumnTypes(Tabel, {{"Aanbeveling_ID", type text}, {"Peilmaand", type date}, {"KPI_ID", Int64.Type}, {"KPI_Code", type text}, {"Volgorde", Int64.Type}, {"Titel", type text}, {"Voorstel", type text}, {"Waarom", type text}, {"Te_Toetsen", type text}, {"Run_ID", type text}, {"Model", type text}, {"Gegenereerd_Op", type text}, {"Review_Status", type text}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table

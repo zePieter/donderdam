@@ -1,31 +1,16 @@
-/// Lokale map met de zeven bron-CSV's. Kies via Transform data > Edit parameters.
+/// Lokale map met de bronbestanden (terugval zonder internet). npm run prepare:powerbi zet dit pad.
 expression DataFolder = "D:\PROJECTEN\INTERN\BI\AI infused BI case\Donderdam-v2\workshop-v099\donderdam\data\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
-	lineageTag: 91e4edda-0d92-4332-b428-8c820df9f01a
 
-	annotation PBI_ResultType = Text
-
-/// Optionele gedeelde HTTPS-map met de bronbestanden; leeg gebruikt de lokale kopie.
+/// Workshopsite voor de BI-CSV's. Leeg = lokale kopie in DataFolder.
 expression BaseUrl = "" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=false]
-	lineageTag: 78732981-0aba-4102-bfe8-d08f2d877e5b
 
-	annotation PBI_ResultType = Text
+/// Workshopsite voor de AI-output. Leeg = lokale kopie in DataFolder.
+expression AiBaseUrl = "" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=false]
 
 expression LeesBron =
 		(Bestand as text) as binary =>
-		    if Text.Trim(BaseUrl) <> "" then
-		        Web.Contents(BaseUrl, [RelativePath = Bestand])
-		    else
-		        File.Contents(DataFolder & Bestand)
-	lineageTag: 04413743-fcec-4302-9f84-93f39e8e183c
-
-/// Leeg: opgeslagen echte AI-output lokaal. Voor web: http://localhost:3000/ of gedeelde HTTPS-URL.
-expression AiBaseUrl = "" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=false]
-	lineageTag: 4254bf84-b808-46e1-a626-8629a87db8d0
-
-	annotation PBI_ResultType = Text
+		    if Text.Trim(BaseUrl) <> "" then Web.Contents(BaseUrl, [RelativePath = Bestand]) else File.Contents(DataFolder & Bestand)
 
 expression LeesAI =
-		(Smaak as text) as list =>
-		    Json.Document(if Text.Trim(AiBaseUrl) = "" then File.Contents(DataFolder & "ai-" & Smaak & ".json") else Web.Contents(AiBaseUrl, [RelativePath = "api/" & Smaak]))
-	lineageTag: dcb81fd3-aa15-4b33-a691-326f6ec506b0
-
+		(Naam as text) as list =>
+		    Json.Document(if Text.Trim(AiBaseUrl) <> "" then Web.Contents(AiBaseUrl, [RelativePath = "api/" & Naam]) else File.Contents(DataFolder & "ai-" & Naam & ".json"))

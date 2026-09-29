@@ -1,60 +1,99 @@
-relationship 12f5b948-df4c-56ef-a80c-4af8605b27e2
-	fromColumn: Fact_KPI.Datum
+relationship ed16a952-725b-57e0-ab4c-81e45e1ea804
+	fromColumn: Fact_Bevolking.Datum
 	toColumn: Dim_Datum.Datum
 
-relationship 79a8a8e9-9857-5789-a098-3b242ed11483
-	fromColumn: Fact_KPI.Wijk_ID
+relationship b9eee7fc-aa56-5c43-ad8a-572894b51087
+	fromColumn: Fact_Bevolking.Wijk_ID
 	toColumn: Dim_Wijk.Wijk_ID
 
-relationship f5ab945a-15c3-559f-a9ff-85078f1f3b34
-	fromColumn: Fact_KPI.KPI_ID
-	toColumn: Dim_KPI.KPI_ID
-
-relationship 2acde53b-9df0-54e2-8124-02a65adc3c51
-	fromColumn: Fact_CO2_Sector.Datum
+relationship a06042b6-2976-5868-ab36-c8df4e7217f1
+	fromColumn: Fact_Oplevering.Datum
 	toColumn: Dim_Datum.Datum
 
-relationship b495eaf7-6915-5ec8-b954-afba8e4576f3
-	fromColumn: Fact_CO2_Sector.Wijk_ID
+relationship cdb888bc-ea42-5e24-ad28-2130dc88e8d4
+	fromColumn: Fact_Oplevering.Wijk_ID
 	toColumn: Dim_Wijk.Wijk_ID
 
-relationship a68aad40-c0f6-5bd3-aa08-244adc29f5d7
-	fromColumn: Fact_CO2_Sector.Sector_ID
+relationship f61cdc1c-9efc-564b-a3d9-2f6701f83173
+	fromColumn: Fact_Oplevering.Project_ID
+	toColumn: Dim_Project.Project_ID
+
+relationship 305ae9a7-e98d-588a-ac02-6a1c1c0d7ed2
+	fromColumn: Fact_Werkloosheid.Datum
+	toColumn: Dim_Datum.Datum
+
+relationship 1035c0d4-ee7e-54ea-a06f-cbe78761f8b1
+	fromColumn: Fact_Werkloosheid.Wijk_ID
+	toColumn: Dim_Wijk.Wijk_ID
+
+relationship f061278c-1e4b-56e9-abb4-b467e330f8e7
+	fromColumn: Fact_Werkloosheid.Leeftijd_ID
+	toColumn: Dim_Leeftijd.Leeftijd_ID
+
+relationship 740ddae3-e87e-5b3f-aee9-5f9826745931
+	fromColumn: Fact_Vacatures.Datum
+	toColumn: Dim_Datum.Datum
+
+relationship e652f819-991a-5373-afbb-591a5119454d
+	fromColumn: Fact_Vacatures.Branche_ID
+	toColumn: Dim_Branche.Branche_ID
+
+relationship d20ec81d-e71d-5cfa-a576-cb139eef2d9c
+	fromColumn: Fact_CO2.Datum
+	toColumn: Dim_Datum.Datum
+
+relationship 12f610df-8432-5d8c-af58-5f6bc8175cbe
+	fromColumn: Fact_CO2.Wijk_ID
+	toColumn: Dim_Wijk.Wijk_ID
+
+relationship 41e6b6ec-3e5f-53d3-a775-23560cac6c22
+	fromColumn: Fact_CO2.Sector_ID
 	toColumn: Dim_Sector.Sector_ID
 
-relationship 59fa391b-87b1-558e-80e2-39fb26bac8d4
-	fromColumn: Fact_Target.Datum
+relationship 06478250-ca81-53f0-a038-ff4dbba8dd3f
+	fromColumn: Fact_Doel.Datum
 	toColumn: Dim_Datum.Datum
 
-relationship 80c9bd54-2890-5ee7-bcc1-d6416db94f99
-	fromColumn: Fact_Target.Wijk_ID
+relationship c6092032-e86a-5e4c-a864-df56108b4c4b
+	fromColumn: Fact_Doel.Wijk_ID
 	toColumn: Dim_Wijk.Wijk_ID
 
-relationship 8bb7fc3c-9b8d-546c-bb35-333dcdb1c91e
-	fromColumn: Fact_Target.KPI_ID
+relationship ce8d2490-45d2-5e5d-a7f6-cd9f75ce11f9
+	fromColumn: Fact_Doel.KPI_ID
 	toColumn: Dim_KPI.KPI_ID
 
-relationship 2293e7f3-04a5-5a25-987f-d63da6323145
-	fromColumn: AI_Inzichten.Peilmaand
+relationship b588514a-f3d0-5d7d-a3a1-46ac367629b8
+	fromColumn: AI_Signaal.Peilmaand
 	toColumn: Dim_Datum.Datum
 
-relationship 695d400a-4fff-5b39-88a5-9e5eed069e0c
-	fromColumn: AI_Inzichten.KPI_ID
+relationship fd218b20-7c97-5f7c-a162-beb1d39130fc
+	fromColumn: AI_Signaal.KPI_ID
 	toColumn: Dim_KPI.KPI_ID
 
-relationship f37d46d8-d385-53aa-9700-2cf727240b21
-	fromColumn: AI_Verdieping.Peilmaand
+relationship 34741b85-a5e9-5043-a1b0-d810ab5e8e1a
+	fromColumn: AI_Wijkduiding.Peilmaand
 	toColumn: Dim_Datum.Datum
 
-relationship fe3970e7-551a-5b8b-b4d2-fe5e497042ad
-	fromColumn: AI_Verdieping.KPI_ID
+relationship 4838db26-336e-5e6f-a9f9-ee5688b3a323
+	fromColumn: AI_Wijkduiding.KPI_ID
 	toColumn: Dim_KPI.KPI_ID
 
-relationship 09767600-d966-5c4e-846c-fd76eaac617e
-	fromColumn: AI_Aanbevelingen.Peilmaand
+relationship de50b4fd-ec23-53ad-abd8-d78945d24daf
+	fromColumn: AI_Wijkduiding.Wijk_ID
+	toColumn: Dim_Wijk.Wijk_ID
+
+relationship ba14cf41-cd27-5703-a04a-fa9118db3190
+	fromColumn: AI_Aanbeveling.Peilmaand
 	toColumn: Dim_Datum.Datum
 
-relationship 12680720-81c0-5041-bff7-c7cf539579c7
-	fromColumn: AI_Aanbevelingen.KPI_ID
+relationship e7b90f5c-2cc0-5481-ab40-3ceaeaee73f9
+	fromColumn: AI_Aanbeveling.KPI_ID
 	toColumn: Dim_KPI.KPI_ID
 
+relationship bcf7637e-68fc-51e9-a0df-f677dcff216d
+	fromColumn: AI_Aanbeveling_Wijk.Aanbeveling_ID
+	toColumn: AI_Aanbeveling.Aanbeveling_ID
+
+relationship 7cc4e05e-2db6-52f7-a0d6-e0b284c36758
+	fromColumn: AI_Aanbeveling_Wijk.Wijk_ID
+	toColumn: Dim_Wijk.Wijk_ID

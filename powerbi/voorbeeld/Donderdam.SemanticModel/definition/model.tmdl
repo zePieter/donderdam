@@ -9,21 +9,23 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["AI_Aanbevelingen","AI_Inzichten","AI_Verdieping","Dim_Datum","Dim_KPI","Dim_Sector","Dim_Wijk","Fact_CO2_Sector","Fact_KPI","Fact_Target","_Meetwaarden","DataFolder","BaseUrl","LeesBron","AiBaseUrl","LeesAI"]
-
 annotation PBI_ProTooling = ["DevMode"]
 
-ref table AI_Aanbevelingen
-ref table AI_Inzichten
-ref table AI_Verdieping
 ref table Dim_Datum
-ref table Dim_KPI
-ref table Dim_Sector
 ref table Dim_Wijk
-ref table Fact_CO2_Sector
-ref table Fact_KPI
-ref table Fact_Target
+ref table Dim_KPI
+ref table Dim_Project
+ref table Dim_Leeftijd
+ref table Dim_Branche
+ref table Dim_Sector
+ref table Fact_Bevolking
+ref table Fact_Oplevering
+ref table Fact_Werkloosheid
+ref table Fact_Vacatures
+ref table Fact_CO2
+ref table Fact_Doel
+ref table AI_Signaal
+ref table AI_Wijkduiding
+ref table AI_Aanbeveling
+ref table AI_Aanbeveling_Wijk
 ref table _Meetwaarden
-
-ref cultureInfo nl-NL
-

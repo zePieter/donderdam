@@ -1,0 +1,101 @@
+table AI_Signaal
+	lineageTag: bbe32a68-1907-5eda-a7a0-ff5818ef05d1
+
+	column Signaal_ID
+		dataType: string
+		lineageTag: 700b4c5f-de5b-51ee-aa50-773b3c42aed0
+		summarizeBy: none
+		sourceColumn: Signaal_ID
+
+	column Peilmaand
+		dataType: dateTime
+		formatString: dd-mm-yyyy
+		lineageTag: 2c2c1001-87e5-5619-a9df-e8ebf3cc4c66
+		summarizeBy: none
+		sourceColumn: Peilmaand
+
+	column KPI_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: aa58b777-40b8-53ac-ac46-05341791ec43
+		summarizeBy: none
+		sourceColumn: KPI_ID
+
+	column KPI_Code
+		dataType: string
+		lineageTag: eb71a054-683f-5a0c-a224-abac8c0da228
+		summarizeBy: none
+		sourceColumn: KPI_Code
+
+	column Signaal
+		dataType: string
+		lineageTag: b7b28b6a-5d2d-53f0-a955-db284f34272a
+		summarizeBy: none
+		sourceColumn: Signaal
+
+	column Richting
+		dataType: string
+		lineageTag: c002846b-218c-5a2a-aad9-17f9302b072d
+		summarizeBy: none
+		sourceColumn: Richting
+
+	column Maanden_Op_Rij
+		dataType: int64
+		formatString: 0
+		lineageTag: 74c280b2-620f-5747-afd5-a3eb831ff3ee
+		summarizeBy: none
+		sourceColumn: Maanden_Op_Rij
+
+	column Kop
+		dataType: string
+		lineageTag: 462217ee-1f63-55a8-a747-66cdbf85bcd0
+		summarizeBy: none
+		sourceColumn: Kop
+
+	column Duiding
+		dataType: string
+		lineageTag: 57fd5915-862e-5fe1-ac27-7b7e32856b82
+		summarizeBy: none
+		sourceColumn: Duiding
+
+	column Zekerheid
+		dataType: string
+		lineageTag: bea7f062-2594-501c-aec5-485e1b6f01ea
+		summarizeBy: none
+		sourceColumn: Zekerheid
+
+	column Run_ID
+		dataType: string
+		lineageTag: 4d2483fe-c917-52d5-a034-9ec7ce105acd
+		summarizeBy: none
+		sourceColumn: Run_ID
+
+	column Model
+		dataType: string
+		lineageTag: 1f037dac-bc79-5b84-a4f3-04ea7eac8fec
+		summarizeBy: none
+		sourceColumn: Model
+
+	column Gegenereerd_Op
+		dataType: string
+		lineageTag: d3c3b8ae-c839-517a-ab18-4c0ed84f66c3
+		summarizeBy: none
+		sourceColumn: Gegenereerd_Op
+
+	column Review_Status
+		dataType: string
+		lineageTag: f89da1c0-53b9-5079-a9d4-e559f370645a
+		summarizeBy: none
+		sourceColumn: Review_Status
+
+	partition AI_Signaal = m
+		mode: import
+		source =
+				let
+				    Bron = LeesAI("signalen"),
+				    Tabel = Table.FromRecords(Bron, {"Signaal_ID","Peilmaand","KPI_ID","KPI_Code","Signaal","Richting","Maanden_Op_Rij","Kop","Duiding","Zekerheid","Run_ID","Model","Gegenereerd_Op","Review_Status"}, MissingField.UseNull),
+				    Typen = Table.TransformColumnTypes(Tabel, {{"Signaal_ID", type text}, {"Peilmaand", type date}, {"KPI_ID", Int64.Type}, {"KPI_Code", type text}, {"Signaal", type text}, {"Richting", type text}, {"Maanden_Op_Rij", Int64.Type}, {"Kop", type text}, {"Duiding", type text}, {"Zekerheid", type text}, {"Run_ID", type text}, {"Model", type text}, {"Gegenereerd_Op", type text}, {"Review_Status", type text}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table

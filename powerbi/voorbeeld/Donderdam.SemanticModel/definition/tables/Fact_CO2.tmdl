@@ -1,0 +1,46 @@
+table Fact_CO2
+	lineageTag: 5d600d31-e7ad-5a52-aeaf-07b7f4287e1e
+
+	column Datum
+		dataType: dateTime
+		isHidden
+		formatString: dd-mm-yyyy
+		lineageTag: 7d68ea30-f62c-55ec-a653-ef051513eb3b
+		summarizeBy: none
+		sourceColumn: Datum
+
+	column Wijk_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d3a0f268-4164-534a-ad6e-e93e69324365
+		summarizeBy: none
+		sourceColumn: Wijk_ID
+
+	column Sector_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fa30fbb1-608e-5e7c-a6ea-4aaf1244792a
+		summarizeBy: none
+		sourceColumn: Sector_ID
+
+	column Ton
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 21228898-886d-5e12-a833-456b50b12429
+		summarizeBy: none
+		sourceColumn: Ton
+
+	partition Fact_CO2 = m
+		mode: import
+		source =
+				let
+				    Bron = Csv.Document(LeesBron("fact_co2.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Kop = Table.PromoteHeaders(Bron, [PromoteAllScalars = true]),
+				    Typen = Table.TransformColumnTypes(Kop, {{"Datum", type date}, {"Wijk_ID", Int64.Type}, {"Sector_ID", Int64.Type}, {"Ton", type number}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table

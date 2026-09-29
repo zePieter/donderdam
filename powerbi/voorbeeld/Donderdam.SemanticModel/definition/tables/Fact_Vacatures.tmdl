@@ -1,0 +1,38 @@
+table Fact_Vacatures
+	lineageTag: d98cfc5b-2de1-57e3-a532-62e565b55c11
+
+	column Datum
+		dataType: dateTime
+		isHidden
+		formatString: dd-mm-yyyy
+		lineageTag: 1e396870-f997-5649-a564-1cd14853b3c5
+		summarizeBy: none
+		sourceColumn: Datum
+
+	column Branche_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c2774183-aa5d-5135-a6cf-5f6c151328a3
+		summarizeBy: none
+		sourceColumn: Branche_ID
+
+	column Vacatures
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: a34be245-1261-598b-ae45-26388abd1b93
+		summarizeBy: none
+		sourceColumn: Vacatures
+
+	partition Fact_Vacatures = m
+		mode: import
+		source =
+				let
+				    Bron = Csv.Document(LeesBron("fact_vacatures.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Kop = Table.PromoteHeaders(Bron, [PromoteAllScalars = true]),
+				    Typen = Table.TransformColumnTypes(Kop, {{"Datum", type date}, {"Branche_ID", Int64.Type}, {"Vacatures", type number}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table

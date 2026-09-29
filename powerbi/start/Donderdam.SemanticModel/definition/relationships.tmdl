@@ -1,36 +1,63 @@
-relationship 12f5b948-df4c-56ef-a80c-4af8605b27e2
-	fromColumn: Fact_KPI.Datum
+relationship ed16a952-725b-57e0-ab4c-81e45e1ea804
+	fromColumn: Fact_Bevolking.Datum
 	toColumn: Dim_Datum.Datum
 
-relationship 79a8a8e9-9857-5789-a098-3b242ed11483
-	fromColumn: Fact_KPI.Wijk_ID
+relationship b9eee7fc-aa56-5c43-ad8a-572894b51087
+	fromColumn: Fact_Bevolking.Wijk_ID
 	toColumn: Dim_Wijk.Wijk_ID
 
-relationship f5ab945a-15c3-559f-a9ff-85078f1f3b34
-	fromColumn: Fact_KPI.KPI_ID
-	toColumn: Dim_KPI.KPI_ID
-
-relationship 2acde53b-9df0-54e2-8124-02a65adc3c51
-	fromColumn: Fact_CO2_Sector.Datum
+relationship a06042b6-2976-5868-ab36-c8df4e7217f1
+	fromColumn: Fact_Oplevering.Datum
 	toColumn: Dim_Datum.Datum
 
-relationship b495eaf7-6915-5ec8-b954-afba8e4576f3
-	fromColumn: Fact_CO2_Sector.Wijk_ID
+relationship cdb888bc-ea42-5e24-ad28-2130dc88e8d4
+	fromColumn: Fact_Oplevering.Wijk_ID
 	toColumn: Dim_Wijk.Wijk_ID
 
-relationship a68aad40-c0f6-5bd3-aa08-244adc29f5d7
-	fromColumn: Fact_CO2_Sector.Sector_ID
+relationship f61cdc1c-9efc-564b-a3d9-2f6701f83173
+	fromColumn: Fact_Oplevering.Project_ID
+	toColumn: Dim_Project.Project_ID
+
+relationship 305ae9a7-e98d-588a-ac02-6a1c1c0d7ed2
+	fromColumn: Fact_Werkloosheid.Datum
+	toColumn: Dim_Datum.Datum
+
+relationship 1035c0d4-ee7e-54ea-a06f-cbe78761f8b1
+	fromColumn: Fact_Werkloosheid.Wijk_ID
+	toColumn: Dim_Wijk.Wijk_ID
+
+relationship f061278c-1e4b-56e9-abb4-b467e330f8e7
+	fromColumn: Fact_Werkloosheid.Leeftijd_ID
+	toColumn: Dim_Leeftijd.Leeftijd_ID
+
+relationship 740ddae3-e87e-5b3f-aee9-5f9826745931
+	fromColumn: Fact_Vacatures.Datum
+	toColumn: Dim_Datum.Datum
+
+relationship e652f819-991a-5373-afbb-591a5119454d
+	fromColumn: Fact_Vacatures.Branche_ID
+	toColumn: Dim_Branche.Branche_ID
+
+relationship d20ec81d-e71d-5cfa-a576-cb139eef2d9c
+	fromColumn: Fact_CO2.Datum
+	toColumn: Dim_Datum.Datum
+
+relationship 12f610df-8432-5d8c-af58-5f6bc8175cbe
+	fromColumn: Fact_CO2.Wijk_ID
+	toColumn: Dim_Wijk.Wijk_ID
+
+relationship 41e6b6ec-3e5f-53d3-a775-23560cac6c22
+	fromColumn: Fact_CO2.Sector_ID
 	toColumn: Dim_Sector.Sector_ID
 
-relationship 59fa391b-87b1-558e-80e2-39fb26bac8d4
-	fromColumn: Fact_Target.Datum
+relationship 06478250-ca81-53f0-a038-ff4dbba8dd3f
+	fromColumn: Fact_Doel.Datum
 	toColumn: Dim_Datum.Datum
 
-relationship 80c9bd54-2890-5ee7-bcc1-d6416db94f99
-	fromColumn: Fact_Target.Wijk_ID
+relationship c6092032-e86a-5e4c-a864-df56108b4c4b
+	fromColumn: Fact_Doel.Wijk_ID
 	toColumn: Dim_Wijk.Wijk_ID
 
-relationship 8bb7fc3c-9b8d-546c-bb35-333dcdb1c91e
-	fromColumn: Fact_Target.KPI_ID
+relationship ce8d2490-45d2-5e5d-a7f6-cd9f75ce11f9
+	fromColumn: Fact_Doel.KPI_ID
 	toColumn: Dim_KPI.KPI_ID
-

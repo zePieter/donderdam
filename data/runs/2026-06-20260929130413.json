@@ -1,0 +1,1599 @@
+{
+  "run_id": "2026-06-20260929130413",
+  "attempt": 1,
+  "created_at": "2026-09-29T13:04:13.329Z",
+  "latency_ms": 9700,
+  "model": "gemini-3.5-flash-lite",
+  "request_id": "Q7e7asnCNKK7xN8PnpyT4AY",
+  "usage": {
+    "promptTokenCount": 11085,
+    "candidatesTokenCount": 2145,
+    "totalTokenCount": 13230,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 11085
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "prompt": "Je bent senior BI-analist bij de (fictieve) gemeente Donderdam. Je kijkt mee met het managementdashboard.\nJe krijgt voor één peilmaand alle cijfers: vier KPI's voor de gemeente en acht wijken met doel, vorig jaar en tijdreeks,\nplus de achterliggende domeindata: woningbouwprojecten met aannemer, werkloosheid per leeftijdsgroep, vacatures per branche en CO2 per sector.\n\nLever drie soorten output die naast de bestaande grafieken komen te staan:\n1. signalen: precies één per KPI (INW, WON, WLH, CO2). Kies Afwijkende trend, Aandacht of Op koers. Een kop van maximaal acht woorden\n   en een duiding van één of twee zinnen die méér zegt dan de kaart al toont: een patroon over de tijd, een wijk die het totaal bepaalt of een verband tussen domeinen.\n2. wijkduidingen: vier tot zes opvallende combinaties van wijk en KPI, verdeeld over minstens drie KPI's. Beschrijf wat je ziet (observatie) en geef een hypothese die je\n   onderbouwt met de domeindata, bijvoorbeeld een project of aannemer, een leeftijdsgroep of een branche. Noem wat nog getoetst moet worden.\n3. aanbevelingen: precies drie mogelijke vervolgstappen voor het management, elk met de wijken waar het om gaat.\n\nRegels:\n- Gebruik alleen de meegeleverde data. Cijfers in je tekst neem je letterlijk over uit de context, zoals ze daar staan (Nederlandse notatie met komma mag).\n- Een verklaring is een hypothese, geen feit. Oorzaken die niet in de data staan (zie niet_in_de_data) noem je alleen als ontbrekende informatie.\n- Verwijs in bewijs alleen naar sleutels uit toegestane_bewijs_sleutels.\n- Wees concreet: noem wijken, projecten, aannemers, leeftijdsgroepen en branches bij naam.\n- Zoek verbanden tussen domeinen, bijvoorbeeld tussen werkloosheid, leeftijdsgroepen en vacatures per branche, of tussen woningbouw, projecten en aannemers.\n- Elke hypothese steunt op minstens één sleutel uit de domeindata (project, leeftijd, branche of sector), niet alleen op een wijk.\n- Een aanbeveling is een voorstel om te onderzoeken of te bespreken, geen besluit.\n- Korte, heldere Nederlandse zinnen. Geen Markdown, geen begroeting. Antwoord uitsluitend volgens het JSON-schema.",
+  "context": {
+    "context_id": "2026-06",
+    "peilmaand": "2026-06-01",
+    "gemeente": "Donderdam (fictieve gemeente, 8 wijken)",
+    "source_hash": "378380c9915db7bea8858280b9fdcb35c0793c39c785fe8b967ddf70a41d8c4e",
+    "toelichting": {
+      "stromen": "Nieuwe woningen en CO2 tellen op van januari t/m de peilmaand. Doelen voor stromen zijn het jaardoel naar rato.",
+      "standen": "Inwoners en werkloosheid zijn de stand in de peilmaand. Werkloosheid in procent van de beroepsbevolking.",
+      "maandreeks": "Waarde per maand (niet cumulatief), laatste 13 maanden gemeente, laatste 6 maanden per wijk."
+    },
+    "kpis": [
+      {
+        "kpi_code": "WON",
+        "kpi": "Nieuwe woningen",
+        "eenheid": "woningen",
+        "periode": "jaar t/m maand",
+        "hoger_is_beter": true,
+        "gemeente": {
+          "waarde": 70,
+          "doel": 80,
+          "vorig_jaar": 81,
+          "verschil_met_doel": -10,
+          "verschil_met_vorig_jaar": -13.6,
+          "verschil_met_vorig_jaar_eenheid": "procent",
+          "maanden_op_rij_ongunstig_t_o_v_doel": 3,
+          "maandreeks": [
+            {
+              "maand": "2025-06",
+              "waarde": 8
+            },
+            {
+              "maand": "2025-07",
+              "waarde": 10
+            },
+            {
+              "maand": "2025-08",
+              "waarde": 14
+            },
+            {
+              "maand": "2025-09",
+              "waarde": 13
+            },
+            {
+              "maand": "2025-10",
+              "waarde": 11
+            },
+            {
+              "maand": "2025-11",
+              "waarde": 14
+            },
+            {
+              "maand": "2025-12",
+              "waarde": 9
+            },
+            {
+              "maand": "2026-01",
+              "waarde": 15
+            },
+            {
+              "maand": "2026-02",
+              "waarde": 9
+            },
+            {
+              "maand": "2026-03",
+              "waarde": 16
+            },
+            {
+              "maand": "2026-04",
+              "waarde": 8
+            },
+            {
+              "maand": "2026-05",
+              "waarde": 8
+            },
+            {
+              "maand": "2026-06",
+              "waarde": 14
+            }
+          ]
+        },
+        "wijken": [
+          {
+            "wijk_id": 1,
+            "wijk": "Groenhof",
+            "waarde": 9,
+            "doel": 10,
+            "vorig_jaar": 10,
+            "verschil_met_doel": -1,
+            "verschil_met_vorig_jaar": -10,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 2,
+            "maandreeks_6": [
+              2,
+              0,
+              4,
+              2,
+              0,
+              1
+            ]
+          },
+          {
+            "wijk_id": 2,
+            "wijk": "Rietzoom",
+            "waarde": 19,
+            "doel": 20,
+            "vorig_jaar": 20,
+            "verschil_met_doel": -1,
+            "verschil_met_vorig_jaar": -5,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 3,
+            "maandreeks_6": [
+              2,
+              2,
+              6,
+              2,
+              2,
+              5
+            ]
+          },
+          {
+            "wijk_id": 3,
+            "wijk": "Noorderhaven",
+            "waarde": 11,
+            "doel": 10,
+            "vorig_jaar": 11,
+            "verschil_met_doel": 1,
+            "verschil_met_vorig_jaar": 0,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+            "maandreeks_6": [
+              2,
+              3,
+              0,
+              1,
+              1,
+              4
+            ]
+          },
+          {
+            "wijk_id": 4,
+            "wijk": "Binnenstede",
+            "waarde": 6,
+            "doel": 7.5,
+            "vorig_jaar": 6,
+            "verschil_met_doel": -1.5,
+            "verschil_met_vorig_jaar": 0,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 3,
+            "maandreeks_6": [
+              3,
+              1,
+              0,
+              0,
+              0,
+              2
+            ]
+          },
+          {
+            "wijk_id": 5,
+            "wijk": "De Havenmeent",
+            "waarde": 4,
+            "doel": 5,
+            "vorig_jaar": 6,
+            "verschil_met_doel": -1,
+            "verschil_met_vorig_jaar": -33.3,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 5,
+            "maandreeks_6": [
+              1,
+              0,
+              1,
+              1,
+              0,
+              1
+            ]
+          },
+          {
+            "wijk_id": 6,
+            "wijk": "Zuidrand",
+            "waarde": 11,
+            "doel": 15,
+            "vorig_jaar": 17,
+            "verschil_met_doel": -4,
+            "verschil_met_vorig_jaar": -35.3,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 2,
+            "maandreeks_6": [
+              4,
+              2,
+              3,
+              1,
+              1,
+              0
+            ]
+          },
+          {
+            "wijk_id": 7,
+            "wijk": "Steenbergkwartier",
+            "waarde": 8,
+            "doel": 7.5,
+            "vorig_jaar": 7,
+            "verschil_met_doel": 0.5,
+            "verschil_met_vorig_jaar": 14.3,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+            "maandreeks_6": [
+              1,
+              0,
+              2,
+              1,
+              3,
+              1
+            ]
+          },
+          {
+            "wijk_id": 8,
+            "wijk": "Donderdam West",
+            "waarde": 2,
+            "doel": 5,
+            "vorig_jaar": 4,
+            "verschil_met_doel": -3,
+            "verschil_met_vorig_jaar": -50,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 6,
+            "maandreeks_6": [
+              0,
+              1,
+              0,
+              0,
+              1,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "kpi_code": "WLH",
+        "kpi": "Werkloosheid",
+        "eenheid": "%",
+        "periode": "stand in maand",
+        "hoger_is_beter": false,
+        "gemeente": {
+          "waarde": 8,
+          "doel": 7,
+          "vorig_jaar": 7.5,
+          "verschil_met_doel": 1,
+          "verschil_met_vorig_jaar": 0.5,
+          "verschil_met_vorig_jaar_eenheid": "procentpunt",
+          "maanden_op_rij_ongunstig_t_o_v_doel": 30,
+          "maandreeks": [
+            {
+              "maand": "2025-06",
+              "waarde": 7.5
+            },
+            {
+              "maand": "2025-07",
+              "waarde": 7.6
+            },
+            {
+              "maand": "2025-08",
+              "waarde": 7.5
+            },
+            {
+              "maand": "2025-09",
+              "waarde": 7.6
+            },
+            {
+              "maand": "2025-10",
+              "waarde": 7.6
+            },
+            {
+              "maand": "2025-11",
+              "waarde": 7.7
+            },
+            {
+              "maand": "2025-12",
+              "waarde": 7.6
+            },
+            {
+              "maand": "2026-01",
+              "waarde": 7.7
+            },
+            {
+              "maand": "2026-02",
+              "waarde": 7.8
+            },
+            {
+              "maand": "2026-03",
+              "waarde": 8
+            },
+            {
+              "maand": "2026-04",
+              "waarde": 7.8
+            },
+            {
+              "maand": "2026-05",
+              "waarde": 8
+            },
+            {
+              "maand": "2026-06",
+              "waarde": 8
+            }
+          ]
+        },
+        "wijken": [
+          {
+            "wijk_id": 1,
+            "wijk": "Groenhof",
+            "waarde": 7.7,
+            "doel": 7,
+            "vorig_jaar": 7.3,
+            "verschil_met_doel": 0.7,
+            "verschil_met_vorig_jaar": 0.4,
+            "verschil_met_vorig_jaar_eenheid": "procentpunt",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 20,
+            "maandreeks_6": [
+              7.8,
+              7.2,
+              7.9,
+              7.5,
+              7.6,
+              7.7
+            ]
+          },
+          {
+            "wijk_id": 2,
+            "wijk": "Rietzoom",
+            "waarde": 7.6,
+            "doel": 7,
+            "vorig_jaar": 8.2,
+            "verschil_met_doel": 0.6,
+            "verschil_met_vorig_jaar": -0.6,
+            "verschil_met_vorig_jaar_eenheid": "procentpunt",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 16,
+            "maandreeks_6": [
+              7.7,
+              7.8,
+              7.6,
+              8,
+              7.7,
+              7.6
+            ]
+          },
+          {
+            "wijk_id": 3,
+            "wijk": "Noorderhaven",
+            "waarde": 8.2,
+            "doel": 7,
+            "vorig_jaar": 7.9,
+            "verschil_met_doel": 1.2,
+            "verschil_met_vorig_jaar": 0.3,
+            "verschil_met_vorig_jaar_eenheid": "procentpunt",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 20,
+            "maandreeks_6": [
+              7.6,
+              7.7,
+              7.5,
+              7.6,
+              8,
+              8.2
+            ]
+          },
+          {
+            "wijk_id": 4,
+            "wijk": "Binnenstede",
+            "waarde": 7.7,
+            "doel": 7,
+            "vorig_jaar": 7.4,
+            "verschil_met_doel": 0.7,
+            "verschil_met_vorig_jaar": 0.3,
+            "verschil_met_vorig_jaar_eenheid": "procentpunt",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 18,
+            "maandreeks_6": [
+              7.6,
+              7.6,
+              7.8,
+              7.2,
+              7.9,
+              7.7
+            ]
+          },
+          {
+            "wijk_id": 5,
+            "wijk": "De Havenmeent",
+            "waarde": 7.6,
+            "doel": 7,
+            "vorig_jaar": 7.4,
+            "verschil_met_doel": 0.6,
+            "verschil_met_vorig_jaar": 0.2,
+            "verschil_met_vorig_jaar_eenheid": "procentpunt",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 9,
+            "maandreeks_6": [
+              7.5,
+              7.8,
+              7.7,
+              7.9,
+              7.7,
+              7.6
+            ]
+          },
+          {
+            "wijk_id": 6,
+            "wijk": "Zuidrand",
+            "waarde": 7.7,
+            "doel": 7,
+            "vorig_jaar": 7.5,
+            "verschil_met_doel": 0.7,
+            "verschil_met_vorig_jaar": 0.2,
+            "verschil_met_vorig_jaar_eenheid": "procentpunt",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 20,
+            "maandreeks_6": [
+              7.4,
+              7.8,
+              7.5,
+              7.3,
+              7.5,
+              7.7
+            ]
+          },
+          {
+            "wijk_id": 7,
+            "wijk": "Steenbergkwartier",
+            "waarde": 7.2,
+            "doel": 7,
+            "vorig_jaar": 7.5,
+            "verschil_met_doel": 0.2,
+            "verschil_met_vorig_jaar": -0.3,
+            "verschil_met_vorig_jaar_eenheid": "procentpunt",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 27,
+            "maandreeks_6": [
+              7.4,
+              7.4,
+              7.7,
+              7.3,
+              7.6,
+              7.2
+            ]
+          },
+          {
+            "wijk_id": 8,
+            "wijk": "Donderdam West",
+            "waarde": 11.4,
+            "doel": 7,
+            "vorig_jaar": 7.2,
+            "verschil_met_doel": 4.4,
+            "verschil_met_vorig_jaar": 4.2,
+            "verschil_met_vorig_jaar_eenheid": "procentpunt",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 17,
+            "maandreeks_6": [
+              9.5,
+              9.6,
+              10.8,
+              10.6,
+              11,
+              11.4
+            ]
+          }
+        ]
+      },
+      {
+        "kpi_code": "CO2",
+        "kpi": "CO2-uitstoot",
+        "eenheid": "ton",
+        "periode": "jaar t/m maand",
+        "hoger_is_beter": false,
+        "gemeente": {
+          "waarde": 1409.8,
+          "doel": 1269.5,
+          "vorig_jaar": 1396.5,
+          "verschil_met_doel": 140.3,
+          "verschil_met_vorig_jaar": 1,
+          "verschil_met_vorig_jaar_eenheid": "procent",
+          "maanden_op_rij_ongunstig_t_o_v_doel": 30,
+          "maandreeks": [
+            {
+              "maand": "2025-06",
+              "waarde": 219.2
+            },
+            {
+              "maand": "2025-07",
+              "waarde": 218.1
+            },
+            {
+              "maand": "2025-08",
+              "waarde": 222.2
+            },
+            {
+              "maand": "2025-09",
+              "waarde": 225.9
+            },
+            {
+              "maand": "2025-10",
+              "waarde": 231.8
+            },
+            {
+              "maand": "2025-11",
+              "waarde": 235.9
+            },
+            {
+              "maand": "2025-12",
+              "waarde": 245.6
+            },
+            {
+              "maand": "2026-01",
+              "waarde": 244
+            },
+            {
+              "maand": "2026-02",
+              "waarde": 244.6
+            },
+            {
+              "maand": "2026-03",
+              "waarde": 236.9
+            },
+            {
+              "maand": "2026-04",
+              "waarde": 234.1
+            },
+            {
+              "maand": "2026-05",
+              "waarde": 226.9
+            },
+            {
+              "maand": "2026-06",
+              "waarde": 223.3
+            }
+          ]
+        },
+        "wijken": [
+          {
+            "wijk_id": 1,
+            "wijk": "Groenhof",
+            "waarde": 123.5,
+            "doel": 135.5,
+            "vorig_jaar": 129.5,
+            "verschil_met_doel": -12,
+            "verschil_met_vorig_jaar": -4.6,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+            "maandreeks_6": [
+              21.8,
+              21.2,
+              21,
+              20.6,
+              19.9,
+              19
+            ]
+          },
+          {
+            "wijk_id": 2,
+            "wijk": "Rietzoom",
+            "waarde": 105.1,
+            "doel": 113,
+            "vorig_jaar": 105.2,
+            "verschil_met_doel": -7.9,
+            "verschil_met_vorig_jaar": -0.1,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+            "maandreeks_6": [
+              17.8,
+              18.4,
+              17.9,
+              17.7,
+              16.4,
+              16.9
+            ]
+          },
+          {
+            "wijk_id": 3,
+            "wijk": "Noorderhaven",
+            "waarde": 150.4,
+            "doel": 152.5,
+            "vorig_jaar": 152.3,
+            "verschil_met_doel": -2.1,
+            "verschil_met_vorig_jaar": -1.2,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+            "maandreeks_6": [
+              26.5,
+              26.5,
+              25.7,
+              25,
+              23.2,
+              23.5
+            ]
+          },
+          {
+            "wijk_id": 4,
+            "wijk": "Binnenstede",
+            "waarde": 309.8,
+            "doel": 214.5,
+            "vorig_jaar": 292.7,
+            "verschil_met_doel": 95.3,
+            "verschil_met_vorig_jaar": 5.8,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 30,
+            "maandreeks_6": [
+              53.4,
+              53.9,
+              51.7,
+              50.2,
+              50.6,
+              50
+            ]
+          },
+          {
+            "wijk_id": 5,
+            "wijk": "De Havenmeent",
+            "waarde": 297.9,
+            "doel": 203,
+            "vorig_jaar": 278.7,
+            "verschil_met_doel": 94.9,
+            "verschil_met_vorig_jaar": 6.9,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 30,
+            "maandreeks_6": [
+              51,
+              50.6,
+              50,
+              49.7,
+              48.4,
+              48.2
+            ]
+          },
+          {
+            "wijk_id": 6,
+            "wijk": "Zuidrand",
+            "waarde": 138.9,
+            "doel": 146.5,
+            "vorig_jaar": 143.8,
+            "verschil_met_doel": -7.6,
+            "verschil_met_vorig_jaar": -3.4,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+            "maandreeks_6": [
+              24.8,
+              24.3,
+              22.5,
+              22.9,
+              22.3,
+              22.1
+            ]
+          },
+          {
+            "wijk_id": 7,
+            "wijk": "Steenbergkwartier",
+            "waarde": 165,
+            "doel": 175,
+            "vorig_jaar": 170.5,
+            "verschil_met_doel": -10,
+            "verschil_met_vorig_jaar": -3.2,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+            "maandreeks_6": [
+              28.4,
+              28.8,
+              28.4,
+              27.7,
+              26.4,
+              25.3
+            ]
+          },
+          {
+            "wijk_id": 8,
+            "wijk": "Donderdam West",
+            "waarde": 119.2,
+            "doel": 129.5,
+            "vorig_jaar": 123.8,
+            "verschil_met_doel": -10.3,
+            "verschil_met_vorig_jaar": -3.7,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+            "maandreeks_6": [
+              20.3,
+              20.9,
+              19.7,
+              20.3,
+              19.7,
+              18.3
+            ]
+          }
+        ]
+      },
+      {
+        "kpi_code": "INW",
+        "kpi": "Inwoners",
+        "eenheid": "inwoners",
+        "periode": "stand in maand",
+        "hoger_is_beter": true,
+        "gemeente": {
+          "waarde": 41749,
+          "doel": 41301,
+          "vorig_jaar": 41528,
+          "verschil_met_doel": 448,
+          "verschil_met_vorig_jaar": 0.5,
+          "verschil_met_vorig_jaar_eenheid": "procent",
+          "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+          "maandreeks": [
+            {
+              "maand": "2025-06",
+              "waarde": 41528
+            },
+            {
+              "maand": "2025-07",
+              "waarde": 41546
+            },
+            {
+              "maand": "2025-08",
+              "waarde": 41556
+            },
+            {
+              "maand": "2025-09",
+              "waarde": 41572
+            },
+            {
+              "maand": "2025-10",
+              "waarde": 41584
+            },
+            {
+              "maand": "2025-11",
+              "waarde": 41609
+            },
+            {
+              "maand": "2025-12",
+              "waarde": 41622
+            },
+            {
+              "maand": "2026-01",
+              "waarde": 41646
+            },
+            {
+              "maand": "2026-02",
+              "waarde": 41673
+            },
+            {
+              "maand": "2026-03",
+              "waarde": 41694
+            },
+            {
+              "maand": "2026-04",
+              "waarde": 41714
+            },
+            {
+              "maand": "2026-05",
+              "waarde": 41732
+            },
+            {
+              "maand": "2026-06",
+              "waarde": 41749
+            }
+          ]
+        },
+        "wijken": [
+          {
+            "wijk_id": 1,
+            "wijk": "Groenhof",
+            "waarde": 5765,
+            "doel": 5655,
+            "vorig_jaar": 5703,
+            "verschil_met_doel": 110,
+            "verschil_met_vorig_jaar": 1.1,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+            "maandreeks_6": [
+              5738,
+              5742,
+              5748,
+              5754,
+              5759,
+              5765
+            ]
+          },
+          {
+            "wijk_id": 2,
+            "wijk": "Rietzoom",
+            "waarde": 5002,
+            "doel": 4746,
+            "vorig_jaar": 4877,
+            "verschil_met_doel": 256,
+            "verschil_met_vorig_jaar": 2.6,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+            "maandreeks_6": [
+              4944,
+              4955,
+              4966,
+              4976,
+              4990,
+              5002
+            ]
+          },
+          {
+            "wijk_id": 3,
+            "wijk": "Noorderhaven",
+            "waarde": 5341,
+            "doel": 5251,
+            "vorig_jaar": 5283,
+            "verschil_met_doel": 90,
+            "verschil_met_vorig_jaar": 1.1,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+            "maandreeks_6": [
+              5314,
+              5321,
+              5328,
+              5334,
+              5336,
+              5341
+            ]
+          },
+          {
+            "wijk_id": 4,
+            "wijk": "Binnenstede",
+            "waarde": 7405,
+            "doel": 7372,
+            "vorig_jaar": 7360,
+            "verschil_met_doel": 33,
+            "verschil_met_vorig_jaar": 0.6,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+            "maandreeks_6": [
+              7392,
+              7400,
+              7401,
+              7403,
+              7404,
+              7405
+            ]
+          },
+          {
+            "wijk_id": 5,
+            "wijk": "De Havenmeent",
+            "waarde": 4247,
+            "doel": 4544,
+            "vorig_jaar": 4468,
+            "verschil_met_doel": -297,
+            "verschil_met_vorig_jaar": -4.9,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 15,
+            "maandreeks_6": [
+              4336,
+              4319,
+              4298,
+              4281,
+              4263,
+              4247
+            ]
+          },
+          {
+            "wijk_id": 6,
+            "wijk": "Zuidrand",
+            "waarde": 5034,
+            "doel": 4847,
+            "vorig_jaar": 4937,
+            "verschil_met_doel": 187,
+            "verschil_met_vorig_jaar": 2,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+            "maandreeks_6": [
+              4997,
+              5004,
+              5012,
+              5019,
+              5027,
+              5034
+            ]
+          },
+          {
+            "wijk_id": 7,
+            "wijk": "Steenbergkwartier",
+            "waarde": 5186,
+            "doel": 5150,
+            "vorig_jaar": 5154,
+            "verschil_met_doel": 36,
+            "verschil_met_vorig_jaar": 0.6,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+            "maandreeks_6": [
+              5167,
+              5172,
+              5178,
+              5181,
+              5186,
+              5186
+            ]
+          },
+          {
+            "wijk_id": 8,
+            "wijk": "Donderdam West",
+            "waarde": 3769,
+            "doel": 3736,
+            "vorig_jaar": 3746,
+            "verschil_met_doel": 33,
+            "verschil_met_vorig_jaar": 0.6,
+            "verschil_met_vorig_jaar_eenheid": "procent",
+            "maanden_op_rij_ongunstig_t_o_v_doel": 0,
+            "maandreeks_6": [
+              3758,
+              3760,
+              3763,
+              3766,
+              3767,
+              3769
+            ]
+          }
+        ]
+      }
+    ],
+    "woningbouwprojecten": [
+      {
+        "project_code": "P-02",
+        "project": "Hofkwartier",
+        "wijk_id": 1,
+        "wijk": "Groenhof",
+        "aannemer": "Aannemersbedrijf Kolk",
+        "segment": "sociale huur",
+        "gepland_jaar_tm_maand": 6,
+        "opgeleverd_jaar_tm_maand": 5,
+        "achterstand": 1,
+        "opgeleverd_laatste_3_maanden": 2,
+        "gepland_laatste_3_maanden": 3
+      },
+      {
+        "project_code": "P-03",
+        "project": "Groenhof Noord",
+        "wijk_id": 1,
+        "wijk": "Groenhof",
+        "aannemer": "BouwMeesters Noord",
+        "segment": "middenhuur",
+        "gepland_jaar_tm_maand": 5,
+        "opgeleverd_jaar_tm_maand": 4,
+        "achterstand": 1,
+        "opgeleverd_laatste_3_maanden": 1,
+        "gepland_laatste_3_maanden": 2
+      },
+      {
+        "project_code": "P-05",
+        "project": "De Rietlanden",
+        "wijk_id": 2,
+        "wijk": "Rietzoom",
+        "aannemer": "BouwMeesters Noord",
+        "segment": "koop",
+        "gepland_jaar_tm_maand": 10,
+        "opgeleverd_jaar_tm_maand": 10,
+        "achterstand": 0,
+        "opgeleverd_laatste_3_maanden": 5,
+        "gepland_laatste_3_maanden": 5
+      },
+      {
+        "project_code": "P-06",
+        "project": "Zoomhof",
+        "wijk_id": 2,
+        "wijk": "Rietzoom",
+        "aannemer": "Bouwgroep Donderhout",
+        "segment": "sociale huur",
+        "gepland_jaar_tm_maand": 10,
+        "opgeleverd_jaar_tm_maand": 9,
+        "achterstand": 1,
+        "opgeleverd_laatste_3_maanden": 4,
+        "gepland_laatste_3_maanden": 5
+      },
+      {
+        "project_code": "P-08",
+        "project": "Noorderkade",
+        "wijk_id": 3,
+        "wijk": "Noorderhaven",
+        "aannemer": "Bouwgroep Donderhout",
+        "segment": "middenhuur",
+        "gepland_jaar_tm_maand": 6,
+        "opgeleverd_jaar_tm_maand": 7,
+        "achterstand": -1,
+        "opgeleverd_laatste_3_maanden": 4,
+        "gepland_laatste_3_maanden": 3
+      },
+      {
+        "project_code": "P-09",
+        "project": "Kraanbaan",
+        "wijk_id": 3,
+        "wijk": "Noorderhaven",
+        "aannemer": "De Waal & Zn",
+        "segment": "koop",
+        "gepland_jaar_tm_maand": 5,
+        "opgeleverd_jaar_tm_maand": 4,
+        "achterstand": 1,
+        "opgeleverd_laatste_3_maanden": 2,
+        "gepland_laatste_3_maanden": 2
+      },
+      {
+        "project_code": "P-11",
+        "project": "Marktkwartier",
+        "wijk_id": 4,
+        "wijk": "Binnenstede",
+        "aannemer": "De Waal & Zn",
+        "segment": "sociale huur",
+        "gepland_jaar_tm_maand": 4,
+        "opgeleverd_jaar_tm_maand": 4,
+        "achterstand": 0,
+        "opgeleverd_laatste_3_maanden": 1,
+        "gepland_laatste_3_maanden": 2
+      },
+      {
+        "project_code": "P-12",
+        "project": "Stadstuinen",
+        "wijk_id": 4,
+        "wijk": "Binnenstede",
+        "aannemer": "Aannemersbedrijf Kolk",
+        "segment": "middenhuur",
+        "gepland_jaar_tm_maand": 4,
+        "opgeleverd_jaar_tm_maand": 2,
+        "achterstand": 2,
+        "opgeleverd_laatste_3_maanden": 1,
+        "gepland_laatste_3_maanden": 2
+      },
+      {
+        "project_code": "P-14",
+        "project": "Havenkade",
+        "wijk_id": 5,
+        "wijk": "De Havenmeent",
+        "aannemer": "Van Rijn Bouwcombinatie",
+        "segment": "koop",
+        "gepland_jaar_tm_maand": 3,
+        "opgeleverd_jaar_tm_maand": 1,
+        "achterstand": 2,
+        "opgeleverd_laatste_3_maanden": 0,
+        "gepland_laatste_3_maanden": 2
+      },
+      {
+        "project_code": "P-15",
+        "project": "Meentpark",
+        "wijk_id": 5,
+        "wijk": "De Havenmeent",
+        "aannemer": "BouwMeesters Noord",
+        "segment": "sociale huur",
+        "gepland_jaar_tm_maand": 3,
+        "opgeleverd_jaar_tm_maand": 3,
+        "achterstand": 0,
+        "opgeleverd_laatste_3_maanden": 2,
+        "gepland_laatste_3_maanden": 2
+      },
+      {
+        "project_code": "P-17",
+        "project": "Zuidrandpark",
+        "wijk_id": 6,
+        "wijk": "Zuidrand",
+        "aannemer": "BouwMeesters Noord",
+        "segment": "middenhuur",
+        "gepland_jaar_tm_maand": 8,
+        "opgeleverd_jaar_tm_maand": 8,
+        "achterstand": 0,
+        "opgeleverd_laatste_3_maanden": 2,
+        "gepland_laatste_3_maanden": 4
+      },
+      {
+        "project_code": "P-18",
+        "project": "Zuidrand Oost",
+        "wijk_id": 6,
+        "wijk": "Zuidrand",
+        "aannemer": "Van Rijn Bouwcombinatie",
+        "segment": "koop",
+        "gepland_jaar_tm_maand": 8,
+        "opgeleverd_jaar_tm_maand": 3,
+        "achterstand": 5,
+        "opgeleverd_laatste_3_maanden": 0,
+        "gepland_laatste_3_maanden": 4
+      },
+      {
+        "project_code": "P-20",
+        "project": "Kwartierhoven",
+        "wijk_id": 7,
+        "wijk": "Steenbergkwartier",
+        "aannemer": "Bouwgroep Donderhout",
+        "segment": "sociale huur",
+        "gepland_jaar_tm_maand": 4,
+        "opgeleverd_jaar_tm_maand": 6,
+        "achterstand": -2,
+        "opgeleverd_laatste_3_maanden": 4,
+        "gepland_laatste_3_maanden": 2
+      },
+      {
+        "project_code": "P-21",
+        "project": "Bergse Tuinen",
+        "wijk_id": 7,
+        "wijk": "Steenbergkwartier",
+        "aannemer": "De Waal & Zn",
+        "segment": "middenhuur",
+        "gepland_jaar_tm_maand": 4,
+        "opgeleverd_jaar_tm_maand": 2,
+        "achterstand": 2,
+        "opgeleverd_laatste_3_maanden": 1,
+        "gepland_laatste_3_maanden": 2
+      },
+      {
+        "project_code": "P-23",
+        "project": "Westhof",
+        "wijk_id": 8,
+        "wijk": "Donderdam West",
+        "aannemer": "De Waal & Zn",
+        "segment": "koop",
+        "gepland_jaar_tm_maand": 3,
+        "opgeleverd_jaar_tm_maand": 2,
+        "achterstand": 1,
+        "opgeleverd_laatste_3_maanden": 1,
+        "gepland_laatste_3_maanden": 2
+      },
+      {
+        "project_code": "P-24",
+        "project": "Donderdam West Kade",
+        "wijk_id": 8,
+        "wijk": "Donderdam West",
+        "aannemer": "Aannemersbedrijf Kolk",
+        "segment": "sociale huur",
+        "gepland_jaar_tm_maand": 3,
+        "opgeleverd_jaar_tm_maand": 0,
+        "achterstand": 3,
+        "opgeleverd_laatste_3_maanden": 0,
+        "gepland_laatste_3_maanden": 2
+      }
+    ],
+    "werkloosheid_per_leeftijd": [
+      {
+        "wijk_id": 1,
+        "wijk": "Groenhof",
+        "leeftijdsgroep": "15-26 jaar",
+        "werkloosheid_pct": 11.5,
+        "vorig_jaar_pct": 11
+      },
+      {
+        "wijk_id": 1,
+        "wijk": "Groenhof",
+        "leeftijdsgroep": "27-49 jaar",
+        "werkloosheid_pct": 6.5,
+        "vorig_jaar_pct": 6.2
+      },
+      {
+        "wijk_id": 1,
+        "wijk": "Groenhof",
+        "leeftijdsgroep": "50-67 jaar",
+        "werkloosheid_pct": 7.1,
+        "vorig_jaar_pct": 6.9
+      },
+      {
+        "wijk_id": 2,
+        "wijk": "Rietzoom",
+        "leeftijdsgroep": "15-26 jaar",
+        "werkloosheid_pct": 14.6,
+        "vorig_jaar_pct": 12.2
+      },
+      {
+        "wijk_id": 2,
+        "wijk": "Rietzoom",
+        "leeftijdsgroep": "27-49 jaar",
+        "werkloosheid_pct": 5.7,
+        "vorig_jaar_pct": 6.9
+      },
+      {
+        "wijk_id": 2,
+        "wijk": "Rietzoom",
+        "leeftijdsgroep": "50-67 jaar",
+        "werkloosheid_pct": 6,
+        "vorig_jaar_pct": 7.6
+      },
+      {
+        "wijk_id": 3,
+        "wijk": "Noorderhaven",
+        "leeftijdsgroep": "15-26 jaar",
+        "werkloosheid_pct": 12.4,
+        "vorig_jaar_pct": 11.8
+      },
+      {
+        "wijk_id": 3,
+        "wijk": "Noorderhaven",
+        "leeftijdsgroep": "27-49 jaar",
+        "werkloosheid_pct": 6.9,
+        "vorig_jaar_pct": 6.6
+      },
+      {
+        "wijk_id": 3,
+        "wijk": "Noorderhaven",
+        "leeftijdsgroep": "50-67 jaar",
+        "werkloosheid_pct": 7.7,
+        "vorig_jaar_pct": 7.4
+      },
+      {
+        "wijk_id": 4,
+        "wijk": "Binnenstede",
+        "leeftijdsgroep": "15-26 jaar",
+        "werkloosheid_pct": 11.6,
+        "vorig_jaar_pct": 11.1
+      },
+      {
+        "wijk_id": 4,
+        "wijk": "Binnenstede",
+        "leeftijdsgroep": "27-49 jaar",
+        "werkloosheid_pct": 6.5,
+        "vorig_jaar_pct": 6.2
+      },
+      {
+        "wijk_id": 4,
+        "wijk": "Binnenstede",
+        "leeftijdsgroep": "50-67 jaar",
+        "werkloosheid_pct": 7.2,
+        "vorig_jaar_pct": 6.9
+      },
+      {
+        "wijk_id": 5,
+        "wijk": "De Havenmeent",
+        "leeftijdsgroep": "15-26 jaar",
+        "werkloosheid_pct": 11.3,
+        "vorig_jaar_pct": 11
+      },
+      {
+        "wijk_id": 5,
+        "wijk": "De Havenmeent",
+        "leeftijdsgroep": "27-49 jaar",
+        "werkloosheid_pct": 6.3,
+        "vorig_jaar_pct": 6.2
+      },
+      {
+        "wijk_id": 5,
+        "wijk": "De Havenmeent",
+        "leeftijdsgroep": "50-67 jaar",
+        "werkloosheid_pct": 7.1,
+        "vorig_jaar_pct": 6.9
+      },
+      {
+        "wijk_id": 6,
+        "wijk": "Zuidrand",
+        "leeftijdsgroep": "15-26 jaar",
+        "werkloosheid_pct": 11.5,
+        "vorig_jaar_pct": 11.3
+      },
+      {
+        "wijk_id": 6,
+        "wijk": "Zuidrand",
+        "leeftijdsgroep": "27-49 jaar",
+        "werkloosheid_pct": 6.5,
+        "vorig_jaar_pct": 6.3
+      },
+      {
+        "wijk_id": 6,
+        "wijk": "Zuidrand",
+        "leeftijdsgroep": "50-67 jaar",
+        "werkloosheid_pct": 7.1,
+        "vorig_jaar_pct": 7
+      },
+      {
+        "wijk_id": 7,
+        "wijk": "Steenbergkwartier",
+        "leeftijdsgroep": "15-26 jaar",
+        "werkloosheid_pct": 10.8,
+        "vorig_jaar_pct": 11.2
+      },
+      {
+        "wijk_id": 7,
+        "wijk": "Steenbergkwartier",
+        "leeftijdsgroep": "27-49 jaar",
+        "werkloosheid_pct": 6.1,
+        "vorig_jaar_pct": 6.3
+      },
+      {
+        "wijk_id": 7,
+        "wijk": "Steenbergkwartier",
+        "leeftijdsgroep": "50-67 jaar",
+        "werkloosheid_pct": 6.7,
+        "vorig_jaar_pct": 7
+      },
+      {
+        "wijk_id": 8,
+        "wijk": "Donderdam West",
+        "leeftijdsgroep": "15-26 jaar",
+        "werkloosheid_pct": 14.5,
+        "vorig_jaar_pct": 10.8
+      },
+      {
+        "wijk_id": 8,
+        "wijk": "Donderdam West",
+        "leeftijdsgroep": "27-49 jaar",
+        "werkloosheid_pct": 11.6,
+        "vorig_jaar_pct": 6.1
+      },
+      {
+        "wijk_id": 8,
+        "wijk": "Donderdam West",
+        "leeftijdsgroep": "50-67 jaar",
+        "werkloosheid_pct": 9,
+        "vorig_jaar_pct": 6.8
+      }
+    ],
+    "vacatures_per_branche": [
+      {
+        "branche": "Bouw & Techniek",
+        "openstaand": 348,
+        "vorig_jaar": 409,
+        "verschil_met_vorig_jaar_procent": -14.9,
+        "maandreeks_6": [
+          379,
+          384,
+          375,
+          355,
+          344,
+          348
+        ]
+      },
+      {
+        "branche": "Zorg & Welzijn",
+        "openstaand": 703,
+        "vorig_jaar": 654,
+        "verschil_met_vorig_jaar_procent": 7.5,
+        "maandreeks_6": [
+          694,
+          671,
+          665,
+          687,
+          709,
+          703
+        ]
+      },
+      {
+        "branche": "Handel & Logistiek",
+        "openstaand": 360,
+        "vorig_jaar": 379,
+        "verschil_met_vorig_jaar_procent": -5,
+        "maandreeks_6": [
+          359,
+          370,
+          381,
+          376,
+          362,
+          360
+        ]
+      },
+      {
+        "branche": "Zakelijke dienstverlening",
+        "openstaand": 309,
+        "vorig_jaar": 291,
+        "verschil_met_vorig_jaar_procent": 6.2,
+        "maandreeks_6": [
+          309,
+          305,
+          294,
+          292,
+          302,
+          309
+        ]
+      },
+      {
+        "branche": "Horeca & Recreatie",
+        "openstaand": 262,
+        "vorig_jaar": 276,
+        "verschil_met_vorig_jaar_procent": -5.1,
+        "maandreeks_6": [
+          215,
+          214,
+          221,
+          227,
+          271,
+          262
+        ]
+      }
+    ],
+    "co2_per_sector": [
+      {
+        "wijk_id": 1,
+        "wijk": "Groenhof",
+        "sector": "Industrie",
+        "ton_jaar_tm_maand": 54.7,
+        "vorig_jaar": 56.7
+      },
+      {
+        "wijk_id": 1,
+        "wijk": "Groenhof",
+        "sector": "Verkeer",
+        "ton_jaar_tm_maand": 36.9,
+        "vorig_jaar": 39.1
+      },
+      {
+        "wijk_id": 1,
+        "wijk": "Groenhof",
+        "sector": "Huishoudens",
+        "ton_jaar_tm_maand": 31.9,
+        "vorig_jaar": 33.7
+      },
+      {
+        "wijk_id": 2,
+        "wijk": "Rietzoom",
+        "sector": "Industrie",
+        "ton_jaar_tm_maand": 47.2,
+        "vorig_jaar": 46.9
+      },
+      {
+        "wijk_id": 2,
+        "wijk": "Rietzoom",
+        "sector": "Verkeer",
+        "ton_jaar_tm_maand": 31.3,
+        "vorig_jaar": 31
+      },
+      {
+        "wijk_id": 2,
+        "wijk": "Rietzoom",
+        "sector": "Huishoudens",
+        "ton_jaar_tm_maand": 26.6,
+        "vorig_jaar": 27.3
+      },
+      {
+        "wijk_id": 3,
+        "wijk": "Noorderhaven",
+        "sector": "Industrie",
+        "ton_jaar_tm_maand": 66.6,
+        "vorig_jaar": 67.1
+      },
+      {
+        "wijk_id": 3,
+        "wijk": "Noorderhaven",
+        "sector": "Verkeer",
+        "ton_jaar_tm_maand": 44.9,
+        "vorig_jaar": 45.6
+      },
+      {
+        "wijk_id": 3,
+        "wijk": "Noorderhaven",
+        "sector": "Huishoudens",
+        "ton_jaar_tm_maand": 38.9,
+        "vorig_jaar": 39.6
+      },
+      {
+        "wijk_id": 4,
+        "wijk": "Binnenstede",
+        "sector": "Industrie",
+        "ton_jaar_tm_maand": 138.3,
+        "vorig_jaar": 129
+      },
+      {
+        "wijk_id": 4,
+        "wijk": "Binnenstede",
+        "sector": "Verkeer",
+        "ton_jaar_tm_maand": 91.8,
+        "vorig_jaar": 88.1
+      },
+      {
+        "wijk_id": 4,
+        "wijk": "Binnenstede",
+        "sector": "Huishoudens",
+        "ton_jaar_tm_maand": 79.7,
+        "vorig_jaar": 75.6
+      },
+      {
+        "wijk_id": 5,
+        "wijk": "De Havenmeent",
+        "sector": "Industrie",
+        "ton_jaar_tm_maand": 134.3,
+        "vorig_jaar": 124.7
+      },
+      {
+        "wijk_id": 5,
+        "wijk": "De Havenmeent",
+        "sector": "Verkeer",
+        "ton_jaar_tm_maand": 88,
+        "vorig_jaar": 83.6
+      },
+      {
+        "wijk_id": 5,
+        "wijk": "De Havenmeent",
+        "sector": "Huishoudens",
+        "ton_jaar_tm_maand": 75.6,
+        "vorig_jaar": 70.4
+      },
+      {
+        "wijk_id": 6,
+        "wijk": "Zuidrand",
+        "sector": "Industrie",
+        "ton_jaar_tm_maand": 62.2,
+        "vorig_jaar": 64.1
+      },
+      {
+        "wijk_id": 6,
+        "wijk": "Zuidrand",
+        "sector": "Verkeer",
+        "ton_jaar_tm_maand": 41.3,
+        "vorig_jaar": 42.4
+      },
+      {
+        "wijk_id": 6,
+        "wijk": "Zuidrand",
+        "sector": "Huishoudens",
+        "ton_jaar_tm_maand": 35.4,
+        "vorig_jaar": 37.3
+      },
+      {
+        "wijk_id": 7,
+        "wijk": "Steenbergkwartier",
+        "sector": "Industrie",
+        "ton_jaar_tm_maand": 72.1,
+        "vorig_jaar": 75.7
+      },
+      {
+        "wijk_id": 7,
+        "wijk": "Steenbergkwartier",
+        "sector": "Verkeer",
+        "ton_jaar_tm_maand": 50,
+        "vorig_jaar": 50.8
+      },
+      {
+        "wijk_id": 7,
+        "wijk": "Steenbergkwartier",
+        "sector": "Huishoudens",
+        "ton_jaar_tm_maand": 42.9,
+        "vorig_jaar": 44
+      },
+      {
+        "wijk_id": 8,
+        "wijk": "Donderdam West",
+        "sector": "Industrie",
+        "ton_jaar_tm_maand": 53.6,
+        "vorig_jaar": 53.9
+      },
+      {
+        "wijk_id": 8,
+        "wijk": "Donderdam West",
+        "sector": "Verkeer",
+        "ton_jaar_tm_maand": 35,
+        "vorig_jaar": 37.5
+      },
+      {
+        "wijk_id": 8,
+        "wijk": "Donderdam West",
+        "sector": "Huishoudens",
+        "ton_jaar_tm_maand": 30.6,
+        "vorig_jaar": 32.4
+      }
+    ],
+    "toegestane_bewijs_sleutels": [
+      "gemeente",
+      "wijk:1",
+      "wijk:2",
+      "wijk:3",
+      "wijk:4",
+      "wijk:5",
+      "wijk:6",
+      "wijk:7",
+      "wijk:8",
+      "project:P-02",
+      "project:P-03",
+      "project:P-05",
+      "project:P-06",
+      "project:P-08",
+      "project:P-09",
+      "project:P-11",
+      "project:P-12",
+      "project:P-14",
+      "project:P-15",
+      "project:P-17",
+      "project:P-18",
+      "project:P-20",
+      "project:P-21",
+      "project:P-23",
+      "project:P-24",
+      "leeftijd:15-26 jaar",
+      "leeftijd:27-49 jaar",
+      "leeftijd:50-67 jaar",
+      "branche:Bouw & Techniek",
+      "branche:Zorg & Welzijn",
+      "branche:Handel & Logistiek",
+      "branche:Zakelijke dienstverlening",
+      "branche:Horeca & Recreatie",
+      "sector:Industrie",
+      "sector:Verkeer",
+      "sector:Huishoudens"
+    ],
+    "niet_in_de_data": [
+      "huizenprijzen",
+      "vergunningen en bezwaren",
+      "bouwmaterialen",
+      "bedrijfssluitingen",
+      "subsidies",
+      "weer"
+    ]
+  },
+  "response_text": "{\n  \"signalen\": [\n    {\n      \"kpi_code\": \"INW\",\n      \"signaal\": \"Op koers\",\n      \"richting\": \"verbetert\",\n      \"kop\": \"Inwonersaantal groeit gestaag door\",\n      \"duiding\": \"Het aantal inwoners stijgt gestaag naar 41749 en overstijgt daarmee het doel van 41301. Bijna alle wijken tonen een stabiele of positieve ontwikkeling, met Rietzoom als sterke groeier.\",\n      \"zekerheid\": \"hoog\"\n    },\n    {\n      \"kpi_code\": \"WON\",\n      \"signaal\": \"Aandacht\",\n      \"richting\": \"verslechtert\",\n      \"kop\": \"Woningbouwproductie blijft achter bij doel\",\n      \"duiding\": \"Met 70 opgeleverde woningen tegen een doel van 80 blijft de woningbouw achter. Vooral in Donderdam West en Zuidrand lopen projecten zoals Zuidrand Oost en Donderdam West Kade fors achter op schema.\",\n      \"zekerheid\": \"hoog\"\n    },\n    {\n      \"kpi_code\": \"WLH\",\n      \"signaal\": \"Afwijkende trend\",\n      \"richting\": \"verslechtert\",\n      \"kop\": \"Sterke stijging werkloosheid in Donderdam West\",\n      \"duiding\": \"De totale werkloosheid stijgt naar 8 procent, gedreven door een zorgwekkende piek in Donderdam West waar alle leeftijdsgroepen stijgen en de werkloosheid op 11.4 procent uitkomt.\",\n      \"zekerheid\": \"hoog\"\n    },\n    {\n      \"kpi_code\": \"CO2\",\n      \"signaal\": \"Afwijkende trend\",\n      \"richting\": \"verslechtert\",\n      \"kop\": \"Overschrijding CO2-uitstoot door Binnenstede en De Havenmeent\",\n      \"duiding\": \"De CO2-uitstoot van 1409.8 ton ligt ruim boven het doel van 1269.5 ton. Dit wordt volledig veroorzaakt door Binnenstede en De Havenmeent met hoge emissies in de sectoren Industrie en Verkeer.\",\n      \"zekerheid\": \"hoog\"\n    }\n  ],\n  \"wijkduidingen\": [\n    {\n      \"kpi_code\": \"WON\",\n      \"wijk_id\": 8,\n      \"observatie\": \"In Donderdam West zijn slechts 2 woningen opgeleverd tegen een doel van 5, en de achterstand bij Donderdam West Kade bedraagt 3 woningen.\",\n      \"hypothese\": \"De aannemer Aannemersbedrijf Kolk heeft mogelijk uitvoeringsproblemen bij project Donderdam West Kade, wat ook doorwerkt in de lage productie van het segment sociale huur.\",\n      \"bewijs\": [\n        \"wijk:8\",\n        \"project:P-24\"\n      ],\n      \"te_toetsen\": \"Of er sprake is van personeelstekorten bij Aannemersbedrijf Kolk of vertragingen in de nutsvoorzieningen.\",\n      \"zekerheid\": \"middel\"\n    },\n    {\n      \"kpi_code\": \"WLH\",\n      \"wijk_id\": 8,\n      \"observatie\": \"De werkloosheid in Donderdam West is opgelopen tot 11.4 procent, met name door sterke stijgingen onder de leeftijdsgroepen 27-49 jaar en 15-26 jaar.\",\n      \"hypothese\": \"Mogelijke sluitingen of reorganisaties bij lokale werkgevers raken vooral de actieve beroepsbevolking, terwijl de afnemende vacatures in Bouw & Techniek instroom belemmeren.\",\n      \"bewijs\": [\n        \"wijk:8\",\n        \"leeftijd:27-49 jaar\",\n        \"leeftijd:15-26 jaar\",\n        \"branche:Bouw & Techniek\"\n      ],\n      \"te_toetsen\": \"Of er specifieke bedrijfsbeëindigingen zijn geweest in Donderdam West die deze leeftijdsgroepen treffen.\",\n      \"zekerheid\": \"laag\"\n    },\n    {\n      \"kpi_code\": \"CO2\",\n      \"wijk_id\": 4,\n      \"observatie\": \"Binnenstede heeft een CO2-uitstoot van 309.8 ton tegen een doel van 214.5 ton, met name in de sector Industrie (138.3 ton) en Verkeer (91.8 ton).\",\n      \"hypothese\": \"De hoge industriële en verkeersactiviteit hangt samen met bouwlogistiek rond projecten zoals Marktkwartier en Stadstuinen door aannemers De Waal & Zn en Aannemersbedrijf Kolk.\",\n      \"bewijs\": [\n        \"wijk:4\",\n        \"sector:Industrie\",\n        \"sector:Verkeer\",\n        \"project:P-12\"\n      ],\n      \"te_toetsen\": \"Of de verhoogde uitstoot direct toe te rekenen is aan zwaar bouwverkeer en energieverbruik van industriële locaties in de binnenstad.\",\n      \"zekerheid\": \"middel\"\n    },\n    {\n      \"kpi_code\": \"WON\",\n      \"wijk_id\": 6,\n      \"observatie\": \"Zuidrand haalt slechts 11 van de 15 geplande woningen en kent bij project Zuidrand Oost een achterstand van 5 woningen.\",\n      \"hypothese\": \"Aannemer Van Rijn Bouwcombinatie loopt bij het koopsegment van Zuidrand Oost ernstige vertraging op door nog onbekende randvoorwaarden.\",\n      \"bewijs\": [\n        \"wijk:6\",\n        \"project:P-18\"\n      ],\n      \"te_toetsen\": \"Of er juridische procedures of financieringsproblemen spelen bij de koopwoningen van Zuidrand Oost.\",\n      \"zekerheid\": \"middel\"\n    },\n    {\n      \"kpi_code\": \"INW\",\n      \"wijk_id\": 2,\n      \"observatie\": \"Rietzoom laat een sterke bevolkingsgroei zien naar 5002 inwoners en overtreft het doel van 4746 ruimschoots.\",\n      \"hypothese\": \"De oplevering van projecten zoals De Rietlanden door BouwMeesters Noord trekt veel nieuwe huishoudens aan in het koopsegment.\",\n      \"bewijs\": [\n        \"wijk:2\",\n        \"project:P-05\"\n      ],\n      \"te_toetsen\": \"Of de migratie naar Rietzoom vooral bestaat uit doorstromers uit andere wijken of van buiten de gemeente.\",\n      \"zekerheid\": \"hoog\"\n    }\n  ],\n  \"aanbevelingen\": [\n    {\n      \"kpi_code\": \"WON\",\n      \"titel\": \"Gesprek met aannemers over vertraagde projecten\",\n      \"voorstel\": \"Plan een bestuurlijk overleg met Aannemersbedrijf Kolk en Van Rijn Bouwcombinatie om de vertragingen bij Donderdam West Kade en Zuidrand Oost te adresseren.\",\n      \"waarom\": \"Deze projecten veroorzaken de grootste achterstanden in de gemeentelijke woningbouwdoelstellingen.\",\n      \"te_toetsen\": \"Of versnelde oplevering in de tweede helft van het jaar haalbaar is.\",\n      \"wijk_ids\": [\n        6,\n        8\n      ]\n    },\n    {\n      \"kpi_code\": \"WLH\",\n      \"titel\": \"Gerichte arbeidsmarktinterventies in Donderdam West\",\n      \"voorstel\": \"Start een werkgroep re-integratie in samenwerking met uitzendbureaus en lokale werkgevers in de sectoren Zorg & Welzijn en Handel & Logistiek.\",\n      \"waarom\": \"De werkloosheid onder de beroepsbevolking van 27-49 jaar en jongeren is in Donderdam West disproportioneel hoog gestegen.\",\n      \"te_toetsen\": \"Of omscholing richting de groeiende vacatures in Zorg & Welzijn soelaas biedt.\",\n      \"wijk_ids\": [\n        8\n      ]\n    },\n    {\n      \"kpi_code\": \"CO2\",\n      \"titel\": \"Onderzoek naar industriële en verkeersemissies in stadskernen\",\n      \"voorstel\": \"Laat de milieudienst een analyse uitvoeren naar de bronnen van de hoge industriële en verkeersuitstoot in Binnenstede en De Havenmeent.\",\n      \"waarom\": \"De CO2-doelstelling van de gemeente wordt nagenoeg geheel tenietgedaan door de overschrijdingen in deze twee wijken.\",\n      \"te_toetsen\": \"Of specifieke industriële bedrijven of logistieke stromen rond Havenkade en Stadstuinen verantwoordelijk zijn.\",\n      \"wijk_ids\": [\n        4,\n        5\n      ]\n    }\n  ]\n}"
+}

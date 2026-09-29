@@ -1,0 +1,28 @@
+table Dim_Branche
+	lineageTag: ab86a8a0-6fd9-5f21-aa49-3ba915772631
+
+	column Branche_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 79100591-515c-5bf7-a1db-15d62b1f4af8
+		summarizeBy: none
+		sourceColumn: Branche_ID
+
+	column Branche
+		dataType: string
+		lineageTag: 5e51689d-40c7-5bba-a90a-906cc0c7fc68
+		summarizeBy: none
+		sourceColumn: Branche
+
+	partition Dim_Branche = m
+		mode: import
+		source =
+				let
+				    Bron = Csv.Document(LeesBron("dim_branche.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Kop = Table.PromoteHeaders(Bron, [PromoteAllScalars = true]),
+				    Typen = Table.TransformColumnTypes(Kop, {{"Branche_ID", Int64.Type}, {"Branche", type text}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table

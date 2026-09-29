@@ -1,0 +1,107 @@
+table AI_Wijkduiding
+	lineageTag: 1947d4eb-a28a-54c4-a337-d2eb92bd0167
+
+	column Duiding_ID
+		dataType: string
+		lineageTag: 56bdba47-0716-5d31-acf4-99e4ae9bd28f
+		summarizeBy: none
+		sourceColumn: Duiding_ID
+
+	column Peilmaand
+		dataType: dateTime
+		formatString: dd-mm-yyyy
+		lineageTag: 7cb01c6e-1126-57c8-a105-18d58d1b761f
+		summarizeBy: none
+		sourceColumn: Peilmaand
+
+	column KPI_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: d709a642-dd03-5ea9-ab9a-06f71a8fe517
+		summarizeBy: none
+		sourceColumn: KPI_ID
+
+	column KPI_Code
+		dataType: string
+		lineageTag: 5a16e9ab-f601-54ce-a202-5becb8de872f
+		summarizeBy: none
+		sourceColumn: KPI_Code
+
+	column Wijk_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: d3c7b809-5e09-5c56-a3d8-8bb8c9a86513
+		summarizeBy: none
+		sourceColumn: Wijk_ID
+
+	column Wijk_Naam
+		dataType: string
+		lineageTag: cec8c77a-72ec-5f7c-a95f-ff5844b124b1
+		summarizeBy: none
+		sourceColumn: Wijk_Naam
+
+	column Observatie
+		dataType: string
+		lineageTag: a972bbd7-a9fd-5f77-aacb-5cf2b5e04de3
+		summarizeBy: none
+		sourceColumn: Observatie
+
+	column Hypothese
+		dataType: string
+		lineageTag: facef928-1bf6-5cc7-a30a-ba4c6c851c3d
+		summarizeBy: none
+		sourceColumn: Hypothese
+
+	column Bewijs
+		dataType: string
+		lineageTag: 1297c8dd-ea08-5907-aa65-2e80de561ea4
+		summarizeBy: none
+		sourceColumn: Bewijs
+
+	column Te_Toetsen
+		dataType: string
+		lineageTag: cff2e6a4-eaa8-50bb-a271-9c5367d11feb
+		summarizeBy: none
+		sourceColumn: Te_Toetsen
+
+	column Zekerheid
+		dataType: string
+		lineageTag: bdb1c83f-527f-504c-a951-a71d9353c5e9
+		summarizeBy: none
+		sourceColumn: Zekerheid
+
+	column Run_ID
+		dataType: string
+		lineageTag: d2b7381d-fc5d-55e7-a334-821cc7063952
+		summarizeBy: none
+		sourceColumn: Run_ID
+
+	column Model
+		dataType: string
+		lineageTag: 8d86af73-c317-53e4-aed8-aa6e74493e4b
+		summarizeBy: none
+		sourceColumn: Model
+
+	column Gegenereerd_Op
+		dataType: string
+		lineageTag: 0e690e97-f1a1-5a4e-a80b-ac22d9177cfe
+		summarizeBy: none
+		sourceColumn: Gegenereerd_Op
+
+	column Review_Status
+		dataType: string
+		lineageTag: 65ffea91-82b8-55d5-add5-7a746572713b
+		summarizeBy: none
+		sourceColumn: Review_Status
+
+	partition AI_Wijkduiding = m
+		mode: import
+		source =
+				let
+				    Bron = LeesAI("wijkduidingen"),
+				    Tabel = Table.FromRecords(Bron, {"Duiding_ID","Peilmaand","KPI_ID","KPI_Code","Wijk_ID","Wijk_Naam","Observatie","Hypothese","Bewijs","Te_Toetsen","Zekerheid","Run_ID","Model","Gegenereerd_Op","Review_Status"}, MissingField.UseNull),
+				    Typen = Table.TransformColumnTypes(Tabel, {{"Duiding_ID", type text}, {"Peilmaand", type date}, {"KPI_ID", Int64.Type}, {"KPI_Code", type text}, {"Wijk_ID", Int64.Type}, {"Wijk_Naam", type text}, {"Observatie", type text}, {"Hypothese", type text}, {"Bewijs", type text}, {"Te_Toetsen", type text}, {"Zekerheid", type text}, {"Run_ID", type text}, {"Model", type text}, {"Gegenereerd_Op", type text}, {"Review_Status", type text}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table

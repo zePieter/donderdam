@@ -1,0 +1,54 @@
+table Fact_Doel
+	lineageTag: 8c89a005-4e55-564d-adbb-cc00896e470f
+
+	column Datum
+		dataType: dateTime
+		isHidden
+		formatString: dd-mm-yyyy
+		lineageTag: b427560f-c2c9-59fd-ac8c-d075f9e2c450
+		summarizeBy: none
+		sourceColumn: Datum
+
+	column Jaar
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2e86be57-c1e7-5ced-afcb-949df56edd41
+		summarizeBy: none
+		sourceColumn: Jaar
+
+	column Wijk_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: db0ec219-91bb-5543-a9aa-7185afbe40fa
+		summarizeBy: none
+		sourceColumn: Wijk_ID
+
+	column KPI_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 57c75aac-b98a-53d7-a63a-baf5faef635b
+		summarizeBy: none
+		sourceColumn: KPI_ID
+
+	column Doel
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: bf2b0edd-567a-561b-ac21-089679a72b0f
+		summarizeBy: none
+		sourceColumn: Doel
+
+	partition Fact_Doel = m
+		mode: import
+		source =
+				let
+				    Bron = Csv.Document(LeesBron("fact_doel.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Kop = Table.PromoteHeaders(Bron, [PromoteAllScalars = true]),
+				    Typen = Table.TransformColumnTypes(Kop, {{"Datum", type date}, {"Jaar", Int64.Type}, {"Wijk_ID", Int64.Type}, {"KPI_ID", Int64.Type}, {"Doel", type number}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table

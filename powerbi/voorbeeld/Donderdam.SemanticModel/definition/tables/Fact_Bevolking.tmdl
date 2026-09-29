@@ -1,0 +1,46 @@
+table Fact_Bevolking
+	lineageTag: 2082550a-7462-599e-a5bc-1f4a2a9a44ca
+
+	column Datum
+		dataType: dateTime
+		isHidden
+		formatString: dd-mm-yyyy
+		lineageTag: 9565fabe-b557-5be0-a614-11f52681f304
+		summarizeBy: none
+		sourceColumn: Datum
+
+	column Wijk_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9ccbc0ac-9466-529c-a6b4-f2619e213aaf
+		summarizeBy: none
+		sourceColumn: Wijk_ID
+
+	column Inwoners
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 932cbcd8-f0c6-53dc-abc2-c5fe35e60bbe
+		summarizeBy: none
+		sourceColumn: Inwoners
+
+	column Huishoudens
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 17ab7000-5dd9-53e8-a587-8cf0911f2231
+		summarizeBy: none
+		sourceColumn: Huishoudens
+
+	partition Fact_Bevolking = m
+		mode: import
+		source =
+				let
+				    Bron = Csv.Document(LeesBron("fact_bevolking.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Kop = Table.PromoteHeaders(Bron, [PromoteAllScalars = true]),
+				    Typen = Table.TransformColumnTypes(Kop, {{"Datum", type date}, {"Wijk_ID", Int64.Type}, {"Inwoners", type number}, {"Huishoudens", type number}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table

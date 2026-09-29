@@ -1,0 +1,29 @@
+table Dim_Leeftijd
+	lineageTag: 5376f116-2f34-55ea-a516-92a768a6788a
+
+	column Leeftijd_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cd8af3e0-eeef-5dbf-a07a-0ccd73a32c6e
+		summarizeBy: none
+		sourceColumn: Leeftijd_ID
+
+	column Leeftijdsgroep
+		dataType: string
+		lineageTag: 1f076257-b69d-576b-aace-fcf0e738904a
+		summarizeBy: none
+		sourceColumn: Leeftijdsgroep
+		sortByColumn: Leeftijd_ID
+
+	partition Dim_Leeftijd = m
+		mode: import
+		source =
+				let
+				    Bron = Csv.Document(LeesBron("dim_leeftijd.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Kop = Table.PromoteHeaders(Bron, [PromoteAllScalars = true]),
+				    Typen = Table.TransformColumnTypes(Kop, {{"Leeftijd_ID", Int64.Type}, {"Leeftijdsgroep", type text}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table

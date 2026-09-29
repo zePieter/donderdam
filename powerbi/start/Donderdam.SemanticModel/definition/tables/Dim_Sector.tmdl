@@ -1,17 +1,17 @@
 table Dim_Sector
-	lineageTag: 2498d3d8-3f4d-40a1-bcef-ca6a3f9ce468
+	lineageTag: 67fb41a0-c6f0-5659-ada6-4a4e8da904dd
 
 	column Sector_ID
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 9537f6b4-ab7d-4700-83df-f853ff911a65
+		lineageTag: 6337002e-9e02-58aa-a60e-fc8267cc2361
 		summarizeBy: none
 		sourceColumn: Sector_ID
 
 	column Sector_Naam
 		dataType: string
-		lineageTag: 6edeb6b7-5845-4c47-88c2-b3ae05a0388c
+		lineageTag: efceef7a-4c87-5f23-aafe-f566f92153bb
 		summarizeBy: none
 		sourceColumn: Sector_Naam
 
@@ -26,4 +26,3 @@ table Dim_Sector
 				    Typen
 
 	annotation PBI_ResultType = Table
-

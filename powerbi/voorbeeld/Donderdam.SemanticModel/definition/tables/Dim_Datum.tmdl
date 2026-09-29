@@ -1,21 +1,19 @@
 table Dim_Datum
-	lineageTag: 5ad1a662-9d5e-4284-8324-4f05b61ee111
+	lineageTag: 664fc61b-d9b7-5bc0-a127-68f176535ace
 	dataCategory: Time
 
 	column Datum
 		dataType: dateTime
 		isKey
 		formatString: dd-mm-yyyy
-		lineageTag: c67002d1-082a-414f-b529-0f6f433ce8e5
+		lineageTag: 0a094ff4-6337-58ed-adfe-e806e4f9b492
 		summarizeBy: none
 		sourceColumn: Datum
-
-		annotation UnderlyingDateTimeDataType = Date
 
 	column Jaar
 		dataType: int64
 		formatString: 0
-		lineageTag: 3552571b-12c6-4e45-b882-d6fc8c3088f2
+		lineageTag: afcd519b-c08e-5ec1-ac66-1b53a430cdec
 		summarizeBy: none
 		sourceColumn: Jaar
 
@@ -23,13 +21,13 @@ table Dim_Datum
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 2c14a779-9599-4679-8eb7-b79fa16506fe
+		lineageTag: 6cb92789-fbd5-5664-ae73-76d8ab0bba18
 		summarizeBy: none
 		sourceColumn: Maandnummer
 
 	column Maand
 		dataType: string
-		lineageTag: 6d505383-91ac-449d-8f87-9db6bd62ee3c
+		lineageTag: f0db6557-a597-553e-a0d7-f3be81c9a18f
 		summarizeBy: none
 		sourceColumn: Maand
 		sortByColumn: JaarMaand
@@ -38,13 +36,13 @@ table Dim_Datum
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: a7e514b3-ba95-4abe-9ae0-f72c4b90a49e
+		lineageTag: c24573a5-9529-55e0-ad1d-983f29eb2198
 		summarizeBy: none
 		sourceColumn: JaarMaand
 
 	column Kwartaal
 		dataType: string
-		lineageTag: df82c450-6b39-442e-9877-2c7b77051c95
+		lineageTag: f40a6e52-df50-5e84-a98d-63d28c87dbec
 		summarizeBy: none
 		sourceColumn: Kwartaal
 
@@ -52,7 +50,7 @@ table Dim_Datum
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 1f361c69-7568-479b-ad5b-e02aa8a480df
+		lineageTag: 450353aa-0d62-5f85-a8e5-16aff7fac721
 		summarizeBy: none
 		sourceColumn: Is_Prognoseperiode
 
@@ -67,4 +65,3 @@ table Dim_Datum
 				    Typen
 
 	annotation PBI_ResultType = Table
-

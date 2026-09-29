@@ -1,0 +1,54 @@
+table Fact_Werkloosheid
+	lineageTag: 71052deb-280a-5368-a5cf-b64f0fe04404
+
+	column Datum
+		dataType: dateTime
+		isHidden
+		formatString: dd-mm-yyyy
+		lineageTag: 121a4fa6-1d9d-55fa-a0f6-c121a880124d
+		summarizeBy: none
+		sourceColumn: Datum
+
+	column Wijk_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5edb87b9-997d-5e17-a7e2-abe6a0de4704
+		summarizeBy: none
+		sourceColumn: Wijk_ID
+
+	column Leeftijd_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: af0b3003-287a-5d52-aadf-57c9496093af
+		summarizeBy: none
+		sourceColumn: Leeftijd_ID
+
+	column Werkzoekenden
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 628f6674-0c77-5bdc-a8cb-ab4ae3292c18
+		summarizeBy: none
+		sourceColumn: Werkzoekenden
+
+	column Beroepsbevolking
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 435f9f02-7aba-5172-ac5c-94c7299b90ee
+		summarizeBy: none
+		sourceColumn: Beroepsbevolking
+
+	partition Fact_Werkloosheid = m
+		mode: import
+		source =
+				let
+				    Bron = Csv.Document(LeesBron("fact_werkloosheid.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Kop = Table.PromoteHeaders(Bron, [PromoteAllScalars = true]),
+				    Typen = Table.TransformColumnTypes(Kop, {{"Datum", type date}, {"Wijk_ID", Int64.Type}, {"Leeftijd_ID", Int64.Type}, {"Werkzoekenden", type number}, {"Beroepsbevolking", type number}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table

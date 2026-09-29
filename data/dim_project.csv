@@ -1,0 +1,25 @@
+Project_ID,Project_Code,Projectnaam,Aannemer,Segment,Woningen_Gepland,Start_Bouw,Geplande_Oplevering_Tot
+1,P-01,Groenhof Park,De Waal & Zn,koop,27,2024-01-01,2025-09-01
+2,P-02,Hofkwartier,Aannemersbedrijf Kolk,sociale huur,20,2025-04-01,2026-12-01
+3,P-03,Groenhof Noord,BouwMeesters Noord,middenhuur,30,2026-01-01,2027-12-01
+4,P-04,Rietzoom Oever,Aannemersbedrijf Kolk,middenhuur,53,2024-01-01,2025-09-01
+5,P-05,De Rietlanden,BouwMeesters Noord,koop,39,2025-04-01,2026-12-01
+6,P-06,Zoomhof,Bouwgroep Donderhout,sociale huur,60,2026-01-01,2027-12-01
+7,P-07,Havenhoofd,BouwMeesters Noord,sociale huur,27,2024-01-01,2025-09-01
+8,P-08,Noorderkade,Bouwgroep Donderhout,middenhuur,20,2025-04-01,2026-12-01
+9,P-09,Kraanbaan,De Waal & Zn,koop,30,2026-01-01,2027-12-01
+10,P-10,Oude Stadswerf,Bouwgroep Donderhout,koop,20,2024-01-01,2025-09-01
+11,P-11,Marktkwartier,De Waal & Zn,sociale huur,15,2025-04-01,2026-12-01
+12,P-12,Stadstuinen,Aannemersbedrijf Kolk,middenhuur,23,2026-01-01,2027-12-01
+13,P-13,Havenmeent Zuid,De Waal & Zn,middenhuur,13,2024-01-01,2025-09-01
+14,P-14,Havenkade,Van Rijn Bouwcombinatie,koop,10,2025-04-01,2026-12-01
+15,P-15,Meentpark,BouwMeesters Noord,sociale huur,15,2026-01-01,2027-12-01
+16,P-16,Zuidrand West,Aannemersbedrijf Kolk,sociale huur,40,2024-01-01,2025-09-01
+17,P-17,Zuidrandpark,BouwMeesters Noord,middenhuur,29,2025-04-01,2026-12-01
+18,P-18,Zuidrand Oost,Van Rijn Bouwcombinatie,koop,45,2026-01-01,2027-12-01
+19,P-19,Steenberg Hof,BouwMeesters Noord,koop,20,2024-01-01,2025-09-01
+20,P-20,Kwartierhoven,Bouwgroep Donderhout,sociale huur,15,2025-04-01,2026-12-01
+21,P-21,Bergse Tuinen,De Waal & Zn,middenhuur,23,2026-01-01,2027-12-01
+22,P-22,Westerpoort,Bouwgroep Donderhout,middenhuur,13,2024-01-01,2025-09-01
+23,P-23,Westhof,De Waal & Zn,koop,10,2025-04-01,2026-12-01
+24,P-24,Donderdam West Kade,Aannemersbedrijf Kolk,sociale huur,15,2026-01-01,2027-12-01

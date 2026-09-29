@@ -1,0 +1,77 @@
+[
+  {
+    "Aanbeveling_ID": "2026-06-A1",
+    "Wijk_ID": 6,
+    "Wijk_Naam": "Zuidrand"
+  },
+  {
+    "Aanbeveling_ID": "2026-06-A1",
+    "Wijk_ID": 8,
+    "Wijk_Naam": "Donderdam West"
+  },
+  {
+    "Aanbeveling_ID": "2026-06-A2",
+    "Wijk_ID": 8,
+    "Wijk_Naam": "Donderdam West"
+  },
+  {
+    "Aanbeveling_ID": "2026-06-A3",
+    "Wijk_ID": 4,
+    "Wijk_Naam": "Binnenstede"
+  },
+  {
+    "Aanbeveling_ID": "2026-06-A3",
+    "Wijk_ID": 5,
+    "Wijk_Naam": "De Havenmeent"
+  },
+  {
+    "Aanbeveling_ID": "2026-07-A1",
+    "Wijk_ID": 6,
+    "Wijk_Naam": "Zuidrand"
+  },
+  {
+    "Aanbeveling_ID": "2026-07-A1",
+    "Wijk_ID": 8,
+    "Wijk_Naam": "Donderdam West"
+  },
+  {
+    "Aanbeveling_ID": "2026-07-A2",
+    "Wijk_ID": 8,
+    "Wijk_Naam": "Donderdam West"
+  },
+  {
+    "Aanbeveling_ID": "2026-07-A3",
+    "Wijk_ID": 4,
+    "Wijk_Naam": "Binnenstede"
+  },
+  {
+    "Aanbeveling_ID": "2026-07-A3",
+    "Wijk_ID": 5,
+    "Wijk_Naam": "De Havenmeent"
+  },
+  {
+    "Aanbeveling_ID": "2026-08-A1",
+    "Wijk_ID": 5,
+    "Wijk_Naam": "De Havenmeent"
+  },
+  {
+    "Aanbeveling_ID": "2026-08-A1",
+    "Wijk_ID": 6,
+    "Wijk_Naam": "Zuidrand"
+  },
+  {
+    "Aanbeveling_ID": "2026-08-A2",
+    "Wijk_ID": 8,
+    "Wijk_Naam": "Donderdam West"
+  },
+  {
+    "Aanbeveling_ID": "2026-08-A3",
+    "Wijk_ID": 4,
+    "Wijk_Naam": "Binnenstede"
+  },
+  {
+    "Aanbeveling_ID": "2026-08-A3",
+    "Wijk_ID": 5,
+    "Wijk_Naam": "De Havenmeent"
+  }
+]

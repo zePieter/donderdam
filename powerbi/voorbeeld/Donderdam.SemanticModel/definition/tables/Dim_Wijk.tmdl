@@ -1,17 +1,17 @@
 table Dim_Wijk
-	lineageTag: 8fb1be77-6e21-4e58-bb13-0ee8d240fc02
+	lineageTag: 4961b47d-a05b-52c4-a9d1-4c597fe84aa0
 
 	column Wijk_ID
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: aee46243-8927-4033-b1f0-9f3b19d5f4e7
+		lineageTag: 993c231e-f7e6-5d84-a30e-e9a52e53f6e3
 		summarizeBy: none
 		sourceColumn: Wijk_ID
 
 	column Wijk_Naam
 		dataType: string
-		lineageTag: 2dd13098-d069-46c1-a36e-858e6c1ec24c
+		lineageTag: 75045202-6d73-57b2-a7d3-8a27b8225db0
 		summarizeBy: none
 		sourceColumn: Wijk_Naam
 
@@ -26,4 +26,3 @@ table Dim_Wijk
 				    Typen
 
 	annotation PBI_ResultType = Table
-

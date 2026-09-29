@@ -1,16 +1,16 @@
 import assert from 'node:assert/strict';
-import {loadData,contexts} from '../lib/data.js';
+import {loadData,context,aiMonths,kpiValue,kpiTarget} from '../lib/data.js';
 import {readOutput,validateOutput} from '../lib/ai.js';
-const data=loadData(),cs=contexts(data),out=readOutput();
-assert.equal(data.fact_kpi.length,1848);assert.equal(cs.length,9);
-assert.equal(new Set(data.fact_kpi.map(r=>[r.Datum,r.Wijk_ID,r.KPI_ID].join('|'))).size,1848);
-assert.equal(new Set(out.records.map(r=>r.context_id)).size,out.records.length);
-assert.equal(out.records.length,9,'Voor dit workshop-pakket zijn negen echte AI-contexten nodig.');
-for(const r of out.records){
-  const c=cs.find(c=>c.context_id===r.context_id);assert.ok(c);assert.equal(r.source_hash,c.source_hash);
-  validateOutput({insight:r.insight,deep_dive:r.deep_dive,recommendations:r.recommendations},c);
-  assert.equal(r.generation_method,'api');assert.ok(r.request_id);assert.match(r.prompt_hash,/^[a-f0-9]{64}$/);assert.match(r.response_hash,/^[a-f0-9]{64}$/);
-  assert.equal(r.facts.value,c.municipality.value);assert.equal(r.facts.target,c.municipality.target);assert.equal(r.facts.previous_year,c.municipality.previous_year);
-  const w=c.wards.find(w=>w.wijk_id===r.deep_dive.wijk_id);assert.equal(r.deep_dive.value,w.value);assert.equal(r.deep_dive.target,w.target);
+import {flatRows,currentRecords} from '../lib/api.js';
+const data=loadData();
+assert.equal(data.fact_bevolking.length,264);assert.equal(data.fact_werkloosheid.length,792);assert.equal(data.fact_co2.length,792);
+assert.equal(kpiValue(data,'WON','2026-08-01'),91);assert.equal(kpiTarget(data,'WON','2026-08-01'),106.7);
+assert.equal(kpiValue(data,'WLH','2026-08-01'),8.2);assert.equal(kpiValue(data,'CO2','2026-08-01'),1849.5);
+const records=currentRecords(data);
+assert.deepEqual(records.map(r=>r.context_id).filter(id=>aiMonths.some(m=>m.startsWith(id))),aiMonths.map(m=>m.slice(0,7)),'Voor de workshop zijn echte AI-runs voor juni t/m augustus nodig.');
+for(const r of records){
+  assert.equal(r.generation_method,'api');assert.ok(r.request_id);assert.match(r.response_hash,/^[a-f0-9]{64}$/);
+  validateOutput(r.output,context(data,r.peilmaand));
 }
-console.log(`BI-bron gecontroleerd; ${cs.length} contexten; ${out.records.length} echte AI-responses beschikbaar.`);
+for(const f of ['signalen','wijkduidingen','aanbevelingen','aanbeveling-wijken'])assert.ok(flatRows(records,f,data).length>0);
+console.log(`BI-bron gecontroleerd; ${records.length} echte AI-runs (${records.map(r=>r.context_id).join(', ')}) door de controle.`);
