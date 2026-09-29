@@ -66,10 +66,140 @@
               {
                 "textRuns": [
                   {
-                    "value": "JULLIE AI-UITBREIDING\n\nSluit de JSON-bron aan.\nKoppel analyseperiode en KPI.\nToon één van de drie smaken.\n\n1  Inzicht\n2  Verdieping\n3  Aanbevelingen\n\nDe analyse gaat over de hele gemeente.\nSelecties lezen ingeladen output; een refresh haalt een nieuwe batch op.",
+                    "value": "AI-ZONE",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "17pt",
+                      "fontSize": "13pt",
+                      "fontWeight": "normal",
+                      "color": "#3A3A3A"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "13pt",
+                      "fontWeight": "normal",
+                      "color": "#3A3A3A"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "In het model staan vier AI-tabellen, nog los van de rest:",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "13pt",
+                      "fontWeight": "normal",
+                      "color": "#3A3A3A"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "13pt",
+                      "fontWeight": "normal",
+                      "color": "#3A3A3A"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "AI_Signaal · per KPI en maand",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "13pt",
+                      "fontWeight": "normal",
+                      "color": "#3A3A3A"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "AI_Wijkduiding · per wijk, KPI en maand",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "13pt",
+                      "fontWeight": "normal",
+                      "color": "#3A3A3A"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "AI_Aanbeveling + AI_Aanbeveling_Wijk",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "13pt",
+                      "fontWeight": "normal",
+                      "color": "#3A3A3A"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "13pt",
+                      "fontWeight": "normal",
+                      "color": "#3A3A3A"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Kies met je groep één soort AI-output.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "13pt",
+                      "fontWeight": "normal",
+                      "color": "#3A3A3A"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Bepaal waar hij aan hangt, leg de relaties",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "13pt",
+                      "fontWeight": "normal",
+                      "color": "#3A3A3A"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "en verrijk een visual die er al staat.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "13pt",
                       "fontWeight": "normal",
                       "color": "#3A3A3A"
                     }

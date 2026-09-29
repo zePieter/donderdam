@@ -1,42 +1,37 @@
 # Klaarzetten · organisator
 
-## 1. Eén werkmap
+## Vanavond of morgenvroeg (10 minuten)
 
-Werk verder in deze repository: `workshop-v099/donderdam`. De oude bronmap en `bronkopie` zijn archief/bouwmateriaal. Gebruik die niet als nieuwe rapportversie.
+1. `https://donderdam.brusseedesign.nl/api/status` toont `ai_maanden: 2026-06, 2026-07, 2026-08` en `ai_ready: true`.
+2. Open `powerbi/voorbeeld/Donderdam.pbip` → **Refresh** → Werkplaats, Nieuwe woningen, aug 2026: 91 (oranje), doel 107, Zuidrand en De Havenmeent oranje.
+3. Open `powerbi/start/Donderdam.pbip` → **Refresh** (kies **Anonymous** als erom gevraagd wordt): 91 / 107, AI-zone leeg.
+4. Zet `uitdelen/Donderdam-start.zip` (map erboven) en `docs/02-groepsopdrachten.md` in Teams. Het spiekbriefje (`docs/04`) houd je achter de hand.
+5. Laptop met Power BI Desktop, Node en deze repository mee voor de demo. Deelnemers hebben alleen Power BI Desktop en de zip nodig.
 
-Open deze map in VS Code. Open de Power BI-bestanden via onderstaande submappen, niet via een oudere vermelding bij Recent.
+## Hoe de onderdelen samenhangen
 
-## 2. Workshopsite op Hostinger (eenmalig)
+```text
+data/basis (fictief)  → npm run build:data  → data/*.csv (stermodel, domeinfeiten)
+data/*.csv            → npm run generate    → Gemini → controle → data/ai-output.json + data/runs/
+                      → npm run build:powerbi → TMDL voor start en voorbeeld
+git push → Hostinger bouwt → donderdam.brusseedesign.nl (API + /data + /runs)
+```
 
-Voorwaarde: pakket **Business** of **Cloud** (alleen die ondersteunen Node.js-apps).
+- **start** leest BI én AI van de website. Leeg je de parameters BaseUrl en AiBaseUrl (Transform data → Edit parameters), dan leest hij lokaal uit DataFolder.
+- **voorbeeld** leest lokaal, zodat een live generatie direct na Refresh zichtbaar is.
 
-1. hPanel → **Websites** → **Add Website** → **Deploy Web App** → **Import Git Repository** → **Authorize** GitHub → kies `zePieter/donderdam`.
-2. Framework **Other**, Node.js **24.x**, entry file `server.js`. Build command `npm run build`, start command `npm start` (als gevraagd). Output directory leeg laten of `.`. Geen environment variables: **geen Gemini-sleutel op de hosting**. `PORT` bepaalt Hostinger zelf.
-3. **Deploy**. Koppel daarna het subdomein `donderdam.brusseedesign.nl` aan de app en wacht op SSL.
-4. Controleer `https://donderdam.brusseedesign.nl/api/status`: verwacht `ai_contexts: 9`, `ai_ready: true`, `llm_calls_on_read: false`.
+## Live generatie in de demo
 
-Hostinger bouwt opnieuw bij **elke push naar `main`**. Push dus niet tijdens de workshop.
+```powershell
+npm run generate -- 2026-09
+```
 
-## 3. Power BI openen
+Dit is één echte Gemini-aanroep (gratis tarief, ±10 seconden). Daarna: in het voorbeeld **Refresh** en sep 2026 kiezen. Voor de site: `git add -A`, `git commit -m "Run september"`, `git push`. Hostinger bouwt dan binnen ±1 minuut opnieuw. **Push niet terwijl groepen aan het werk zijn**: de site is een seconde of wat weg tijdens de herbouw.
 
-1. Sluit een al geopend Donderdam-rapport voordat je de projectbestanden wijzigt.
-2. **Start** leest de BI-CSV's standaard van `https://donderdam.brusseedesign.nl/data/` (parameter BaseUrl). Deelnemers hoeven dus geen pad in te stellen.
-3. **Voorbeeld** leest lokaal: voer op een andere computer `npm run prepare:powerbi` uit, of zet **Transform data → Edit parameters → DataFolder** op de map `data\`. **AiBaseUrl** leeg = lokale AI-snapshot; `https://donderdam.brusseedesign.nl/` = via de site.
-4. Klik **Home → Refresh**. Kies bij de workshopsite **Anonymous** als Power BI om credentials vraagt. Vul nergens de Gemini-sleutel in.
+## Terugval
 
-## 4. Korte acceptatie
-
-| Selectie | Werkelijk | Doel | Verschil vorig jaar |
-|---|---:|---:|---:|
-| Nieuwe woningen · augustus 2026 | 91 | 106,67 (kaart rondt af op 107) | −13,33% |
-| Nieuwe woningen · juni 2026 | 70 | 80 | −13,58% |
-| Werkloosheid · augustus 2026 | 8,21294% | 7% | +0,76234 procentpunt |
-| CO2 · augustus 2026 | 1.849,5 ton YTD | 1.692,67 ton YTD | +0,69142% |
-
-Controleer in het voorbeeld dat de AI-tekst verandert wanneer je juni/augustus of een andere gedekte KPI kiest. Bij inwoners of januari is er bewust geen AI-output. Selecties starten geen generatie.
-
-## 5. Delen
-
-Zip de map `powerbi/start` (zonder `.pbi`) en zet die met de groepsopdrachten in Teams. Houd de volledige repo-zip achter de hand als terugval zonder internet (zie begeleiderskaart). Het voorbeeld is jouw demo en terugvalpunt.
-
-Opening (optioneel): toon `https://donderdam.brusseedesign.nl/api/insights?month=2026-08&kpi=WON` in de browser: “dit is AI-output als API, gefilterd op periode en KPI.”
+| Probleem | Oplossing |
+|---|---|
+| Site onbereikbaar | Deelnemers: Edit parameters → BaseUrl en AiBaseUrl leeg, DataFolder = uitgepakte map `data\` uit de repo-zip |
+| Gemini-limiet of netwerk bij de live stap | Laat een bestaande run zien op de site. Geen simulatie. |
+| Desktop toont oude cijfers | Refresh; het bestand komt met een cache van 29 september |

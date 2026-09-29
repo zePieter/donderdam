@@ -65,3 +65,4 @@ table Dim_Datum
 				    Typen
 
 	annotation PBI_ResultType = Table
+

@@ -29,3 +29,6 @@ ref table AI_Wijkduiding
 ref table AI_Aanbeveling
 ref table AI_Aanbeveling_Wijk
 ref table _Meetwaarden
+
+ref cultureInfo nl-NL
+

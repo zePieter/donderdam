@@ -52,3 +52,4 @@ table Fact_Oplevering
 				    Typen
 
 	annotation PBI_ResultType = Table
+

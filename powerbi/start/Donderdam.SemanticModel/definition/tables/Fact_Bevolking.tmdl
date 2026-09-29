@@ -44,3 +44,4 @@ table Fact_Bevolking
 				    Typen
 
 	annotation PBI_ResultType = Table
+

@@ -65,3 +65,4 @@ table Dim_Project
 				    Typen
 
 	annotation PBI_ResultType = Table
+

@@ -6,7 +6,7 @@
     "y": 175,
     "z": 0,
     "height": 262,
-    "width": 620,
+    "width": 700,
     "tabOrder": 0
   },
   "visual": {
@@ -106,6 +106,23 @@
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Meetwaarden"
+                  }
+                },
+                "Property": "Woningen Achterstand YTD"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
       }
     },
     "objects": {

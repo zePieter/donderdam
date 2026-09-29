@@ -47,11 +47,6 @@
     },
     {
       "source": "wijken",
-      "target": "context",
-      "type": "NoFilter"
-    },
-    {
-      "source": "wijken",
       "target": "kaart0",
       "type": "NoFilter"
     },
@@ -67,17 +62,52 @@
     },
     {
       "source": "wijken",
-      "target": "ai_plek",
-      "type": "NoFilter"
-    },
-    {
-      "source": "wijken",
       "target": "voet",
       "type": "NoFilter"
     },
     {
       "source": "wijken",
-      "target": "ai_bron",
+      "target": "ai_signaal",
+      "type": "NoFilter"
+    },
+    {
+      "source": "wijken",
+      "target": "ai_aanbeveling",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ai_aanbeveling",
+      "target": "wijken",
+      "type": "DataFilter"
+    },
+    {
+      "source": "ai_aanbeveling",
+      "target": "ai_signaal",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ai_aanbeveling",
+      "target": "ai_wijk",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ai_aanbeveling",
+      "target": "kaart0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ai_aanbeveling",
+      "target": "kaart1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ai_aanbeveling",
+      "target": "kaart2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ai_wijk",
+      "target": "wijken",
       "type": "NoFilter"
     }
   ]

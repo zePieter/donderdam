@@ -3,8 +3,7 @@
   "pageOrder": [
     "Werkplaats",
     "Trends",
-    "Onderbouwing",
-    "AI"
+    "Onderbouwing"
   ],
-  "activePageName": "Onderbouwing"
+  "activePageName": "Werkplaats"
 }

@@ -1,40 +1,34 @@
-# Overdracht · stand 29 september 2026
+# Overdracht · stand 29 september 2026, middag
 
-Voortgezet in Claude Code na de ChatGPT Work-sessie (inventarisatie en bouw 11:10–12:01). Lees daarna [klaarzetten](01-klaarzetten.md) en [groepsopdrachten](02-groepsopdrachten.md).
+Versie 1.0. De vangnetversie van vanochtend staat onder git-tag `v0.99-vangnet`.
 
-## Gekozen route
+## Wat er veranderd is en waarom
 
-AI-output en BI-CSV's via de eigen workshopsite **`https://donderdam.brusseedesign.nl`** (Node-app op Hostinger, gekoppeld aan GitHub `zePieter/donderdam`). Deelnemers: zip uitpakken, Refresh, Anonymous, één URL plakken, relaties leggen, Table maken. Terugval zonder internet: lokale `data/` + `-lokaal.m`.
+De eerste opzet (v0.99) liet deelnemers kant-en-klare AI-tekst naast een KPI zetten, met klikinstructies. Dat raakte de kern niet. De nieuwe kern: **de AI-output staat al als data in het model; de groepen bepalen waar hij aan hangt (Waarmee/Hoe/Waarom).**
 
-## Getest en werkend
-
-| Wat | Hoe getest | Resultaat |
+| Onderdeel | v0.99 | v1.0 |
 |---|---|---|
-| Node-app en data | `npm test`, `npm run build` | 9/9 tests, 9 echte Gemini-contexten |
-| Voorbeeld-PBIP in Desktop 2.157 | Openen, volledige refresh, DAX-query (`../controle/test-desktop.ps1`) | 9/9 contexten: juiste waarde/doel/VJ en precies één AI-rij |
-| Voorbeeld visueel | Schermafdruk Werkplaats + Drie AI-smaken | Leesbaar, thema actief, tekst loopt terug |
-| Start-PBIP in Desktop | Openen, volledige refresh, schermafdruk Werkplaats + Trends | BI-cijfers kloppen (WON aug: 91 / 107 / −13,3%); AI-plek is instructievlak |
-| Deelnemerspad lokaal | Kopie van start + `AI_Inzichten-lokaal.m` + twee relaties, refresh, DAX | 9 rijen; elke context één rij met juiste titel; INW en januari nul rijen |
-| Live site (29-09, 13:35) | Alle endpoints op `https://donderdam.brusseedesign.nl` | `/api/status` 9/9 `ai_ready`; insights/deep-dives 9, recommendations 27 (gefilterd 3); `/data/fact_kpi.csv` 1.848; foute maand 400; `/.env` 403 |
-| Deelnemerspad tegen live site | Kopie van start + web-snippets, DataFolder bewust ongeldig, Desktop-refresh | Eerst venster **Access Web content → Anonymous → Connect** (zoals in opdracht). Daarna BI 1.848 rijen, AI 9 rijen, filter aug/WON 3 adviezen, WON aug 91, INW 0 AI-rijen |
+| BI-model | Eén generieke Fact_KPI | Stermodel met 6 domeinfeiten, eigen grain, gedeelde dimensies |
+| Wat het LLM zag | Eén KPI per aanroep | Per maand alles: 4 KPI's × 8 wijken, projecten, leeftijdsgroepen, branches, sectoren |
+| AI-output | Tekst op gemeenteniveau | 3 infusements met sleutels: signaal (KPI × maand), wijkduiding (wijk × KPI × maand), aanbeveling + brug naar wijken |
+| Controle | Geen getallen toegestaan | Getallen toegestaan maar gecontroleerd tegen de data; hypothese moet op domeindata steunen |
+| Deelnemers | Get data + klikstappen | Kant-en-klaar bestand; uitdaging per groep; spiekbriefje als vangnet |
+| Zichtbaarheid LLM | Alleen modelnaam | Per run de prompt, de data en het antwoord op de site; live generatie in de demo |
 
-Refresh zonder klikken: open het PBIP en draai `../controle/refresh-desktop.ps1`.
+## Getest (29-09, Power BI Desktop 2.157)
 
-## Veranderd sinds ChatGPT
+| Wat | Resultaat |
+|---|---|
+| `npm test` / `npm run build` | 9/9; 3 echte runs door de controle |
+| Controlecijfers nieuw model | Gelijk aan v0.99: WON aug 91 / 106,67 / 105; WLH 8,21% / 7%; CO₂ 1.849,5; INW 41.818 |
+| Voorbeeld in Desktop | Alle drie infusements zichtbaar en werkend (schermafdruk) |
+| Start in Desktop tegen live site | BI 384 opleverrijen, AI 12 / 15 / 9 / 15 rijen, zonder relaties (bedoeld) |
+| Live site | `/api/status` schema 2.0, runs zichtbaar |
 
-- **AI-tekst was onleesbaar.** Desktop negeerde de lettergrootte van de tekst-Cards: reuzeletter, afgekapt. Die Cards zijn nu gewone **Tables** met tekstterugloop, hetzelfde patroon dat de groepen bouwen. Script: `../herstel_tekstvlakken.mjs`.
-- **Donderdam-thema** geregistreerd in beide rapporten. Grafieken: legenda Werkelijk/Doel, doel in zandkleur, geen technische astitels; slicers herhalen de veldnaam niet.
-- **Verdieping:** Gemini zette `missing_data` soms nog eens achter de hypothese. De platte tabel laat die herhaling weg; ruwe responses (`ai-output.json`, `runs/`) zijn **niet** gewijzigd. Measure toont "Focus: wijk".
-- **Hostinger-klaar:** `npm start` = `node server.js` (geen `.env`-vlag die oudere Node mist). Snippets en de startversie wijzen naar `donderdam.brusseedesign.nl`. Groepsopdrachten met vaste URL's en een bonus over API-parameters.
-- Eerste commit en push naar GitHub gedaan.
+**Niet getest:** een groep die een uitdaging echt met de muis doorloopt, en de interactie "klik op een aanbeveling → wijken markeren" via klikken (de measure is met DAX bewezen, de kleur met een schermafdruk). Speel uitdaging C vanavond één keer na.
 
-## Nog open
+## Bouwscripts
 
-1. **Hostinger:** gekoppeld en live sinds 29-09 13:35 (deploy uit `main`). Eerste deploy gaf 503: `server.js` luisterde alleen bij directe start; opgelost in `1fffb4c` (logica in `lib/api.js`).
-2. **UI-route met de muis:** Get data → Web → To Table → uitvouwen is niet handmatig doorgeklikt (de query zelf is bewezen). Eén keer naspelen na livegang.
-3. **Inhoud:** insight-teksten zijn vlak ("boven doel, hoger dan vorig jaar"). Bruikbaar als discussiepunt (opdracht 1). Bekende foute claim CO2 jul/aug "als enige": zie begeleiderskaart.
-4. Op poort 3000 draaide nog een oudere lokale server (gestart vóór deze wijzigingen). Stop die of herstart met `npm start` voor een demo.
-
-## Niet doen
-
-Geen Gemini-sleutel op hosting, in Power Query of in Git. `.env`, `runs/` en `.pbi/` blijven buiten Git. Niet pushen tijdens de workshop.
+- In de repo: `scripts/build-domain.js` (data), `scripts/generate.js` (LLM), `scripts/build-powerbi.js` (TMDL).
+- Rapportpagina's (map erboven): `bouw_onderbouwing.mjs`, daarna `bouw_werkplaats.mjs`. Sluit Desktop vóór het draaien.
+- Desktop-test: `controle/refresh-desktop.ps1` en `controle/dax.ps1 -Query "EVALUATE ..."`.

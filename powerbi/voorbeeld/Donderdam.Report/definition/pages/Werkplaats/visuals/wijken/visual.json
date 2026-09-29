@@ -42,12 +42,27 @@
                       "Entity": "_Meetwaarden"
                     }
                   },
-                  "Property": "KPI Waarde"
+                  "Property": "KPI Waarde Overige Wijken"
                 }
               },
-              "queryRef": "_Meetwaarden.KPI Waarde",
-              "nativeQueryRef": "KPI Waarde",
+              "queryRef": "_Meetwaarden.KPI Waarde Overige Wijken",
+              "nativeQueryRef": "KPI Waarde Overige Wijken",
               "displayName": "Werkelijk"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Meetwaarden"
+                    }
+                  },
+                  "Property": "KPI Waarde AI-aanbevolen"
+                }
+              },
+              "queryRef": "_Meetwaarden.KPI Waarde AI-aanbevolen",
+              "nativeQueryRef": "KPI Waarde AI-aanbevolen",
+              "displayName": "Werkelijk · door AI aanbevolen"
             },
             {
               "field": {
@@ -119,7 +134,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Werkelijk en doel per wijk'"
+                  "Value": "'Werkelijk en doel per wijk (oranje = door AI aanbevolen)'"
                 }
               }
             },
@@ -196,7 +211,25 @@
             }
           },
           "selector": {
-            "metadata": "_Meetwaarden.KPI Waarde"
+            "metadata": "_Meetwaarden.KPI Waarde Overige Wijken"
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E8603C'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Meetwaarden.KPI Waarde AI-aanbevolen"
           }
         },
         {

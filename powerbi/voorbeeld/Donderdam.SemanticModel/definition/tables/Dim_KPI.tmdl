@@ -67,3 +67,4 @@ table Dim_KPI
 				    Typen
 
 	annotation PBI_ResultType = Table
+

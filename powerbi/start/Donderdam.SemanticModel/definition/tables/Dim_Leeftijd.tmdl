@@ -27,3 +27,4 @@ table Dim_Leeftijd
 				    Typen
 
 	annotation PBI_ResultType = Table
+

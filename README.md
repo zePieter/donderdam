@@ -1,23 +1,18 @@
 # Donderdam · AI toevoegen aan BI
 
-Een workshop van 45 minuten: zelf echte AI-output inladen, modelleren en naast bestaande Power BI-visuals gebruiken. Twee of drie gemengde groepjes. Versie 0.99 in voorbereiding.
+Workshop voor BI-collega's: een taalmodel heeft de Donderdam-data bekeken, de output staat als tabellen in het model. Groepen bepalen waar die AI-output aan hangt en verrijken een bestaand dashboard. Versie 1.0.
 
-**Begin hier:** [klaarzetten](docs/01-klaarzetten.md) · [groepsopdrachten](docs/02-groepsopdrachten.md) · [begeleiderskaart](docs/03-begeleiderskaart.md) · [overdracht](docs/OVERDRACHT.md).
-
-## Wat zit erin?
+**Begin hier:** [klaarzetten](docs/01-klaarzetten.md) · [uitdagingen](docs/02-groepsopdrachten.md) · [begeleiderskaart](docs/03-begeleiderskaart.md) · [spiekbriefje](docs/04-spiekbriefje.md) · [overdracht](docs/OVERDRACHT.md).
 
 | Bestand/map | Gebruik |
 |---|---|
-| `powerbi/start/Donderdam.pbip` | BI-basis; deelnemers voegen zelf één AI-tabel toe. |
-| `powerbi/voorbeeld/Donderdam.pbip` | Uitgewerkte verbinding met alle drie smaken. |
-| `data/*.csv` | Bestaande fictieve BI-data: 33 maanden, 8 wijken, 7 KPI's. |
-| `data/ai-output.json` | Negen echte Gemini API-responses, inclusief analysecontext en herkomst. |
-| `data/ai-*.json` | Platte versies om rechtstreeks in Power BI te laden. |
-| `powerquery/` | Plakbare queries voor online en lokaal inladen. |
-| `prompts/` | Werkelijke prompt, JSON-schema en berekende context per peilmaand/KPI. |
-| `lib/`, `scripts/`, `server.js` | Kleine Node.js-app, zonder externe packages. |
+| `powerbi/start/` | Klassiek dashboard + 4 AI-tabellen, nog los. Dit krijgen de groepen. |
+| `powerbi/voorbeeld/` | Uitgewerkt: drie infusements op klassieke visuals. |
+| `data/*.csv` | Fictief stermodel: 7 dimensies, 6 domeinfeiten (bron: `data/basis`). |
+| `data/ai-output.json`, `data/runs/` | Echte Gemini-runs met prompt, context en antwoord. |
+| `lib/`, `scripts/`, `server.js` | Node-app zonder externe packages. |
 
-**De BI-data is gesimuleerd; de AI-tekst is werkelijk door Gemini gegenereerd.** Een opgeslagen LLM-response blijft echte modeloutput. De tekst is een concept dat je aan de cijfers toetst, geen geverifieerde oorzaak of beleidsadvies.
+**De BI-data is fictief; de AI-tekst is echte modeloutput (status concept).**
 
 ## Codebase en lokaal starten
 
@@ -31,36 +26,21 @@ npm run build
 npm start
 ```
 
-Open `http://localhost:3000/`. `/api/status` hoort 9 AI-contexten te melden. De website kan volledig zonder `.env` of Gemini-sleutel draaien.
+Open `http://localhost:3000/`. De site toont de runs; `/api/status` meldt de beschikbare AI-maanden.
 
 De startversie leest de BI-data van de workshopsite. Het voorbeeld leest lokaal: `npm run prepare:powerbi` zet de datapaden; zonder Node kan dit via Power BI → Transform data → Edit parameters → DataFolder.
-
-## De datalaag
-
-```text
-Fictieve CSV-feiten → berekende maand/KPI-context → Gemini (eenmalige batch)
-       ↓                                      ↓
-Power BI-feiten                     opgeslagen AI-JSON
-       └──── gedeelde Datum- en KPI-dimensies ──┘
-                  ↓
-       Gewone kaarten, tabellen en grafieken
-```
-
-AI-dekking: WON, WLH en CO2 × juni, juli en augustus 2026. Scope: de gemeente. `Focus_Wijk_ID` is een genoemde wijk binnen die analyse; het is **geen wijkfilter voor de hele analyse**. Daarom koppelen de AI-tabellen alleen aan datum en KPI.
-
-Selecties lezen de ingeladen analyses. Refresh leest een nieuw bestand of de API opnieuw. Alleen `npm run generate` doet LLM-aanroepen.
 
 ## Nieuwe AI-output genereren (alleen organisator)
 
 Kopieer `.env.example` naar `.env`, vul lokaal de sleutel in en bevestig `Free` nadat je het project in AI Studio hebt gecontroleerd. Geen billing activeren voor deze workshop. `.env` en `runs/` blijven buiten Git.
 
 ```powershell
-npm run generate -- --all
-npm run snapshots
+npm run generate -- --all      # of: npm run generate -- 2026-09
+npm run build:powerbi
 npm run build
 ```
 
-Bestaande contexten met dezelfde bron worden overgeslagen. `--force` genereert bewust opnieuw. Bij een limietfout stopt de batch; er is geen betaalde uitwijk of gesimuleerde vervanging. Ruwe responses staan lokaal in `runs/`; per opgeslagen context staan model, tijdstip, request-id, prompt- en responsehash. Alleen fictieve geaggregeerde data gaat naar Gemini.
+Bestaande maanden met dezelfde brondata worden overgeslagen; `--force` genereert opnieuw. Per maand één aanroep; een afgekeurde respons krijgt één herkansing met de foutmelding. Alleen fictieve geaggregeerde data gaat naar Gemini. Runs staan in `data/runs/` en zijn op de site te bekijken.
 
 ## Hostinger
 

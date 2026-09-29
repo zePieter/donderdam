@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
-  "name": "advies",
+  "name": "ai_aanbeveling",
   "position": {
-    "x": 860,
-    "y": 185,
+    "x": 760,
+    "y": 355,
     "z": 0,
-    "height": 560,
-    "width": 400,
+    "height": 168,
+    "width": 500,
     "tabOrder": 0
   },
   "visual": {
@@ -17,21 +17,52 @@
           "projections": [
             {
               "field": {
-                "Measure": {
+                "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Meetwaarden"
+                      "Entity": "AI_Aanbeveling"
                     }
                   },
-                  "Property": "AI Suggesties"
+                  "Property": "Titel"
                 }
               },
-              "queryRef": "_Meetwaarden.AI Suggesties",
-              "nativeQueryRef": "AI Suggesties",
-              "displayName": "Drie mogelijke vervolgstappen"
+              "queryRef": "AI_Aanbeveling.Titel",
+              "nativeQueryRef": "Titel",
+              "displayName": "Aanbeveling"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AI_Aanbeveling"
+                    }
+                  },
+                  "Property": "Voorstel"
+                }
+              },
+              "queryRef": "AI_Aanbeveling.Voorstel",
+              "nativeQueryRef": "Voorstel"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "AI_Aanbeveling"
+                  }
+                },
+                "Property": "Volgorde"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
       }
     },
     "objects": {
@@ -41,7 +72,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "11D"
+                  "Value": "10D"
                 }
               }
             },
@@ -136,7 +167,18 @@
             "gridHorizontal": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "gridHorizontalColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E0D8C8'"
+                    }
+                  }
                 }
               }
             },
@@ -147,21 +189,10 @@
                 }
               }
             },
-            "outlineColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#F2EEE5'"
-                    }
-                  }
-                }
-              }
-            },
             "rowPadding": {
               "expr": {
                 "Literal": {
-                  "Value": "4D"
+                  "Value": "3D"
                 }
               }
             }
@@ -187,13 +218,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "370D"
+                  "Value": "150D"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "_Meetwaarden.AI Suggesties"
+            "metadata": "AI_Aanbeveling.Titel"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "320D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "AI_Aanbeveling.Voorstel"
           }
         }
       ]
@@ -249,7 +294,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'3 | Aanbevelingen'"
+                  "Value": "'3 · Aanbeveling: klik er een aan, de wijken lichten op'"
                 }
               }
             },

@@ -1,15 +1,11 @@
 # Donderdam · werkafspraken voor voortzetting
 
-Lees eerst README.md, docs/OVERDRACHT.md en docs/02-groepsopdrachten.md. De huidige workshopopdracht gaat boven oudere Claude-gesprekken en oude bron-CLAUDE.md.
+Lees eerst README.md, docs/OVERDRACHT.md en docs/03-begeleiderskaart.md.
 
-- Doel: circa 45 minuten, 2–3 gemengde groepjes, zelf echte AI-output ontsluiten, modelleren en combineren met BI.
-- Houd de bestaande fictieve dataset en kernmeasures. Originalen buiten deze repository niet wijzigen. Werk alleen in herkenbare kopieën.
-- Gewone Power BI Desktop-visuals. Geen SVG/customvisuals, Power Apps, Fabric-infrastructuur, chat of actieketen toevoegen.
-- Negen echte opgeslagen Gemini-contexten voor WON/WLH/CO2 × juni–augustus 2026; geen simulatie als vervanging. Gemeentelijke scope expliciet houden.
-- Kosten: gratis Gemini-project door gebruiker bevestigd. Geen billing activeren, betaalde fallback of onbegrensde retries. Geen API-key in Git, browser, Power Query of Power BI.
-- Node-app serveert alleen data; iedere GET is zonder LLM-aanroep. Contextgevoelige selectie verplicht niet tot live generatie.
-- Measures in _Meetwaarden; actieve relaties één richting van dimensie naar feit/AI. Geen relatie Focus_Wijk_ID → Dim_Wijk als scopefilter.
-- Houd teksten kort. Geef exacte bestandslocaties, bediening en verwacht resultaat. Uitgebreide naslag in docs, niet in elk chatantwoord.
-- Test echte Desktop-lading en visuals; een regexvalidator is geen bewijs. Maak zichtbaar wat getest, ongetest en inhoudelijk twijfelachtig is.
-- Lees de bekende AI-inhoudsfouten in de begeleiderskaart. Label output niet automatisch goedgekeurd.
-- Bewaak resterende voorbereidingstijd; het oorspronkelijke budget van 150 minuten is geen nieuw budget bij hervatten.
+- **Kern:** de AI-output staat al als data (met sleutels) in het model. Deelnemers bepalen Waarmee/Hoe/Waarom: waar hangt het aan, welke measure, welke bestaande visual. Geen DAX-cursus, geen opmaakwedstrijd, geen klikrecepten.
+- **Vorm:** 60 minuten, 30 minuten netto stoeien, 2–3 gemengde groepjes, één uitdaging per groep (A signaal, B wijkduiding, C aanbeveling). Spiekbriefje alleen als vangnet.
+- **Model:** zuiver stermodel met domeinfeiten volgens de standaarden; geen generieke Fact_KPI. Measures in `_Meetwaarden`, relaties 1:* in één richting. Model wordt gegenereerd door `scripts/build-powerbi.js`; niet met de hand in TMDL werken.
+- **LLM:** echte Gemini-runs (gratis tarief bevestigd), per peilmaand één aanroep met alle domeindata. Getallen in de tekst moeten in de data staan, en een hypothese moet op domeindata steunen. Eén herkansing, daarna stoppen. Geen simulatie, geen betaalde uitwijk, geen sleutel in Git, op de hosting of in Power BI.
+- **Site:** leest alleen, roept het LLM nooit aan. Hostinger bouwt opnieuw bij elke push naar main.
+- **Test:** echte Desktop-lading plus een schermafdruk. Een DAX-query bewijst het model, niet de visual. Card-visuals negeren de lettergrootte bij lange tekst; gebruik een Table met tekstterugloop. Kleur via een measure werkt niet bij meerdere measures in één grafiek.
+- **Communicatie met de organisator:** per keuze expliciet voor- en nadelen met het gevolg. Kort; details in docs.

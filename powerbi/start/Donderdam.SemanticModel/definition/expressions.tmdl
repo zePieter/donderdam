@@ -1,16 +1,22 @@
 /// Lokale map met de bronbestanden (terugval zonder internet). npm run prepare:powerbi zet dit pad.
 expression DataFolder = "D:\PROJECTEN\INTERN\BI\AI infused BI case\Donderdam-v2\workshop-v099\donderdam\data\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 9ee591b6-aee0-4f99-b5e0-3fe85085ab29
 
 /// Workshopsite voor de BI-CSV's. Leeg = lokale kopie in DataFolder.
 expression BaseUrl = "https://donderdam.brusseedesign.nl/data/" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=false]
+	lineageTag: a890aed6-34b0-4811-b88b-c4a204ceb2b0
 
 /// Workshopsite voor de AI-output. Leeg = lokale kopie in DataFolder.
 expression AiBaseUrl = "https://donderdam.brusseedesign.nl/" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=false]
+	lineageTag: e0fa53c6-2ff5-4c2a-a754-c5c26fbf0a4e
 
 expression LeesBron =
 		(Bestand as text) as binary =>
 		    if Text.Trim(BaseUrl) <> "" then Web.Contents(BaseUrl, [RelativePath = Bestand]) else File.Contents(DataFolder & Bestand)
+	lineageTag: 3842e282-1c36-4fbe-8594-d49f7faa0740
 
 expression LeesAI =
 		(Naam as text) as list =>
 		    Json.Document(if Text.Trim(AiBaseUrl) <> "" then Web.Contents(AiBaseUrl, [RelativePath = "api/" & Naam]) else File.Contents(DataFolder & "ai-" & Naam & ".json"))
+	lineageTag: 4abff00c-2a92-4492-959e-0f0ba90a3e67
+

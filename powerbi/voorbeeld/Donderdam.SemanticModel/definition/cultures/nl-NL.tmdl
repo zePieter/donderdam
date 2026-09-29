@@ -1,0 +1,326 @@
+cultureInfo nl-NL
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "ai_aanbeveling.titel": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "AI_Aanbeveling",
+			          "ConceptualProperty": "Titel"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Aanbeveling": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_meetwaarden.ai_signaal_tekst": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Meetwaarden",
+			          "ConceptualProperty": "AI Signaal Tekst"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "AI-signaal bij deze KPI": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_meetwaarden.kpi_waarde_overige_wijken": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Meetwaarden",
+			          "ConceptualProperty": "KPI Waarde Overige Wijken"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Werkelijk": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_meetwaarden.kpi_waarde_aiaanbevolen": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Meetwaarden",
+			          "ConceptualProperty": "KPI Waarde AI-aanbevolen"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Werkelijk · door AI aanbevolen": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_meetwaarden.kpi_target": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Meetwaarden",
+			          "ConceptualProperty": "KPI Target"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Doel": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_meetwaarden.kpi_waarde": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Meetwaarden",
+			          "ConceptualProperty": "KPI Waarde"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Werkelijk": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_meetwaarden.co2_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Meetwaarden",
+			          "ConceptualProperty": "CO2 YTD"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "CO2 ton": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_meetwaarden.woningen_gepland_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Meetwaarden",
+			          "ConceptualProperty": "Woningen Gepland YTD"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Gepland": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_meetwaarden.woningen_opgeleverd_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Meetwaarden",
+			          "ConceptualProperty": "Woningen Opgeleverd YTD"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Opgeleverd": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_meetwaarden.woningen_achterstand_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Meetwaarden",
+			          "ConceptualProperty": "Woningen Achterstand YTD"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Achterstand": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_meetwaarden.vacatures": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Meetwaarden",
+			          "ConceptualProperty": "Vacatures"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Openstaande vacatures": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ai_wijkduiding.wijk_naam": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "AI_Wijkduiding",
+			          "ConceptualProperty": "Wijk_Naam"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Wijk": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dim_sector.sector_naam": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dim_Sector",
+			          "ConceptualProperty": "Sector_Naam"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sector": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dim_wijk.wijk_naam": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dim_Wijk",
+			          "ConceptualProperty": "Wijk_Naam"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Wijk": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dim_project.projectnaam": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dim_Project",
+			          "ConceptualProperty": "Projectnaam"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Project": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

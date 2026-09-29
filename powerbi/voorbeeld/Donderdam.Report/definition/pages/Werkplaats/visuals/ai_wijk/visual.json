@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
-  "name": "verdieping",
+  "name": "ai_wijk",
   "position": {
-    "x": 440,
-    "y": 185,
+    "x": 760,
+    "y": 532,
     "z": 0,
-    "height": 560,
-    "width": 395,
+    "height": 153,
+    "width": 500,
     "tabOrder": 0
   },
   "visual": {
@@ -17,18 +17,46 @@
           "projections": [
             {
               "field": {
-                "Measure": {
+                "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Meetwaarden"
+                      "Entity": "AI_Wijkduiding"
                     }
                   },
-                  "Property": "AI Verdieping"
+                  "Property": "Wijk_Naam"
                 }
               },
-              "queryRef": "_Meetwaarden.AI Verdieping",
-              "nativeQueryRef": "AI Verdieping",
-              "displayName": "Welke wijk, en wat weten we nog niet?"
+              "queryRef": "AI_Wijkduiding.Wijk_Naam",
+              "nativeQueryRef": "Wijk_Naam",
+              "displayName": "Wijk"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AI_Wijkduiding"
+                    }
+                  },
+                  "Property": "Observatie"
+                }
+              },
+              "queryRef": "AI_Wijkduiding.Observatie",
+              "nativeQueryRef": "Observatie"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AI_Wijkduiding"
+                    }
+                  },
+                  "Property": "Hypothese"
+                }
+              },
+              "queryRef": "AI_Wijkduiding.Hypothese",
+              "nativeQueryRef": "Hypothese"
             }
           ]
         }
@@ -41,7 +69,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "10D"
                 }
               }
             },
@@ -136,7 +164,18 @@
             "gridHorizontal": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "gridHorizontalColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E0D8C8'"
+                    }
+                  }
                 }
               }
             },
@@ -147,21 +186,10 @@
                 }
               }
             },
-            "outlineColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#F2EEE5'"
-                    }
-                  }
-                }
-              }
-            },
             "rowPadding": {
               "expr": {
                 "Literal": {
-                  "Value": "4D"
+                  "Value": "3D"
                 }
               }
             }
@@ -187,13 +215,41 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "365D"
+                  "Value": "80D"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "_Meetwaarden.AI Verdieping"
+            "metadata": "AI_Wijkduiding.Wijk_Naam"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "190D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "AI_Wijkduiding.Observatie"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "190D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "AI_Wijkduiding.Hypothese"
           }
         }
       ]
@@ -249,7 +305,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'2 | Verdieping'"
+                  "Value": "'2 · Wijkduiding: klik op een wijk in de grafiek'"
                 }
               }
             },

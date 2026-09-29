@@ -26,3 +26,4 @@ table Dim_Sector
 				    Typen
 
 	annotation PBI_ResultType = Table
+

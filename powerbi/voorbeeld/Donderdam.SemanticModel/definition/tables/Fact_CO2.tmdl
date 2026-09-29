@@ -44,3 +44,4 @@ table Fact_CO2
 				    Typen
 
 	annotation PBI_ResultType = Table
+

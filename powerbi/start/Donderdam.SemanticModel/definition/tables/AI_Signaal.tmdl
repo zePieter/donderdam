@@ -99,3 +99,4 @@ table AI_Signaal
 				    Typen
 
 	annotation PBI_ResultType = Table
+

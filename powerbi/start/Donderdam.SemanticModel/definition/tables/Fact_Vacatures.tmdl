@@ -36,3 +36,4 @@ table Fact_Vacatures
 				    Typen
 
 	annotation PBI_ResultType = Table
+

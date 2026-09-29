@@ -61,3 +61,4 @@ relationship c6092032-e86a-5e4c-a864-df56108b4c4b
 relationship ce8d2490-45d2-5e5d-a7f6-cd9f75ce11f9
 	fromColumn: Fact_Doel.KPI_ID
 	toColumn: Dim_KPI.KPI_ID
+

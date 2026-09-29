@@ -93,3 +93,4 @@ table AI_Aanbeveling
 				    Typen
 
 	annotation PBI_ResultType = Table
+

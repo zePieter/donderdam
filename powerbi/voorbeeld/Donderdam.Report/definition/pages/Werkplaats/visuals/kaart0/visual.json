@@ -41,8 +41,13 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Literal": {
-                      "Value": "'#4A9FA0'"
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Meetwaarden"
+                        }
+                      },
+                      "Property": "AI Signaal Kleur"
                     }
                   }
                 }

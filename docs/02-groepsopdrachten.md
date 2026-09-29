@@ -1,77 +1,62 @@
-# Groepsopdrachten · 45 minuten
+# Uitdagingen · 30 minuten stoeien
 
-**Doel:** voeg een bruikbare AI-laag toe aan het bestaande Donderdam-dashboard. Jullie laden zelf de output, kiezen de juiste relaties en tonen de informatie naast de cijfers. Echte Gemini-tekst, fictieve gemeentecijfers.
+**Uitgangspunt.** Het klassieke dashboard werkt. Een taalmodel (Gemini) heeft de Donderdam-data bekeken en zijn output staat al als tabellen in het model: gestructureerd, met sleutels en herkomst. Er zijn nog geen relaties, measures of visuals voor. Dat is jullie werk.
 
-Maak twee of drie gemengde groepjes. Verdeel binnen het groepje: iemand bedient Power BI, iemand controleert de cijfers en iemand bewaakt de gebruikersvraag. Wissel na tien minuten.
+**Waar het om draait:** het punt waar drie vragen samenkomen.
 
-| Minuten | Samen doen |
+| | Vraag |
 |---|---|
-| 0–5 | Korte demo: bestaande BI + één extra AI-tabel. Kies een smaak. |
-| 5–12 | JSON inladen en kolomtypen controleren. |
-| 12–20 | Relaties leggen en eerste visual maken. |
-| 20–32 | Periode/KPI wisselen, inhoud toetsen en visual bruikbaar maken. |
-| 32–41 | Ieder groepje demonstreert in circa drie minuten. |
-| 41–45 | Kies één toepassing in een eigen klantdashboard en benoem de eerstvolgende kleine stap. |
+| **Waarmee** | Wat voor output is dit? Een label, een tekst of een selectie? Op welk niveau (grain) en met welke sleutels? |
+| **Hoe** | Waar hangt het aan in het model? Welke measure en welke bestaande visual wordt er rijker van? |
+| **Waarom** | Wat wint de gebruiker? En wanneer vertrouw je het niet? |
 
-## Voor alle groepjes · aansluiten
+**Opzet:** gemengde groepjes van 2 à 4, één uitdaging per groep. Open `Donderdam.pbip`, klik **Refresh** en kies bij de vraag om toegang **Anonymous**. Werken jullie vast, pak dan het [spiekbriefje](04-spiekbriefje.md). Het uitgewerkte voorbeeld laat de begeleider aan het eind zien.
 
-1. Pak de zip uit en open `Donderdam.pbip`. Klik **Home → Refresh**; vraagt Power BI om toegang, kies **Anonymous → Connect**. De BI-data komt van de workshopsite, er is geen map of pad in te stellen. Kies **Nieuwe woningen** en **aug 2026**; verwacht **91**, doel **107**.
-2. Kies **Home → Get data → Web** en plak de URL van jullie smaak hieronder. Klik **Transform data**.
-3. Power Query zet de JSON meestal zelf om: je ziet 9 rijen (bij aanbevelingen 27) en rechts de stappen *Converted to table*, *Expanded Column1* en *Changed column type*. Zie je toch alleen het woord **List**? Kies dan **To Table**, bevestig, klik de dubbele pijl in de kolomkop en haal het vinkje bij *Use original column name as prefix* weg.
-4. Hernoem de query rechts bij **Name** (staat op "Query") volgens de tabel hieronder. Controleer de kolomtypen: **Peilmaand** kalendericoon (Date), **KPI_ID** **1²3** (Whole number). Klik op het icoon als het anders is. Gebruik **Close & Apply**.
-5. Ga naar **Model view → Manage relationships → New**. Leg twee actieve relaties: jullie tabel `[KPI_ID]` → `Dim_KPI[KPI_ID]`, en `[Peilmaand]` → `Dim_Datum[Datum]`. Beide **Many to one (*:1)** en **Single**. De dimensies filteren de AI-tabel. Controleer of Desktop geen ongewenste automatische relaties heeft toegevoegd.
-6. Maak jullie visual. Gebruik de bestaande KPI- en maandslicer. Kies alleen juni, juli of augustus 2026 en WON, WLH of CO2 voor AI.
+---
 
-**Snelle hulp:** plak de volledige query uit `powerquery/` in **Transform data → New source → Blank query → Advanced Editor**. De relaties blijven jullie eigen stap. Geen internet? Zie de terugval in de begeleiderskaart.
+## A · Signaal: de AI kijkt mee bij de KPI
 
-| Smaak | Naam query | URL |
-|---|---|---|
-| 1 · Inzicht | AI_Inzichten | `https://donderdam.brusseedesign.nl/api/insights` |
-| 2 · Verdieping | AI_Verdieping | `https://donderdam.brusseedesign.nl/api/deep-dives` |
-| 3 · Aanbevelingen | AI_Aanbevelingen | `https://donderdam.brusseedesign.nl/api/recommendations` |
+**Tabel:** `AI_Signaal`, één rij per KPI per maand. Velden: Signaal (Afwijkende trend, Aandacht of Op koers), Kop, Duiding, Zekerheid, Maanden_Op_Rij, Model.
 
-Op `https://donderdam.brusseedesign.nl` staat ook de uitleg per bron en de ruwe LLM-invoer.
+**Gebruikersvraag:** "Ik kijk 30 seconden naar dit dashboard. Waar moet ik op letten?"
 
-## 1 · Inzicht: wat voegt de tekst toe?
+**Uitdaging:** laat het AI-signaal zichtbaar worden bíj de KPI-kaarten die er al staan, zodat het bij de gekozen KPI en maand verandert.
 
-**Gebruikersvraag:** “Wat moet ik bij deze KPI als eerste zien?”
+- Waar hangt deze tabel aan? En waarom níet aan Dim_Wijk?
+- Hoe laat je zien dat dit een oordeel van een model is en geen gemeten cijfer?
+- Kies Werkloosheid in augustus. Klopt de duiding met de cijfers?
 
-Maak een gewone **Table** met `Titel`, `Inzicht` en `Review_Status`. Zet **Values → Text wrap** aan en **Totals** uit. Maak het vlak naast de bestaande wijkgrafiek leesbaar; liever minder velden dan piepkleine tekst. Voeg eventueel een kleine tabel met `Model` en `Peilmaand` toe.
+## B · Wijkduiding: de AI wijst een wijk aan
 
-Test augustus tegenover juni, daarna woningbouw tegenover werkloosheid. Controleer één bewering met de kaart en één met **Trends**. Leg uit of de tekst méér zegt dan “rood is slecht”.
+**Tabel:** `AI_Wijkduiding`, alleen de opvallende combinaties van wijk × KPI × maand. Velden: Observatie, Hypothese, Bewijs (projecten, leeftijdsgroepen, branches), Te_Toetsen.
 
-**Klaar als:** de juiste tekst met beide slicers meeverandert, inwoners geen AI-rij oplevert en jullie één nuttige duiding én één beperking kunnen noemen.
+**Gebruikersvraag:** "Welke wijk verdient aandacht, en waarom zou dat zo zijn?"
 
-## 2 · Verdieping: waar kijk ik verder?
+**Uitdaging:** koppel de duiding aan de wijkgrafiek, zodat een klik op een wijk laat zien wat de AI erover zegt.
 
-**Gebruikersvraag:** “Welke wijk verdient nader onderzoek, en wat weten we nog niet?”
+- Waarom heeft niet elke wijk een rij? Wat betekent een lege plek voor de gebruiker?
+- Toets één hypothese aan de pagina **Onderbouwing**. Welke houdt stand en welke klinkt alleen overtuigend?
+- Welke data zou de AI nodig hebben om de zwakke hypothese te onderbouwen?
 
-Maak een gewone **Table** met `Focus_Wijk`, `Observatie`, `Hypothese` en `Ontbrekende_Data`; tekstterugloop aan, totalen uit. Controleer de genoemde wijk op **Trends** met de wijkselectie.
+## C · Aanbeveling: de AI stuurt de aandacht
 
-`Focus_Wijk_ID` is de wijk die de AI aanwijst binnen een gemeentebrede analyse. Leg **geen actieve relatie van dat veld naar Dim_Wijk**: daarmee wordt een genoemd voorbeeld ten onrechte de scope van de hele analyse. De AI kent geen vergunningen, werkgevers of bouwprojecten.
+**Tabellen:** `AI_Aanbeveling` (drie per maand) en `AI_Aanbeveling_Wijk` (per aanbeveling de wijken waar het om gaat).
 
-Test een andere peilmaand. Maak voor de gebruiker zichtbaar wat observatie is en wat alleen een mogelijke verklaring is. Benoem de data waarmee je die verklaring zou toetsen.
+**Gebruikersvraag:** "Wat is een zinnige volgende stap, en waar?"
 
-**Klaar als:** periode en KPI goed filteren, jullie de opvallende wijk in BI hebben gecontroleerd en niemand een hypothese voor een bewezen oorzaak kan aanzien.
+**Uitdaging:** toon de aanbevelingen zo, dat de gekozen aanbeveling de bijbehorende wijken zichtbaar maakt in de bestaande wijkgrafiek.
 
-## 3 · Aanbevelingen: welke vervolgstap helpt?
+- Dit is een veel-op-veel-situatie. Hoe loop het filter van aanbeveling naar wijk? En wat gebeurt er met de rest van het dashboard als je dat met tweerichtingsfiltering oplost?
+- Filteren of markeren: wat helpt de gebruiker meer?
+- Zou je deze aanbeveling zo aan een wethouder voorleggen? Wat ontbreekt er?
 
-**Gebruikersvraag:** “Wat kan ik verstandig als volgende stap onderzoeken?”
+---
 
-Maak een gewone **Table** met `Volgorde`, `Titel`, `Suggestie` en `Te_Toetsen`; sorteer op Volgorde, tekstterugloop aan, totalen uit. Eén periode/KPI heeft drie voorstellen. Kies met het groepje de bruikbaarste en wijs een generiek of ongefundeerd voorstel af.
+## Delen · 3 minuten per groep
 
-Als dit staat: voeg een gewone **Slicer** met `AI_Aanbevelingen[Volgorde]` toe, enkelvoudige selectie, stijl **Tile**. Daarmee kiest de gebruiker een al gegenereerd alternatief. Dit is een interactie met AI-data; de knop roept geen LLM aan.
+Laat één werkende interactie zien en vul jullie rij in de gezamenlijke tabel:
 
-**Klaar als:** de drie voorstellen bij de juiste context verschijnen, een alternatief selecteerbaar is en jullie kunnen uitleggen welke toets nodig is vóór uitvoering. Bouw geen actieketen.
+| Groep | Waarmee (vorm, grain, sleutels) | Hoe (relaties, measure, visual) | Waarom (winst voor de gebruiker) | Waar moet je de AI begrenzen? |
+|---|---|---|---|---|
 
-## Bonus · de API laten filteren
-
-Klaar en tijd over? De API accepteert `month` (2026-06 t/m 2026-08) en `kpi` (WON, WLH, CO2). Maak in Power Query een parameter **Maand** (Text, `2026-08`) en pas in de Advanced Editor de bron aan:
-
-`Web.Contents("https://donderdam.brusseedesign.nl/", [RelativePath = "api/insights", Query = [month = Maand]])`
-
-Bespreek: wanneer filter je in de bron (minder data, ververs per keuze), en wanneer in het model (alles laden, slicers doen het werk)? Voor AI-output die per context wordt gegenereerd is dat een echte ontwerpkeuze.
-
-## Bespreek met de andere groepjes
-
-Laat één werkende selectie zien, benoem wat de gebruiker ermee wint en toon één punt waarop je de AI moet begrenzen. Bij twee groepjes doet groep 2 eerst verdieping en voegt alleen bij voldoende tijd de aanbevelingentabel toe.
+Noem daarna één **do** en één **don't** voor AI-output in een BI-oplossing.

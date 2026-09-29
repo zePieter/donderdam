@@ -81,11 +81,13 @@ const measures=[
 // Alleen in het voorbeeld: de uitgewerkte AI-verrijking.
 const aiMeasures=[
   ['9 AI\\1 Signaal','AI Signaal','SELECTEDVALUE ( AI_Signaal[Signaal] )'],
-  ['9 AI\\1 Signaal','AI Signaal Tekst','IF ( COUNTROWS ( AI_Signaal ) = 1,\n    SELECTEDVALUE ( AI_Signaal[Kop] ) & UNICHAR ( 10 ) & SELECTEDVALUE ( AI_Signaal[Duiding] ) & UNICHAR ( 10 ) & "Zekerheid: " & SELECTEDVALUE ( AI_Signaal[Zekerheid] ),\n    "Geen AI-signaal voor deze selectie." )'],
+  ['9 AI\\1 Signaal','AI Signaal Tekst','VAR _n = SELECTEDVALUE ( AI_Signaal[Maanden_Op_Rij] )\nRETURN IF ( COUNTROWS ( AI_Signaal ) = 1,\n    UPPER ( SELECTEDVALUE ( AI_Signaal[Signaal] ) ) & IF ( _n > 1, " · " & _n & " maanden op rij achter op doel", "" ) & UNICHAR ( 10 ) & SELECTEDVALUE ( AI_Signaal[Kop] ) & UNICHAR ( 10 ) & UNICHAR ( 10 ) & SELECTEDVALUE ( AI_Signaal[Duiding] ) & UNICHAR ( 10 ) & UNICHAR ( 10 ) & "Zekerheid volgens het model: " & SELECTEDVALUE ( AI_Signaal[Zekerheid] ) & UNICHAR ( 10 ) & [AI Herkomst],\n    "Geen AI-signaal voor deze selectie. AI-output is er voor juni, juli en augustus 2026." )'],
   ['9 AI\\1 Signaal','AI Signaal Kleur','SWITCH ( [AI Signaal], "Afwijkende trend", "#E8603C", "Aandacht", "#EF9F27", "Op koers", "#3BAA5C", "#6B6259" )'],
   ['9 AI\\2 Wijkduiding','AI Wijkduiding Aanwezig','IF ( NOT ISEMPTY ( AI_Wijkduiding ), 1 )','0'],
   ['9 AI\\3 Aanbeveling','AI Aanbevolen Wijk','IF ( NOT ISEMPTY ( AI_Aanbeveling_Wijk ), 1 )','0'],
   ['9 AI\\3 Aanbeveling','AI Wijk Kleur','IF ( [AI Aanbevolen Wijk] = 1, "#E8603C", "#4A9FA0" )'],
+  ['9 AI\\3 Aanbeveling','KPI Waarde AI-aanbevolen','IF ( [AI Aanbevolen Wijk] = 1, [KPI Waarde] )','#,0.00'],
+  ['9 AI\\3 Aanbeveling','KPI Waarde Overige Wijken','IF ( ISBLANK ( [AI Aanbevolen Wijk] ), [KPI Waarde] )','#,0.00'],
   ['9 AI\\Herkomst','AI Herkomst','VAR _m = SELECTEDVALUE ( AI_Signaal[Model] )\nVAR _t = SELECTEDVALUE ( AI_Signaal[Gegenereerd_Op] )\nRETURN IF ( ISBLANK ( _m ), "Geen AI-output voor deze selectie", _m & " | " & FORMAT ( DATEVALUE ( LEFT ( _t, 10 ) ), "d mmm yyyy" ) & " " & MID ( _t, 12, 5 ) & " UTC | " & SELECTEDVALUE ( AI_Signaal[Review_Status] ) )'],
 ];
 

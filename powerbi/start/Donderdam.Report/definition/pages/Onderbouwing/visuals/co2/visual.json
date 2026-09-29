@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "co2",
   "position": {
-    "x": 660,
+    "x": 740,
     "y": 452,
     "z": 0,
     "height": 265,
-    "width": 600,
+    "width": 520,
     "tabOrder": 0
   },
   "visual": {
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "Dim_Wijk.Wijk_Naam",
-              "nativeQueryRef": "Wijk_Naam"
+              "nativeQueryRef": "Wijk_Naam",
+              "active": true
             }
           ]
         },
@@ -45,7 +46,8 @@
                 }
               },
               "queryRef": "Dim_Sector.Sector_Naam",
-              "nativeQueryRef": "Sector_Naam"
+              "nativeQueryRef": "Sector_Naam",
+              "displayName": "Sector"
             }
           ]
         },
