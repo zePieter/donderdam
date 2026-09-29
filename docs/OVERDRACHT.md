@@ -15,7 +15,8 @@ AI-output en BI-CSV's via de eigen workshopsite **`https://donderdam.brusseedesi
 | Voorbeeld visueel | Schermafdruk Werkplaats + Drie AI-smaken | Leesbaar, thema actief, tekst loopt terug |
 | Start-PBIP in Desktop | Openen, volledige refresh, schermafdruk Werkplaats + Trends | BI-cijfers kloppen (WON aug: 91 / 107 / −13,3%); AI-plek is instructievlak |
 | Deelnemerspad lokaal | Kopie van start + `AI_Inzichten-lokaal.m` + twee relaties, refresh, DAX | 9 rijen; elke context één rij met juiste titel; INW en januari nul rijen |
-| Deelnemerspad via HTTP | Kopie van start tegen de Node-server (localhost als stand-in voor Hostinger), DataFolder bewust ongeldig | BI 1.848 rijen via `/data/`; AI 9 rijen via `/api/insights`; `?month=2026-08&kpi=WON` geeft 3 adviezen |
+| Live site (29-09, 13:35) | Alle endpoints op `https://donderdam.brusseedesign.nl` | `/api/status` 9/9 `ai_ready`; insights/deep-dives 9, recommendations 27 (gefilterd 3); `/data/fact_kpi.csv` 1.848; foute maand 400; `/.env` 403 |
+| Deelnemerspad tegen live site | Kopie van start + web-snippets, DataFolder bewust ongeldig, Desktop-refresh | Eerst venster **Access Web content → Anonymous → Connect** (zoals in opdracht). Daarna BI 1.848 rijen, AI 9 rijen, filter aug/WON 3 adviezen, WON aug 91, INW 0 AI-rijen |
 
 Refresh zonder klikken: open het PBIP en draai `../controle/refresh-desktop.ps1`.
 
@@ -29,7 +30,7 @@ Refresh zonder klikken: open het PBIP en draai `../controle/refresh-desktop.ps1`
 
 ## Nog open
 
-1. **Hostinger koppelen** (organisator, ±20 min): zie klaarzetten §2. Daarna `/api/status` controleren en de startversie één keer verversen tegen de echte site.
+1. **Hostinger:** gekoppeld en live sinds 29-09 13:35 (deploy uit `main`). Eerste deploy gaf 503: `server.js` luisterde alleen bij directe start; opgelost in `1fffb4c` (logica in `lib/api.js`).
 2. **UI-route met de muis:** Get data → Web → To Table → uitvouwen is niet handmatig doorgeklikt (de query zelf is bewezen). Eén keer naspelen na livegang.
 3. **Inhoud:** insight-teksten zijn vlak ("boven doel, hoger dan vorig jaar"). Bruikbaar als discussiepunt (opdracht 1). Bekende foute claim CO2 jul/aug "als enige": zie begeleiderskaart.
 4. Op poort 3000 draaide nog een oudere lokale server (gestart vóór deze wijzigingen). Stop die of herstart met `npm start` voor een demo.
