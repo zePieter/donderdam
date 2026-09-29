@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {loadData,contexts,metric,parseCSV} from '../lib/data.js';
 import {validateOutput,generate,buildRecord} from '../lib/ai.js';
-import {createServer,flatRows} from '../server.js';
+import {createServer,flatRows} from '../lib/api.js';
 
 const data=loadData(),cs=contexts(data);
 const fixture={insight:{title:'Testinzicht',text:'Alleen een testrespons, geen workshopoutput.',evidence_ids:['gemeente']},deep_dive:{wijk_id:6,observation:'Testobservatie.',hypothesis:'Hypothese: dit is testtekst.',missing_data:'Testgegevens nodig.',evidence_ids:['wijk:6']},recommendations:Array.from({length:3},()=>({title:'Testadvies',suggestion:'Testvoorstel.',check:'Testcontrole.',evidence_ids:['gemeente']}))};
