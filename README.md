@@ -33,7 +33,7 @@ npm start
 
 Open `http://localhost:3000/`. `/api/status` hoort 9 AI-contexten te melden. De website kan volledig zonder `.env` of Gemini-sleutel draaien.
 
-Op een andere computer: `npm run prepare:powerbi` zet de lokale datapaden; zonder Node kan dit via Power BI → Transform data → Edit parameters → DataFolder.
+De startversie leest de BI-data van de workshopsite. Het voorbeeld leest lokaal: `npm run prepare:powerbi` zet de datapaden; zonder Node kan dit via Power BI → Transform data → Edit parameters → DataFolder.
 
 ## De datalaag
 
@@ -64,8 +64,8 @@ Bestaande contexten met dezelfde bron worden overgeslagen. `--force` genereert b
 
 ## Hostinger
 
-Koppel de GitHub-repository als Node.js-app. Instellingen: Node 24 (of 22), framework **Other**, projectroot `.`, build `npm run build`, start `npm start` of entrypoint `server.js`. Laat Hostinger `PORT` bepalen. **Geen Gemini-key instellen op de hosting**: de app serveert opgeslagen output. Koppel daarna `donderdam.brusseedesign.nl` en controleer HTTPS en `/api/status`.
+Stappen in hPanel: zie [klaarzetten §2](docs/01-klaarzetten.md). Kort: Node.js-app uit GitHub (`zePieter/donderdam`), framework **Other**, Node 24, entry `server.js`, build `npm run build`, start `npm start`. Hostinger bepaalt `PORT`. **Geen Gemini-key op de hosting**: de app serveert opgeslagen output. Subdomein `donderdam.brusseedesign.nl`; de Power Query-snippets en de startversie verwijzen daarheen.
 
-Deze repository is lokaal verbonden met `https://github.com/zePieter/donderdam`. Online bereikbaarheid is pas aangetoond na een geslaagde deploymenttest; zie overdracht voor de actuele status.
+Hostinger bouwt opnieuw bij elke push naar `main`. Online bereikbaarheid is pas aangetoond na een geslaagde deploymenttest; zie overdracht.
 
 Technische referenties: [Gemini structured output](https://ai.google.dev/gemini-api/docs/structured-output), [gratis modelplan en tarieven](https://ai.google.dev/gemini-api/docs/pricing), [Hostinger Node.js](https://www.hostinger.com/support/how-to-deploy-a-nodejs-website-in-hostinger/).

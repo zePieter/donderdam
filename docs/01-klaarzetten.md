@@ -6,22 +6,23 @@ Werk verder in deze repository: `workshop-v099/donderdam`. De oude bronmap en `b
 
 Open deze map in VS Code. Open de Power BI-bestanden via onderstaande submappen, niet via een oudere vermelding bij Recent.
 
-## 2. Bron beschikbaar maken
+## 2. Workshopsite op Hostinger (eenmalig)
 
-Voor deelnemers bij voorkeur de gedeelde HTTPS-URL. Als hosting nog ontbreekt: gebruik de meegeleverde JSON-bestanden. Die bevatten dezelfde echte modeloutput. Deelnemers hebben geen AI-account of sleutel nodig.
+Voorwaarde: pakket **Business** of **Cloud** (alleen die ondersteunen Node.js-apps).
 
-Lokaal de webbron testen: VS Code → Terminal → New Terminal → `npm start`. Laat die terminal draaien. Open `http://localhost:3000/api/status`; verwacht `ai_contexts: 9`, `ai_ready: true` en `llm_calls_on_read: false`.
+1. hPanel → **Websites** → **Add Website** → **Deploy Web App** → **Import Git Repository** → **Authorize** GitHub → kies `zePieter/donderdam`.
+2. Framework **Other**, Node.js **24.x**, entry file `server.js`. Build command `npm run build`, start command `npm start` (als gevraagd). Output directory leeg laten of `.`. Geen environment variables: **geen Gemini-sleutel op de hosting**. `PORT` bepaalt Hostinger zelf.
+3. **Deploy**. Koppel daarna het subdomein `donderdam.brusseedesign.nl` aan de app en wacht op SSL.
+4. Controleer `https://donderdam.brusseedesign.nl/api/status`: verwacht `ai_contexts: 9`, `ai_ready: true`, `llm_calls_on_read: false`.
 
-`localhost` betekent ieders eigen computer. Geef deelnemers dus de gedeelde URL of de lokale bestanden; de localhost-URL op jouw laptop is niet hun webbron.
+Hostinger bouwt opnieuw bij **elke push naar `main`**. Push dus niet tijdens de workshop.
 
 ## 3. Power BI openen
 
 1. Sluit een al geopend Donderdam-rapport voordat je de projectbestanden wijzigt.
-2. Op een andere computer: voer in de repository `npm run prepare:powerbi` uit. Geen Node? Open het PBIP en kies **Transform data → Edit parameters**. Zet **DataFolder** op het volledige pad naar de map `data`, inclusief afsluitende `\`.
-3. Open `powerbi/start/Donderdam.pbip` voor de deelnemers of `powerbi/voorbeeld/Donderdam.pbip` voor de demonstratie.
-4. Klik **Home → Refresh**. Dit laadt de brondata. Bij het voorbeeld staat **AiBaseUrl** aanvankelijk leeg: dat gebruikt de echte lokale AI-snapshot.
-5. Voor webgebruik in het voorbeeld: **AiBaseUrl** wordt `http://localhost:3000/` of de gedeelde HTTPS-root, met afsluitende `/`. Kies bij de openbare workshopbron **Anonymous** als Power BI om credentials vraagt. Vul nergens de Gemini-sleutel in.
-6. Laat **BaseUrl** leeg voor lokale BI-CSV's. Alleen als je ook de BI-bron via de website wilt lezen: zet BaseUrl op de URL eindigend op `/data/`.
+2. **Start** leest de BI-CSV's standaard van `https://donderdam.brusseedesign.nl/data/` (parameter BaseUrl). Deelnemers hoeven dus geen pad in te stellen.
+3. **Voorbeeld** leest lokaal: voer op een andere computer `npm run prepare:powerbi` uit, of zet **Transform data → Edit parameters → DataFolder** op de map `data\`. **AiBaseUrl** leeg = lokale AI-snapshot; `https://donderdam.brusseedesign.nl/` = via de site.
+4. Klik **Home → Refresh**. Kies bij de workshopsite **Anonymous** als Power BI om credentials vraagt. Vul nergens de Gemini-sleutel in.
 
 ## 4. Korte acceptatie
 
@@ -34,6 +35,8 @@ Lokaal de webbron testen: VS Code → Terminal → New Terminal → `npm start`.
 
 Controleer in het voorbeeld dat de AI-tekst verandert wanneer je juni/augustus of een andere gedekte KPI kiest. Bij inwoners of januari is er bewust geen AI-output. Selecties starten geen generatie.
 
-## 5. Delen en doorgaan
+## 5. Delen
 
-Geef elk groepje een eigen kopie van de **start**-map, de **data**-map, hun opdracht en de Power Query-snippet. Het voorbeeld houd je als terugvalpunt. In VS Code Source Control horen `.env`, `runs/` en `.pbi` niet bij de wijzigingen. Een lokale commit is nog geen GitHub-push; een push is nog geen Hostinger-deployment.
+Zip de map `powerbi/start` (zonder `.pbi`) en zet die met de groepsopdrachten in Teams. Houd de volledige repo-zip achter de hand als terugval zonder internet (zie begeleiderskaart). Het voorbeeld is jouw demo en terugvalpunt.
+
+Opening (optioneel): toon `https://donderdam.brusseedesign.nl/api/insights?month=2026-08&kpi=WON` in de browser: “dit is AI-output als API, gefilterd op periode en KPI.”

@@ -2,8 +2,8 @@
 expression DataFolder = "D:\PROJECTEN\INTERN\BI\AI infused BI case\Donderdam-v2\workshop-v099\donderdam\data\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: 013f53e1-f5d4-4dd3-b705-267c95349555
 
-/// Optionele gedeelde HTTPS-map met de bronbestanden; leeg gebruikt de lokale kopie.
-expression BaseUrl = "" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=false]
+/// Workshopbron voor de BI-CSV's. Leegmaken = lokale kopie in DataFolder (terugval zonder internet).
+expression BaseUrl = "https://donderdam.brusseedesign.nl/data/" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=false]
 	lineageTag: b0366ce6-9e76-4ed1-a8aa-92f4fa155ad9
 
 expression LeesBron =

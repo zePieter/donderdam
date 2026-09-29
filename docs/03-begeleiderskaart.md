@@ -14,7 +14,7 @@ Toon woningbouw augustus: 91 tegenover circa 107. Open het voorbeeld en laat dez
 | Na 20 minuten tekst verandert niet | Controleer de twee relaties, richting Single, datumtype Date en filters uit gedeelde dimensies. |
 | Dezelfde tekst bij elke wijk | De analyse heeft gemeentelijke scope. Gebruik de wijkgrafiek als bewijs; doe niet alsof de tekst op wijkniveau gegenereerd is. |
 | Gebrek aan tijd | Gewone Table met tekstterugloop is voldoende. Geen opmaakwedstrijd. |
-| Hosting/netwerk valt uit | Lokale `ai-*.json` via dezelfde DataFolder. Dit is dezelfde echte AI-output. |
+| Hosting/netwerk valt uit | Geef de repo-zip (met `data/`). **Transform data → Edit parameters:** BaseUrl leegmaken, DataFolder = pad naar `data\` (met afsluitende `\`). AI via de `-lokaal.m`-query. Dezelfde echte AI-output. |
 | Groep blijft technisch vastlopen | Open de voorbeeldoplossing; laat hen de relatiekeuze en inhoud controleren en één visual wijzigen. |
 
 ## Inhoudelijke controle · bekend uit de echte responses

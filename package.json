@@ -6,7 +6,7 @@
   "description": "Donderdam: BI-data en echte LLM-output voor een Power BI-workshop",
   "engines": { "node": ">=22" },
   "scripts": {
-    "start": "node --env-file-if-exists=.env server.js",
+    "start": "node server.js",
     "build": "node scripts/check.js",
     "test": "node --test",
     "contexts": "node scripts/export-contexts.js",
