@@ -1,0 +1,74 @@
+cultureInfo nl-NL
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "table_meetwaarden.contextlabel": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Meetwaarden",
+			          "ConceptualProperty": "Contextlabel"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Selectie": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_meetwaarden.kpi_waarde": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Meetwaarden",
+			          "ConceptualProperty": "KPI Waarde"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Werkelijk": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_meetwaarden.kpi_target": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Meetwaarden",
+			          "ConceptualProperty": "KPI Target"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Doel": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

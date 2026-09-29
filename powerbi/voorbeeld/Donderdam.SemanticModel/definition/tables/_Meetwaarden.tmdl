@@ -1,0 +1,201 @@
+/// Kernmeasures hergebruikt en begrensd voor een eenduidige KPI- en periodecontext.
+table _Meetwaarden
+	lineageTag: c930a9d6-6738-4262-80d5-4dcce7cefd4c
+
+	measure 'KPI Waarde' =
+			VAR _agg = SELECTEDVALUE ( Dim_KPI[Aggregatie] )
+			VAR _ratio = SELECTEDVALUE ( Dim_KPI[Is_Ratio] ) = 1
+			VAR _laatste = MAX ( Fact_KPI[Datum] )
+			VAR _jaarstart = DATE ( YEAR ( _laatste ), 1, 1 )
+			VAR _t =
+			    IF (
+			        _agg = "stand",
+			        CALCULATE ( SUM ( Fact_KPI[Teller] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] = _laatste ),
+			        CALCULATE ( SUM ( Fact_KPI[Teller] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] >= _jaarstart && Dim_Datum[Datum] <= _laatste )
+			    )
+			VAR _n =
+			    IF (
+			        _agg = "stand",
+			        CALCULATE ( SUM ( Fact_KPI[Noemer] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] = _laatste ),
+			        CALCULATE ( SUM ( Fact_KPI[Noemer] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] >= _jaarstart && Dim_Datum[Datum] <= _laatste )
+			    )
+			RETURN
+			    IF ( NOT HASONEVALUE ( Dim_KPI[KPI_ID] ) || ISBLANK ( _agg ) || ISBLANK ( _laatste ), BLANK (), IF ( _ratio, DIVIDE ( _t, _n ), _t ) )
+		formatString: #,0.00
+		displayFolder: 2 KPI
+		lineageTag: f1011d22-b02c-4908-94b7-7ce47f68779b
+
+	measure 'KPI Waarde VJ' =
+			VAR _agg = SELECTEDVALUE ( Dim_KPI[Aggregatie] )
+			VAR _ratio = SELECTEDVALUE ( Dim_KPI[Is_Ratio] ) = 1
+			VAR _huidig = MAX ( Fact_KPI[Datum] )
+			VAR _laatste = IF ( NOT ISBLANK ( _huidig ), EDATE ( _huidig, -12 ) )
+			VAR _jaarstart = DATE ( YEAR ( _laatste ), 1, 1 )
+			VAR _t =
+			    IF (
+			        _agg = "stand",
+			        CALCULATE ( SUM ( Fact_KPI[Teller] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] = _laatste ),
+			        CALCULATE ( SUM ( Fact_KPI[Teller] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] >= _jaarstart && Dim_Datum[Datum] <= _laatste )
+			    )
+			VAR _n =
+			    IF (
+			        _agg = "stand",
+			        CALCULATE ( SUM ( Fact_KPI[Noemer] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] = _laatste ),
+			        CALCULATE ( SUM ( Fact_KPI[Noemer] ), REMOVEFILTERS ( Dim_Datum ), Dim_Datum[Datum] >= _jaarstart && Dim_Datum[Datum] <= _laatste )
+			    )
+			RETURN
+			    IF ( NOT HASONEVALUE ( Dim_KPI[KPI_ID] ) || ISBLANK ( _agg ) || ISBLANK ( _laatste ), BLANK (), IF ( _ratio, DIVIDE ( _t, _n ), _t ) )
+		formatString: #,0.00
+		displayFolder: 2 KPI
+		lineageTag: b90bda99-bab5-4313-868d-f3a89d36e7d3
+
+	measure 'KPI Jaartarget' =
+			VAR _ratio = SELECTEDVALUE ( Dim_KPI[Is_Ratio] ) = 1
+			VAR _datum = MAX ( Fact_KPI[Datum] )
+			VAR _jaar = YEAR ( _datum )
+			RETURN
+			    IF ( NOT HASONEVALUE ( Dim_KPI[KPI_ID] ) || ISBLANK ( _datum ), BLANK (), CALCULATE (
+			        IF ( _ratio, AVERAGE ( Fact_Target[Target] ), SUM ( Fact_Target[Target] ) ),
+			        REMOVEFILTERS ( Dim_Datum ),
+			        Dim_Datum[Datum] = DATE ( _jaar, 1, 1 )
+			    ) )
+		formatString: #,0.00
+		displayFolder: 3 Target
+		lineageTag: 56d0a1a2-0f73-48c0-9cf4-8718c2d1e5ee
+
+	measure 'KPI Target' =
+			VAR _agg = SELECTEDVALUE ( Dim_KPI[Aggregatie] )
+			VAR _ratio = SELECTEDVALUE ( Dim_KPI[Is_Ratio] ) = 1
+			VAR _maand = MONTH ( MAX ( Fact_KPI[Datum] ) )
+			RETURN
+			    IF ( _agg = "cumulatief" && NOT _ratio, [KPI Jaartarget] * _maand / 12, [KPI Jaartarget] )
+		formatString: #,0.00
+		displayFolder: 3 Target
+		lineageTag: f495c0d7-8691-4673-bdad-b4cf75e0ac48
+
+	measure 'KPI Trend' =
+			VAR _ratio = SELECTEDVALUE ( Dim_KPI[Is_Percentage] ) = 1
+			VAR _nu = [KPI Waarde]
+			VAR _vj = [KPI Waarde VJ]
+			RETURN
+			    IF ( ISBLANK ( _nu ) || ISBLANK ( _vj ), BLANK (), IF ( _ratio, _nu - _vj, DIVIDE ( _nu - _vj, _vj ) ) )
+		formatString: 0.0%
+		displayFolder: 2 KPI
+		lineageTag: bc085804-6872-489a-be94-c281a503c47d
+
+	measure 'KPI Op Koers' =
+			VAR _hoger = SELECTEDVALUE ( Dim_KPI[Hoger_Is_Beter] ) = 1
+			VAR _v = [KPI Waarde]
+			VAR _t = [KPI Target]
+			RETURN
+			    IF ( ISBLANK ( _v ) || ISBLANK ( _t ), BLANK (), IF ( IF ( _hoger, _v >= _t, _v <= _t ), 1, 0 ) )
+		formatString: 0
+		displayFolder: 2 KPI
+		lineageTag: 8f6dc378-9b3f-4d71-bc03-38ad63a3ec61
+
+	measure 'KPI Waarde Tekst' =
+			VAR _code = SELECTEDVALUE ( Dim_KPI[KPI_Code] )
+			VAR _v = [KPI Waarde]
+			RETURN
+			    IF (
+			        ISBLANK ( _v ),
+			        BLANK (),
+			        SWITCH (
+			            _code,
+			            "INW", FORMAT ( _v / 1000, "0.0" ) & "K",
+			            "WLH", FORMAT ( _v * 100, "0.0" ) & "%",
+			            "ZON", FORMAT ( _v * 100, "0" ) & "%",
+			            "CO2", FORMAT ( _v, "#,0" ) & "t",
+			            "ENE", FORMAT ( _v, "0" ) & " kWh",
+			            FORMAT ( _v, "#,0" )
+			        )
+			    )
+		displayFolder: 7 Opmaak\Tekst
+		lineageTag: 2d45e5a5-8ec7-4b9a-9ddc-94b453133beb
+
+	measure 'KPI Target Tekst' =
+			VAR _code = SELECTEDVALUE ( Dim_KPI[KPI_Code] )
+			VAR _v = [KPI Target]
+			RETURN
+			    IF (
+			        ISBLANK ( _v ),
+			        BLANK (),
+			        SWITCH (
+			            _code,
+			            "INW", FORMAT ( _v / 1000, "0.0" ) & "K",
+			            "WLH", FORMAT ( _v * 100, "0.0" ) & "%",
+			            "ZON", FORMAT ( _v * 100, "0" ) & "%",
+			            "CO2", FORMAT ( _v, "#,0" ) & "t",
+			            "ENE", FORMAT ( _v, "0" ) & " kWh",
+			            FORMAT ( _v, "#,0" )
+			        )
+			    )
+		displayFolder: 7 Opmaak\Tekst
+		lineageTag: fd61e8bd-5977-42f6-88ad-58f8f7598622
+
+	measure Teller = SUM ( Fact_KPI[Teller] )
+		formatString: #,0.0
+		displayFolder: 1 Basis
+		lineageTag: 85989697-e45a-4a78-b372-d1cc47d88cc4
+
+	measure Noemer = SUM ( Fact_KPI[Noemer] )
+		formatString: #,0.0
+		displayFolder: 1 Basis
+		lineageTag: b6a0fbb9-a306-4829-bef7-fd882a6ae000
+
+	measure 'CO2 Sector Ton' = SUM ( Fact_CO2_Sector[Ton] )
+		formatString: #,0
+		displayFolder: 8 Thema\Duurzaamheid
+		lineageTag: 23558756-edbf-4c9d-bd57-ad295ea75da7
+
+	measure 'KPI Afwijking' = IF ( ISBLANK ( [KPI Waarde] ) || ISBLANK ( [KPI Target] ), BLANK (), [KPI Waarde] - [KPI Target] )
+		formatString: #,0.00
+		displayFolder: 2 KPI
+		lineageTag: 2b1228cc-560c-4abc-855a-89cf477a7c76
+
+	measure 'KPI Trend Tekst' =
+			VAR _v = [KPI Trend]
+			RETURN IF ( ISBLANK ( _v ), "Geen vergelijkbare historie", IF ( SELECTEDVALUE ( Dim_KPI[Is_Percentage] ) = 1, FORMAT ( _v * 100, "+0.0;-0.0;0.0" ) & " procentpunt", FORMAT ( _v, "+0.0%;-0.0%;0.0%" ) ) )
+		displayFolder: 7 Opmaak\Tekst
+		lineageTag: 207838b8-9758-4838-bfde-09751f5b9ea8
+
+	measure Contextlabel =
+			VAR _p = SELECTEDVALUE ( Dim_Datum[Maand], "Kies een maand" )
+			VAR _k = SELECTEDVALUE ( Dim_KPI[KPI_Naam], "Kies een KPI" )
+			RETURN _k & " | " & _p & " | " & IF ( ISFILTERED ( Dim_Wijk ), "Wijkselectie", "Gemeente: alle acht wijken" )
+		displayFolder: 7 Opmaak\Tekst
+		lineageTag: b346e6e9-af85-497a-bc2a-a8c2987396e3
+
+	measure 'AI Context Geldig' = HASONEVALUE ( Dim_KPI[KPI_ID] ) && HASONEVALUE ( Dim_Datum[JaarMaand] ) && NOT ISFILTERED ( Dim_Wijk )
+		displayFolder: 9 AI
+		lineageTag: 9e87d531-2c5f-4d6d-8cde-1eb8d44dad94
+
+	measure 'AI Inzicht' = IF ( NOT [AI Context Geldig], "Kies één KPI en maand, zonder wijkfilter.", IF ( COUNTROWS ( AI_Inzichten ) <> 1, "Geen AI-output voor deze selectie. Kies WON, WLH of CO2 en juni–augustus 2026.", SELECTEDVALUE ( AI_Inzichten[Titel] ) & UNICHAR(10) & UNICHAR(10) & SELECTEDVALUE ( AI_Inzichten[Inzicht] ) ) )
+		displayFolder: 9 AI
+		lineageTag: 0c163483-bc65-4239-adf7-be5c85bee1b7
+
+	measure 'AI Verdieping' = IF ( NOT [AI Context Geldig] || COUNTROWS ( AI_Verdieping ) <> 1, "Geen eenduidige AI-context.", "Focus: " & SELECTEDVALUE ( AI_Verdieping[Focus_Wijk] ) & UNICHAR(10) & UNICHAR(10) & SELECTEDVALUE ( AI_Verdieping[Observatie] ) & UNICHAR(10) & UNICHAR(10) & SELECTEDVALUE ( AI_Verdieping[Hypothese] ) & UNICHAR(10) & "Te toetsen met: " & SELECTEDVALUE ( AI_Verdieping[Ontbrekende_Data] ) )
+		displayFolder: 9 AI
+		lineageTag: bebabae5-d26e-4c25-a61f-32a5f793f6ef
+
+	measure 'AI Suggesties' = IF ( NOT [AI Context Geldig] || COUNTROWS ( AI_Inzichten ) <> 1, "Geen eenduidige AI-context.", CONCATENATEX ( AI_Aanbevelingen, AI_Aanbevelingen[Volgorde] & ". " & AI_Aanbevelingen[Titel] & UNICHAR(10) & AI_Aanbevelingen[Suggestie] & UNICHAR(10) & "Toets: " & AI_Aanbevelingen[Te_Toetsen], UNICHAR(10) & UNICHAR(10), AI_Aanbevelingen[Volgorde], ASC ) )
+		displayFolder: 9 AI
+		lineageTag: 2a21c88b-bd60-4c65-a4a4-a84e52ac7912
+
+	measure 'AI Herkomst' = IF ( [AI Context Geldig] && COUNTROWS ( AI_Inzichten ) = 1, SELECTEDVALUE ( AI_Inzichten[Model] ) & " | " & SELECTEDVALUE ( AI_Inzichten[Review_Status] ) & " | scope: gemeente", "Geen passende AI-output" )
+		displayFolder: 9 AI
+		lineageTag: 5f7628c5-c3ba-4eb6-bb26-c239d2a6f11d
+
+	column Sleutel
+		dataType: int64
+		isHidden
+		lineageTag: cdc03329-cfba-4c72-bfdb-a6dd1f729664
+		summarizeBy: none
+		sourceColumn: Sleutel
+
+	partition _Meetwaarden = m
+		mode: import
+		source = #table(type table [Sleutel = Int64.Type], {})
+
+	annotation PBI_ResultType = Table
+

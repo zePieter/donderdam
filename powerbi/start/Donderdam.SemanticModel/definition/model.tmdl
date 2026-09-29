@@ -1,0 +1,24 @@
+model Model
+	culture: nl-NL
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: nl-NL
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Dim_Datum
+ref table Dim_KPI
+ref table Dim_Sector
+ref table Dim_Wijk
+ref table Fact_CO2_Sector
+ref table Fact_KPI
+ref table Fact_Target
+ref table _Meetwaarden
+
+ref cultureInfo nl-NL
+

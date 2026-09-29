@@ -1,0 +1,70 @@
+table Dim_Datum
+	lineageTag: 5ad1a662-9d5e-4284-8324-4f05b61ee111
+	dataCategory: Time
+
+	column Datum
+		dataType: dateTime
+		isKey
+		formatString: dd-mm-yyyy
+		lineageTag: c67002d1-082a-414f-b529-0f6f433ce8e5
+		summarizeBy: none
+		sourceColumn: Datum
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Jaar
+		dataType: int64
+		formatString: 0
+		lineageTag: 3552571b-12c6-4e45-b882-d6fc8c3088f2
+		summarizeBy: none
+		sourceColumn: Jaar
+
+	column Maandnummer
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2c14a779-9599-4679-8eb7-b79fa16506fe
+		summarizeBy: none
+		sourceColumn: Maandnummer
+
+	column Maand
+		dataType: string
+		lineageTag: 6d505383-91ac-449d-8f87-9db6bd62ee3c
+		summarizeBy: none
+		sourceColumn: Maand
+		sortByColumn: JaarMaand
+
+	column JaarMaand
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a7e514b3-ba95-4abe-9ae0-f72c4b90a49e
+		summarizeBy: none
+		sourceColumn: JaarMaand
+
+	column Kwartaal
+		dataType: string
+		lineageTag: df82c450-6b39-442e-9877-2c7b77051c95
+		summarizeBy: none
+		sourceColumn: Kwartaal
+
+	column Is_Prognoseperiode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1f361c69-7568-479b-ad5b-e02aa8a480df
+		summarizeBy: none
+		sourceColumn: Is_Prognoseperiode
+
+	partition Dim_Datum = m
+		mode: import
+		source =
+				let
+				    Bron = Csv.Document(LeesBron("dim_datum.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Kop = Table.PromoteHeaders(Bron, [PromoteAllScalars = true]),
+				    Typen = Table.TransformColumnTypes(Kop, {{"Datum", type date}, {"Jaar", Int64.Type}, {"Maandnummer", Int64.Type}, {"Maand", type text}, {"JaarMaand", Int64.Type}, {"Kwartaal", type text}, {"Is_Prognoseperiode", Int64.Type}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,126 @@
+table AI_Aanbevelingen
+	lineageTag: 0286b36f-d6cd-4610-91ba-847c87cfa1aa
+
+	column Context_ID
+		dataType: string
+		lineageTag: e1e9597a-6491-4d84-b555-cd0a3a09947f
+		summarizeBy: none
+		sourceColumn: Context_ID
+
+	column Peilmaand
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 48c805fe-5d7f-4567-800b-b0b8be5c648c
+		summarizeBy: none
+		sourceColumn: Peilmaand
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column KPI_ID
+		dataType: int64
+		lineageTag: f02cdab5-a996-4363-b9ca-0d6d2b73bb80
+		summarizeBy: none
+		sourceColumn: KPI_ID
+
+	column KPI_Code
+		dataType: string
+		lineageTag: f7314b72-b2f4-49bd-9dba-2e720662a6b2
+		summarizeBy: none
+		sourceColumn: KPI_Code
+
+	column Scope
+		dataType: string
+		lineageTag: 950483bc-18e0-439c-a790-5ba8419a7030
+		summarizeBy: none
+		sourceColumn: Scope
+
+	column Scope_Omschrijving
+		dataType: string
+		lineageTag: 26516696-bcbb-495a-811f-9cfb92475922
+		summarizeBy: none
+		sourceColumn: Scope_Omschrijving
+
+	column Bron
+		dataType: string
+		lineageTag: 2e627d3d-3a7b-47e1-91b4-64fa80e26ede
+		summarizeBy: none
+		sourceColumn: Bron
+
+	column Model
+		dataType: string
+		lineageTag: b92141a0-10e3-46fc-a187-6d059d3cbac6
+		summarizeBy: none
+		sourceColumn: Model
+
+	column Gegenereerd_Op
+		dataType: string
+		lineageTag: 948f3f0a-c6b7-4936-9f10-84c62860011f
+		summarizeBy: none
+		sourceColumn: Gegenereerd_Op
+
+	column Review_Status
+		dataType: string
+		lineageTag: e5529f2d-55a1-483e-a8f9-11b408eeb8a4
+		summarizeBy: none
+		sourceColumn: Review_Status
+
+	column Bron_Hash
+		dataType: string
+		lineageTag: f26ce735-0891-4e00-927e-09672c3ca8d4
+		summarizeBy: none
+		sourceColumn: Bron_Hash
+
+	column Generatie_Methode
+		dataType: string
+		lineageTag: fd65420b-5816-4c16-9501-7bfc5d874e9d
+		summarizeBy: none
+		sourceColumn: Generatie_Methode
+
+	column Advies_ID
+		dataType: string
+		lineageTag: 5d14a745-f61d-4d34-9b4f-3ae8f5a066be
+		summarizeBy: none
+		sourceColumn: Advies_ID
+
+	column Volgorde
+		dataType: int64
+		lineageTag: 8e7db0f7-e3fd-4a82-88dd-1c5f3fdc37df
+		summarizeBy: none
+		sourceColumn: Volgorde
+
+	column Titel
+		dataType: string
+		lineageTag: d897e292-47bc-4dd6-9767-5f3b147ef061
+		summarizeBy: none
+		sourceColumn: Titel
+
+	column Suggestie
+		dataType: string
+		lineageTag: 54be8f1d-8a58-413c-ac37-e4a75b7d6683
+		summarizeBy: none
+		sourceColumn: Suggestie
+
+	column Te_Toetsen
+		dataType: string
+		lineageTag: 392ec5af-66c8-4798-82db-a0da19c0fd2c
+		summarizeBy: none
+		sourceColumn: Te_Toetsen
+
+	column Onderbouwing
+		dataType: string
+		lineageTag: 71345650-6706-4d84-b7d7-d2c4365b9d44
+		summarizeBy: none
+		sourceColumn: Onderbouwing
+
+	partition AI_Aanbevelingen = m
+		mode: import
+		source =
+				let
+				    Bron = LeesAI("recommendations"),
+				    Tabel = Table.FromRecords(Bron),
+				    Typen = Table.TransformColumnTypes(Tabel, {{"Context_ID", type text}, {"Peilmaand", type date}, {"KPI_ID", Int64.Type}, {"KPI_Code", type text}, {"Scope", type text}, {"Scope_Omschrijving", type text}, {"Bron", type text}, {"Model", type text}, {"Gegenereerd_Op", type text}, {"Review_Status", type text}, {"Bron_Hash", type text}, {"Generatie_Methode", type text}, {"Advies_ID", type text}, {"Volgorde", Int64.Type}, {"Titel", type text}, {"Suggestie", type text}, {"Te_Toetsen", type text}, {"Onderbouwing", type text}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table
+

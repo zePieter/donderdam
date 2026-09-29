@@ -1,0 +1,669 @@
+{
+  "schema_version": "1.0",
+  "records": [
+    {
+      "context_id": "2026-06_CO2",
+      "peilmaand": "2026-06-01",
+      "kpi_id": 4,
+      "kpi_code": "CO2",
+      "scope": "gemeente",
+      "scope_description": "Gemeente Donderdam, alle acht wijken",
+      "source_hash": "563d43586051631e7799e87e92cab5f4551fe8bb986471f7c862a8183d9a7d7f",
+      "review_status": "concept",
+      "provider": "Google Gemini API",
+      "model": "gemini-3.5-flash-lite",
+      "requested_model": "gemini-3.5-flash-lite",
+      "created_at": "2026-09-29T09:44:26.663Z",
+      "request_id": "d4i7aqqhH5i1xN8P7pmLsAg",
+      "prompt_hash": "5d6eb4ef1a458554e0deed1e399d13bac0a6090cf1b11b6ad20f854c9c6c58c9",
+      "response_hash": "c05ba8132b6d33fca5a8aca360eebe217744d4bd3569fc668b121a6f6fceeef8",
+      "generation_method": "api",
+      "facts": {
+        "value": 1409.8000000000004,
+        "target": 1269.5,
+        "previous_year": 1396.4999999999998,
+        "unit": "ton",
+        "period_definition": "som januari t/m peilmaand"
+      },
+      "insight": {
+        "title": "Ontwikkeling gemeentetotaal ten opzichte van het streefcijfer",
+        "text": "Het gemeentetotaal ligt hoger dan de vastgestelde doelstelling voor de peilmaand, waarbij de cijfers een stijging laten zien in vergelijking met dezelfde periode vorig jaar.",
+        "evidence_ids": [
+          "gemeente"
+        ]
+      },
+      "deep_dive": {
+        "wijk_id": 5,
+        "observation": "De wijk De Havenmeent vertoont een aanzienlijke overschrijding van de doelstelling en laat tevens een toename zien ten opzichte van de voorgaande periode.",
+        "hypothesis": "Hypothese: Hypothesis: De toename in deze wijk wordt veroorzaakt door verhoogde industriële bedrijvigheid.",
+        "missing_data": "Gedetailleerde bedrijfsgegevens en energieverbruik per sector per wijk.",
+        "evidence_ids": [
+          "wijk:5"
+        ],
+        "wijk_naam": "De Havenmeent",
+        "value": 297.90000000000003,
+        "target": 203,
+        "previous_year": 278.70000000000005
+      },
+      "recommendations": [
+        {
+          "title": "Vergelijking van best presterende wijken",
+          "suggestion": "Onderzoek welke factoren bijdragen aan de positieve resultaten in wijken die onder hun streefcijfer blijven.",
+          "check": "Controleer of er specifieke beleidsmaatregelen of bewonersinitiatieven actief zijn in deze gebieden.",
+          "evidence_ids": [
+            "wijk:1",
+            "wijk:2"
+          ]
+        },
+        {
+          "title": "Analyse van afwijkingen in stedelijke kernen",
+          "suggestion": "Onderzoek de specifieke bronnen van de uitstoot in de wijken met de hoogste waarden.",
+          "check": "Vergelijk de maandelijkse tijdreeksen van deze wijken met het gemeentelijk gemiddelde om afwijkende patronen te identificeren.",
+          "evidence_ids": [
+            "wijk:4",
+            "wijk:5"
+          ]
+        },
+        {
+          "title": "Evaluatie van de lineaire doelstellingen",
+          "suggestion": "Onderzoek of de gehanteerde lineaire verdeling van de jaardoelen over de maanden aansluit bij de seizoensgebonden patronen.",
+          "check": "Toets de historische maanddata van eerdere jaren aan de huidige streefwaarden om te zien of seizoenspieken structureel worden onderschat.",
+          "evidence_ids": [
+            "gemeente"
+          ]
+        }
+      ]
+    },
+    {
+      "context_id": "2026-06_WLH",
+      "peilmaand": "2026-06-01",
+      "kpi_id": 3,
+      "kpi_code": "WLH",
+      "scope": "gemeente",
+      "scope_description": "Gemeente Donderdam, alle acht wijken",
+      "source_hash": "563d43586051631e7799e87e92cab5f4551fe8bb986471f7c862a8183d9a7d7f",
+      "review_status": "concept",
+      "provider": "Google Gemini API",
+      "model": "gemini-3.5-flash-lite",
+      "requested_model": "gemini-3.5-flash-lite",
+      "created_at": "2026-09-29T09:44:08.304Z",
+      "request_id": "ZYi7auhY9ILbyg-h7M_JAQ",
+      "prompt_hash": "5d6eb4ef1a458554e0deed1e399d13bac0a6090cf1b11b6ad20f854c9c6c58c9",
+      "response_hash": "7ef618c4f5fd9dbf3faef5283ee20a450b9d9da15a2e731d6d3db32fa7ddf7f4",
+      "generation_method": "api",
+      "facts": {
+        "value": 0.08010133578995854,
+        "target": 0.07,
+        "previous_year": 0.07548393072149671,
+        "unit": "%",
+        "period_definition": "stand in peilmaand"
+      },
+      "insight": {
+        "title": "Stijging van de werkloosheid in de gemeente",
+        "text": "Het gemeentetotaal laat een verhoging zien ten opzichte van dezelfde periode vorig jaar en bevindt zich boven het vastgestelde doel.",
+        "evidence_ids": [
+          "gemeente"
+        ]
+      },
+      "deep_dive": {
+        "wijk_id": 8,
+        "observation": "De wijk Donderdam West toont een sterke stijging in de tijdreeks vanaf het begin van het jaar tot de peilmaand, waarmee deze wijk fors afwijkt van de andere wijken.",
+        "hypothesis": "Hypothese: Hypothesis: De stijging in deze wijk wordt veroorzaakt door het sluiten van een grote lokale werkgever.",
+        "missing_data": "Gegevens over faillissementen of bedrijfsbeëindigingen per wijk en de individuele arbeidsmarktstatus van bewoners.",
+        "evidence_ids": [
+          "wijk:8"
+        ],
+        "wijk_naam": "Donderdam West",
+        "value": 0.11428571428571428,
+        "target": 0.07,
+        "previous_year": 0.07238193018480493
+      },
+      "recommendations": [
+        {
+          "title": "Onderzoek naar bedrijvigheid",
+          "suggestion": "Stel een onderzoek in naar wijzigingen in de lokale bedrijvigheid in de afwijkende wijk.",
+          "check": "Controleer of er bedrijven zijn verhuisd of gestopt in deze specifieke periode.",
+          "evidence_ids": [
+            "wijk:8"
+          ]
+        },
+        {
+          "title": "Vergelijking met omliggende wijken",
+          "suggestion": "Vergelijk de demografische opbouw van de wijken om te zien of specifieke groepen harder worden getroffen.",
+          "check": "Analyseer de leeftijdsopbouw en opleidingsniveau per wijk naast de werkloosheidscijfers.",
+          "evidence_ids": [
+            "wijk:3",
+            "wijk:8"
+          ]
+        },
+        {
+          "title": "Evaluatie gemeentebrede doelstellingen",
+          "suggestion": "Evalueer de huidige beleidsmaatregelen om te bepalen of bijsturing nodig is voor het gemeentetotaal.",
+          "check": "Controleer de voortgang van actieve re-integratietrajecten binnen de gemeente.",
+          "evidence_ids": [
+            "gemeente"
+          ]
+        }
+      ]
+    },
+    {
+      "context_id": "2026-06_WON",
+      "peilmaand": "2026-06-01",
+      "kpi_id": 2,
+      "kpi_code": "WON",
+      "scope": "gemeente",
+      "scope_description": "Gemeente Donderdam, alle acht wijken",
+      "source_hash": "563d43586051631e7799e87e92cab5f4551fe8bb986471f7c862a8183d9a7d7f",
+      "review_status": "concept",
+      "provider": "Google Gemini API",
+      "model": "gemini-3.5-flash-lite",
+      "requested_model": "gemini-3.5-flash-lite",
+      "created_at": "2026-09-29T09:43:49.669Z",
+      "request_id": "Uoi7asnaH9f1xN8P-4CZ8Ao",
+      "prompt_hash": "5d6eb4ef1a458554e0deed1e399d13bac0a6090cf1b11b6ad20f854c9c6c58c9",
+      "response_hash": "228713f3726db1b825ccbea5923546d1ee00e4df4b5148cdf517f35708944a16",
+      "generation_method": "api",
+      "facts": {
+        "value": 70,
+        "target": 80,
+        "previous_year": 81,
+        "unit": "woningen",
+        "period_definition": "som januari t/m peilmaand"
+      },
+      "insight": {
+        "title": "Gemeentelijke woningbouw blijft achter bij de doelstelling",
+        "text": "Het gemeentetotaal voor nieuwe woningen bevindt zich onder het cumulatieve doel voor de huidige peilmaand. Ook in vergelijking met dezelfde periode vorig jaar is er sprake van een daling van het totaal aantal gerealiseerde woningen.",
+        "evidence_ids": [
+          "gemeente"
+        ]
+      },
+      "deep_dive": {
+        "wijk_id": 8,
+        "observation": "In Donderdam West is de realisatie van nieuwe woningen ten opzichte van dezelfde periode vorig jaar gehalveerd en blijft de wijk sterk achter bij de lineaire doelstelling voor de peilmaand.",
+        "hypothesis": "Hypothese: Hypothesis: De sterke daling in deze wijk wordt veroorzaakt door vertragingen in de levering van bouwmaterialen en onvoorziene grondproblemen op de bouwlocaties.",
+        "missing_data": "Gedetailleerde bouwplaatsrapportages per project, vergunningstatus en gegevens over de beschikbaarheid van bouwmaterialen en arbeidskrachten.",
+        "evidence_ids": [
+          "wijk:8"
+        ],
+        "wijk_naam": "Donderdam West",
+        "value": 2,
+        "target": 5,
+        "previous_year": 4
+      },
+      "recommendations": [
+        {
+          "title": "Vergelijking met voorgaande jaren",
+          "suggestion": "Onderzoek of de seizoenspatronen in de woningbouw van de afgelopen jaren vergelijkbaar zijn met het huidige verloop.",
+          "check": "Controleer de maandelijkse historische reeksen van de gemeente en alle wijken uit voorgaande jaren.",
+          "evidence_ids": [
+            "gemeente",
+            "wijk:1",
+            "wijk:2"
+          ]
+        },
+        {
+          "title": "Analyse van achterblijvende wijken",
+          "suggestion": "Breng in kaart welke specifieke wijken het grootste negatieve verschil vertonen ten opzichte van hun jaarlijkse doelstelling.",
+          "check": "Vergelijk de realisatiewaarden en de ongunstige afwijkingen van alle afzonderlijke wijken.",
+          "evidence_ids": [
+            "wijk:8",
+            "wijk:6",
+            "wijk:5"
+          ]
+        },
+        {
+          "title": "Voortgang van de woningstroom",
+          "suggestion": "Onderzoek de maandelijkse trend van de realisatie om te zien of de groei in de latere maanden van het jaar aantrekt.",
+          "check": "Analyseer de maandelijkse tijdreeksen van het gemeentetotaal vanaf januari tot en met de peilmaand.",
+          "evidence_ids": [
+            "gemeente"
+          ]
+        }
+      ]
+    },
+    {
+      "context_id": "2026-07_CO2",
+      "peilmaand": "2026-07-01",
+      "kpi_id": 4,
+      "kpi_code": "CO2",
+      "scope": "gemeente",
+      "scope_description": "Gemeente Donderdam, alle acht wijken",
+      "source_hash": "563d43586051631e7799e87e92cab5f4551fe8bb986471f7c862a8183d9a7d7f",
+      "review_status": "concept",
+      "provider": "Google Gemini API",
+      "model": "gemini-3.5-flash-lite",
+      "requested_model": "gemini-3.5-flash-lite",
+      "created_at": "2026-09-29T09:45:25.715Z",
+      "request_id": "r4i7ao7AJfqbvdIPi5ik6A8",
+      "prompt_hash": "5d6eb4ef1a458554e0deed1e399d13bac0a6090cf1b11b6ad20f854c9c6c58c9",
+      "response_hash": "8a55ec0d6f5b0fd496fb474f001050dfb7001cb53d6c6781ebd9c6a38fb9a609",
+      "generation_method": "api",
+      "facts": {
+        "value": 1630.0000000000007,
+        "target": 1481.0833333333333,
+        "previous_year": 1614.5999999999995,
+        "unit": "ton",
+        "period_definition": "som januari t/m peilmaand"
+      },
+      "insight": {
+        "title": "Stijging gemeentetotaal",
+        "text": "De totale waarde laat een stijging zien ten opzichte van dezelfde periode vorig jaar, waarbij het cumulatieve doel voor de gekozen peilmaand wordt overschreden.",
+        "evidence_ids": [
+          "gemeente"
+        ]
+      },
+      "deep_dive": {
+        "wijk_id": 4,
+        "observation": "Deze wijk vertoont als enige een aanzienlijke overschrijding van het cumulatieve doel en een toename ten opzichte van de voorgaande periode.",
+        "hypothesis": "Hypothese: Hypothesis: De toename in deze wijk wordt veroorzaakt door verhoogde bedrijvigheid of intensiever energieverbruik in de gebouwde omgeving.",
+        "missing_data": "Gedetailleerde verbruiksgegevens per sector en gegevens over bouwactiviteiten.",
+        "evidence_ids": [
+          "wijk:4"
+        ],
+        "wijk_naam": "Binnenstede",
+        "value": 358,
+        "target": 250.25,
+        "previous_year": 339.2
+      },
+      "recommendations": [
+        {
+          "title": "Vergelijkende analyse",
+          "suggestion": "Onderzoek de maandelijkse voortgang van de wijken die onder het doel presteren om best practices te identificeren.",
+          "check": "Controleer of de daling in deze wijken structureel is of door seizoensinvloeden komt.",
+          "evidence_ids": [
+            "wijk:1",
+            "wijk:2",
+            "wijk:6"
+          ]
+        },
+        {
+          "title": "Doelstellingen evaluatie",
+          "suggestion": "Evalueer de lineaire verdeling van de jaarlijkse doelen ten opzichte van de werkelijke maandelijkse patronen.",
+          "check": "Vergelijk de maandelijkse historische reeksen met de gehanteerde lineaire normen.",
+          "evidence_ids": [
+            "gemeente"
+          ]
+        },
+        {
+          "title": "Wijkgerichte verkenning",
+          "suggestion": "Voer een onderzoek uit naar de factoren achter de afwijkende ontwikkeling in De Havenmeent.",
+          "check": "Ga na of er specifieke eenmalige projecten of registratiewijzigingen zijn doorgevoerd.",
+          "evidence_ids": [
+            "wijk:5"
+          ]
+        }
+      ]
+    },
+    {
+      "context_id": "2026-07_WLH",
+      "peilmaand": "2026-07-01",
+      "kpi_id": 3,
+      "kpi_code": "WLH",
+      "scope": "gemeente",
+      "scope_description": "Gemeente Donderdam, alle acht wijken",
+      "source_hash": "563d43586051631e7799e87e92cab5f4551fe8bb986471f7c862a8183d9a7d7f",
+      "review_status": "concept",
+      "provider": "Google Gemini API",
+      "model": "gemini-3.5-flash-lite",
+      "requested_model": "gemini-3.5-flash-lite",
+      "created_at": "2026-09-29T09:45:04.416Z",
+      "request_id": "nYi7ateEHNaOxN8P9feooQY",
+      "prompt_hash": "5d6eb4ef1a458554e0deed1e399d13bac0a6090cf1b11b6ad20f854c9c6c58c9",
+      "response_hash": "d05bdbdb99cdcdbf93a1f6265d1b8678c1405008c132811ffccbd2c26f8840d4",
+      "generation_method": "api",
+      "facts": {
+        "value": 0.08148045850020716,
+        "target": 0.07,
+        "previous_year": 0.0759616719900014,
+        "unit": "%",
+        "period_definition": "stand in peilmaand"
+      },
+      "insight": {
+        "title": "Gemeentebrede overschrijding van de doelstelling",
+        "text": "De totale indicator voor de gemeente bevindt zich boven de vastgestelde norm en vertoont een stijgende lijn ten opzichte van dezelfde periode vorig jaar.",
+        "evidence_ids": [
+          "gemeente"
+        ]
+      },
+      "deep_dive": {
+        "wijk_id": 8,
+        "observation": "Deze wijk laat als enige een structurele en sterke stijging zien vanaf het begin van dit kalenderjaar tot het hoogste niveau binnen de gemeente.",
+        "hypothesis": "Hypothese: Dit wordt veroorzaakt door het sluiten van een groot lokaal industrieterrein of bedrijfsverzamelgebouw in de wijk begin dit jaar.",
+        "missing_data": "Gegevens over bedrijfsfaillissementen, verhuizingen van ondernemingen en individuele inschrijvingen per wijk.",
+        "evidence_ids": [
+          "wijk:8"
+        ],
+        "wijk_naam": "Donderdam West",
+        "value": 0.11479591836734694,
+        "target": 0.07,
+        "previous_year": 0.07337095946639302
+      },
+      "recommendations": [
+        {
+          "title": "Analyse van de arbeidsmarkt per wijk",
+          "suggestion": "Het is aan te bevelen om een verdiepend onderzoek te starten naar de regionale spreiding van vacatures en sectoren.",
+          "check": "Controleer of de stijging in specifieke wijken gekoppeld is aan bepaalde bedrijfstakken.",
+          "evidence_ids": [
+            "gemeente",
+            "wijk:8"
+          ]
+        },
+        {
+          "title": "Evaluatie van de gemeentelijke sturingsdoelen",
+          "suggestion": "Het verdient aanbeveling om te onderzoeken of de gehanteerde jaardoelstelling nog realistisch is gezien de huidige ontwikkeling.",
+          "check": "Vergelijk de maandelijkse trend met de historische gegevens van de afgelopen jaren.",
+          "evidence_ids": [
+            "gemeente"
+          ]
+        },
+        {
+          "title": "Inzet van gerichte arbeidsbemiddeling",
+          "suggestion": "Overweeg om extra middelen voor re-integratie te concentreren op de wijken met de grootste negatieve afwijking.",
+          "check": "Ga na of de capaciteit van het lokale arbeidsloket aansluit bij de omvang van de doelgroep per wijk.",
+          "evidence_ids": [
+            "wijk:8",
+            "wijk:6"
+          ]
+        }
+      ]
+    },
+    {
+      "context_id": "2026-07_WON",
+      "peilmaand": "2026-07-01",
+      "kpi_id": 2,
+      "kpi_code": "WON",
+      "scope": "gemeente",
+      "scope_description": "Gemeente Donderdam, alle acht wijken",
+      "source_hash": "563d43586051631e7799e87e92cab5f4551fe8bb986471f7c862a8183d9a7d7f",
+      "review_status": "concept",
+      "provider": "Google Gemini API",
+      "model": "gemini-3.5-flash-lite",
+      "requested_model": "gemini-3.5-flash-lite",
+      "created_at": "2026-09-29T09:44:46.256Z",
+      "request_id": "iYi7as3-N4zmnsEPuODZ0Qk",
+      "prompt_hash": "5d6eb4ef1a458554e0deed1e399d13bac0a6090cf1b11b6ad20f854c9c6c58c9",
+      "response_hash": "52d78170f829fccb0ecd6f0986b932beecdc9d9d493e3dcb193667a1c8355465",
+      "generation_method": "api",
+      "facts": {
+        "value": 79,
+        "target": 93.33333333333333,
+        "previous_year": 91,
+        "unit": "woningen",
+        "period_definition": "som januari t/m peilmaand"
+      },
+      "insight": {
+        "title": "Achterstand op het gemeentelijke bouwaantal",
+        "text": "Het gemeentetotaal blijft achter bij de lineaire doelstelling. De historische reeks laat zien dat het resultaat lager uitvalt dan in dezelfde periode vorig jaar.",
+        "evidence_ids": [
+          "gemeente"
+        ]
+      },
+      "deep_dive": {
+        "wijk_id": 8,
+        "observation": "Donderdam West laat de grootste negatieve afwijking ten opzichte van de doelstelling en de vergelijking met vorig jaar zien.",
+        "hypothesis": "Hypothese: Hypothesis: De sterke daling in deze wijk wordt veroorzaakt door vertraging in de uitvoeringsfase van geplande bouwprojecten.",
+        "missing_data": "Gegevens over bouwvergunningen, start bouw-meldingen en bouwleges per wijk.",
+        "evidence_ids": [
+          "wijk:8"
+        ],
+        "wijk_naam": "Donderdam West",
+        "value": 2,
+        "target": 5.833333333333333,
+        "previous_year": 5
+      },
+      "recommendations": [
+        {
+          "title": "Analyse van de maandelijkse voortgang",
+          "suggestion": "Onderzoek of de maandelijkse productie in de wijken structureel achterblijft bij de lineaire verdeling.",
+          "check": "Vergelijk de maandelijkse realisatie per wijk met de historische maandgemiddelden.",
+          "evidence_ids": [
+            "gemeente",
+            "wijk:1",
+            "wijk:2"
+          ]
+        },
+        {
+          "title": "Vergelijking met de voorgaande periode",
+          "suggestion": "Breng in kaart welke wijken de grootste daling of stijging vertonen ten opzichte van dezelfde periode vorig jaar.",
+          "check": "Controleer de jaar-op-jaar mutaties per afzonderlijke wijk.",
+          "evidence_ids": [
+            "wijk:6",
+            "wijk:8"
+          ]
+        },
+        {
+          "title": "Evaluatie van de wijkdoelstellingen",
+          "suggestion": "Onderzoek de haalbaarheid van de jaarlijkse doelstellingen per wijk op basis van de tot nu toe gerealiseerde cijfers.",
+          "check": "Toets de openstaande hiaten tussen de werkelijke waarden en de gestelde doelen per wijk.",
+          "evidence_ids": [
+            "gemeente",
+            "wijk:4",
+            "wijk:7"
+          ]
+        }
+      ]
+    },
+    {
+      "context_id": "2026-08_CO2",
+      "peilmaand": "2026-08-01",
+      "kpi_id": 4,
+      "kpi_code": "CO2",
+      "scope": "gemeente",
+      "scope_description": "Gemeente Donderdam, alle acht wijken",
+      "source_hash": "563d43586051631e7799e87e92cab5f4551fe8bb986471f7c862a8183d9a7d7f",
+      "review_status": "concept",
+      "provider": "Google Gemini API",
+      "model": "gemini-3.5-flash-lite",
+      "requested_model": "gemini-3.5-flash-lite",
+      "created_at": "2026-09-29T09:46:05.245Z",
+      "request_id": "2Yi7asXOGtLoxN8PnI6GqQc",
+      "prompt_hash": "5d6eb4ef1a458554e0deed1e399d13bac0a6090cf1b11b6ad20f854c9c6c58c9",
+      "response_hash": "936625a1cdfbf2a0a9b191385cec9b9c44e4daf1e05d8eb77a5f893ef54517b7",
+      "generation_method": "api",
+      "facts": {
+        "value": 1849.5000000000007,
+        "target": 1692.6666666666667,
+        "previous_year": 1836.7999999999993,
+        "unit": "ton",
+        "period_definition": "som januari t/m peilmaand"
+      },
+      "insight": {
+        "title": "Gemeentelijke uitstoot blijft boven het vastgestelde doel",
+        "text": "Het gemeentetotaal laat een ongunstige afwijking zien ten opzichte van het pad. De meeste afzonderlijke wijken blijven juist onder hun niveau.",
+        "evidence_ids": [
+          "gemeente",
+          "wijk:1",
+          "wijk:4"
+        ]
+      },
+      "deep_dive": {
+        "wijk_id": 4,
+        "observation": "Binnenstede laat als enige van de geselecteerde wijken een aanzienlijke overschrijding zien ten opzichte van het niveau. Dit contrasteert met de dalingen in de overige gebieden.",
+        "hypothesis": "Hypothese: Hypothesis: De hogere uitstoot in Binnenstede wordt veroorzaakt door intensieve bouwactiviteiten of bedrijvigheid in het stadscentrum.",
+        "missing_data": "Gedetailleerde gegevens over bedrijfsactiviteiten, verkeersintensiteit en bouwvergunningen per wijk ontbreken.",
+        "evidence_ids": [
+          "wijk:4"
+        ],
+        "wijk_naam": "Binnenstede",
+        "value": 408.2,
+        "target": 286,
+        "previous_year": 387.2
+      },
+      "recommendations": [
+        {
+          "title": "Onderzoek de concentratie in Binnenstede",
+          "suggestion": "Verken of de afwijking in Binnenstede samenhangt met specifieke sectoren zoals verkeer of industrie.",
+          "check": "Controleer of er sectorale uitsplitsingen beschikbaar zijn voor deze wijk.",
+          "evidence_ids": [
+            "wijk:4"
+          ]
+        },
+        {
+          "title": "Analyseer de daling in Groenhof",
+          "suggestion": "Bestudeer de factoren die hebben geleid tot de positieve ontwikkeling in Groenhof.",
+          "check": "Vergelijk de historische maandtotalen met het huidige niveau.",
+          "evidence_ids": [
+            "wijk:1"
+          ]
+        },
+        {
+          "title": "Evalueer de lineaire doelstellingen",
+          "suggestion": "Ga na of de gehanteerde maandelijkse doelen aansluiten bij seizoenspatronen.",
+          "check": "Controleer de berekeningswijze van de tussentijdse doelstellingen.",
+          "evidence_ids": [
+            "gemeente"
+          ]
+        }
+      ]
+    },
+    {
+      "context_id": "2026-08_WLH",
+      "peilmaand": "2026-08-01",
+      "kpi_id": 3,
+      "kpi_code": "WLH",
+      "scope": "gemeente",
+      "scope_description": "Gemeente Donderdam, alle acht wijken",
+      "source_hash": "563d43586051631e7799e87e92cab5f4551fe8bb986471f7c862a8183d9a7d7f",
+      "review_status": "concept",
+      "provider": "Google Gemini API",
+      "model": "gemini-3.5-flash-lite",
+      "requested_model": "gemini-3.5-flash-lite",
+      "created_at": "2026-09-29T09:45:46.219Z",
+      "request_id": "xIi7ap32OJi1xN8P7pmLsAg",
+      "prompt_hash": "5d6eb4ef1a458554e0deed1e399d13bac0a6090cf1b11b6ad20f854c9c6c58c9",
+      "response_hash": "e2b009ca0cabe3769cb3ca536bb9248a5911c59aeb9aeb8acbf67799b8f6d6ba",
+      "generation_method": "api",
+      "facts": {
+        "value": 0.0821293825342781,
+        "target": 0.07,
+        "previous_year": 0.07450599287333981,
+        "unit": "%",
+        "period_definition": "stand in peilmaand"
+      },
+      "insight": {
+        "title": "Gemeentebrede stijging",
+        "text": "Het gemeentetotaal laat een opwaartse trend zien ten opzichte van dezelfde periode vorig jaar en bevindt zich boven het vastgestelde doel.",
+        "evidence_ids": [
+          "gemeente"
+        ]
+      },
+      "deep_dive": {
+        "wijk_id": 8,
+        "observation": "Deze wijk laat als enige een zeer sterke stijging zien in de tijdreeks vanaf het begin van het jaar tot de peilmaand, waarmee het ver boven het gemeentelijk gemiddelde uitkomt.",
+        "hypothesis": "Hypothese: Deze ontwikkeling hangt samen met het sluiten van een grote lokale werkgever in deze specifieke wijk.",
+        "missing_data": "Ontbrekende gegevens: Bedrijfsregistraties, faillissementsdata per wijk en sectorale werkgelegenheidscijfers.",
+        "evidence_ids": [
+          "wijk:8",
+          "gemeente"
+        ],
+        "wijk_naam": "Donderdam West",
+        "value": 0.12340642529321774,
+        "target": 0.07,
+        "previous_year": 0.0728578758337609
+      },
+      "recommendations": [
+        {
+          "title": "Analyse van de noordelijke wijken",
+          "suggestion": "Onderzoek de maandelijkse fluctuaties in de wijken Groenhof, Rietzoom en Noorderhaven om te zien of daar seizoenspatronen zichtbaar zijn.",
+          "check": "Vergelijk de maandelijkse reeksen van deze wijken met historische seizoenspatronen uit eerdere jaren.",
+          "evidence_ids": [
+            "wijk:1",
+            "wijk:2",
+            "wijk:3"
+          ]
+        },
+        {
+          "title": "Vergelijking centrale en zuidelijke gebieden",
+          "suggestion": "Verken de onderlinge verschillen in de tijdreeks tussen Binnenstede, De Havenmeent, Zuidrand en Steenbergkwartier.",
+          "check": "Toets of de veranderingen in deze wijken gelijke tred houden met de gemeentelijke lijn.",
+          "evidence_ids": [
+            "wijk:4",
+            "wijk:5",
+            "wijk:6"
+          ]
+        },
+        {
+          "title": "Evaluatie van de doelstelling",
+          "suggestion": "Evalueer of het huidige jaarlijks doel nog realistisch is gezien de gerealiseerde cijfers van de gemeente en de uitschieters in specifieke gebieden.",
+          "check": "Controleer de gehanteerde beleidsnormen en de definitie van de streefwaarden.",
+          "evidence_ids": [
+            "gemeente",
+            "wijk:8"
+          ]
+        }
+      ]
+    },
+    {
+      "context_id": "2026-08_WON",
+      "peilmaand": "2026-08-01",
+      "kpi_id": 2,
+      "kpi_code": "WON",
+      "scope": "gemeente",
+      "scope_description": "Gemeente Donderdam, alle acht wijken",
+      "source_hash": "563d43586051631e7799e87e92cab5f4551fe8bb986471f7c862a8183d9a7d7f",
+      "review_status": "concept",
+      "provider": "Google Gemini API",
+      "model": "gemini-3.5-flash-lite",
+      "requested_model": "gemini-3.5-flash-lite",
+      "created_at": "2026-09-29T09:43:29.207Z",
+      "request_id": "PYi7aobbGJSYkdUP-Kuy-QM",
+      "prompt_hash": "5d6eb4ef1a458554e0deed1e399d13bac0a6090cf1b11b6ad20f854c9c6c58c9",
+      "response_hash": "49b24fd6e147d5a08259aa8b8170c8049fbc0d63859420a7bc1957d58d4f0cdd",
+      "generation_method": "api",
+      "facts": {
+        "value": 91,
+        "target": 106.66666666666667,
+        "previous_year": 105,
+        "unit": "woningen",
+        "period_definition": "som januari t/m peilmaand"
+      },
+      "insight": {
+        "title": "Gemeentelijke achterstand op de woningbouwdoelstelling",
+        "text": "Het gemeentetotaal voor nieuwe woningen blijft achter bij de lineaire doelstelling tot en met de peilmaand, wat een negatieve afwijking laat zien ten opzichte van dezelfde periode vorig jaar.",
+        "evidence_ids": [
+          "gemeente"
+        ]
+      },
+      "deep_dive": {
+        "wijk_id": 6,
+        "observation": "In Zuidrand daalt het aantal nieuwe woningen aanzienlijk ten opzichte van dezelfde periode vorig jaar en ligt het resultaat flink onder het lineaire streefpunt.",
+        "hypothesis": "Hypothese: Hypothesis: De daling in Zuidrand wordt veroorzaakt door vertraging in de oplevering van een specifiek groot bouwproject. Ontbrekende gegevens: Bouwplanningen per project, vergunningstatus en gegevens over bezwaarprocedures.",
+        "missing_data": "Bouwplanningen per project, vergunningstatus en gegevens over bezwaarprocedures.",
+        "evidence_ids": [
+          "wijk:6"
+        ],
+        "wijk_naam": "Zuidrand",
+        "value": 13,
+        "target": 20,
+        "previous_year": 22
+      },
+      "recommendations": [
+        {
+          "title": "Analyse van projecten in Zuidrand",
+          "suggestion": "Onderzoek de status van de geplande woningbouwprojecten in de wijk Zuidrand om te zien waar eventuele stagnatie optreedt.",
+          "check": "Controleer of er specifieke knelpunten zijn in de vergunningverlening of bouwfase voor deze wijk.",
+          "evidence_ids": [
+            "wijk:6"
+          ]
+        },
+        {
+          "title": "Voortgangsmonitor andere wijken",
+          "suggestion": "Vergelijk de maandelijkse instroom van nieuwe woningen in goed presterende wijken zoals Steenbergkwartier met de achterblijvende wijken.",
+          "check": "Ga na of er structurele verschillen zijn in de opbouw van de jaarprognoses per wijk.",
+          "evidence_ids": [
+            "wijk:7",
+            "gemeente"
+          ]
+        },
+        {
+          "title": "Evaluatie lineaire verdeling",
+          "suggestion": "Evalueer of het hanteren van een lineaire verdeling voor de jaarlijkse doelstellingen realistisch is voor de bouwcycli in de gemeente.",
+          "check": "Controleer historische seizoenspatronen in de oplevering van woningen in voorgaande jaren.",
+          "evidence_ids": [
+            "gemeente"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+table AI_Verdieping
+	lineageTag: bee02ece-01dd-4e2d-afd8-01d5a99ee57d
+
+	column Context_ID
+		dataType: string
+		lineageTag: a472af16-bca7-4216-9bae-1decaf77ac21
+		summarizeBy: none
+		sourceColumn: Context_ID
+
+	column Peilmaand
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6e410069-9c8e-4958-bcc8-4656d3d8f3cb
+		summarizeBy: none
+		sourceColumn: Peilmaand
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column KPI_ID
+		dataType: int64
+		lineageTag: a721fe5f-896c-46c7-8d85-894391c8f3a6
+		summarizeBy: none
+		sourceColumn: KPI_ID
+
+	column KPI_Code
+		dataType: string
+		lineageTag: bec73632-252d-407d-b374-5b1c61c7b659
+		summarizeBy: none
+		sourceColumn: KPI_Code
+
+	column Scope
+		dataType: string
+		lineageTag: 23796240-e4a7-4517-bef4-7c1fa44e96c6
+		summarizeBy: none
+		sourceColumn: Scope
+
+	column Scope_Omschrijving
+		dataType: string
+		lineageTag: f26050bd-65a2-47aa-b1d7-6c653fe074b0
+		summarizeBy: none
+		sourceColumn: Scope_Omschrijving
+
+	column Bron
+		dataType: string
+		lineageTag: a55f41f6-2f6f-4612-a147-455f9699ee6b
+		summarizeBy: none
+		sourceColumn: Bron
+
+	column Model
+		dataType: string
+		lineageTag: 709bf503-dcb0-424f-9eb9-1b988d9d050e
+		summarizeBy: none
+		sourceColumn: Model
+
+	column Gegenereerd_Op
+		dataType: string
+		lineageTag: 4bfdce44-0688-4d5a-ac1e-dace7a7d5611
+		summarizeBy: none
+		sourceColumn: Gegenereerd_Op
+
+	column Review_Status
+		dataType: string
+		lineageTag: 84d3002b-9d04-4786-8e6b-216aa31fbae4
+		summarizeBy: none
+		sourceColumn: Review_Status
+
+	column Bron_Hash
+		dataType: string
+		lineageTag: 20dada1a-6b34-49cb-b508-363f31f67fc6
+		summarizeBy: none
+		sourceColumn: Bron_Hash
+
+	column Generatie_Methode
+		dataType: string
+		lineageTag: c95dd9e5-aba5-4c74-bbec-b9d426af5f25
+		summarizeBy: none
+		sourceColumn: Generatie_Methode
+
+	column Focus_Wijk_ID
+		dataType: int64
+		lineageTag: 004f7491-7768-479a-8f1c-dd6da02f86d2
+		summarizeBy: none
+		sourceColumn: Focus_Wijk_ID
+
+	column Focus_Wijk
+		dataType: string
+		lineageTag: f20550b9-3c7d-4b68-ad8a-a5f418374884
+		summarizeBy: none
+		sourceColumn: Focus_Wijk
+
+	column Observatie
+		dataType: string
+		lineageTag: e65bb330-7424-451c-9b73-2c0d2eea763e
+		summarizeBy: none
+		sourceColumn: Observatie
+
+	column Hypothese
+		dataType: string
+		lineageTag: e3e2f252-ae04-4b62-8134-52d768a5e5e1
+		summarizeBy: none
+		sourceColumn: Hypothese
+
+	column Ontbrekende_Data
+		dataType: string
+		lineageTag: 73d8e48c-4d9f-4283-a0a4-a59ff0a283bb
+		summarizeBy: none
+		sourceColumn: Ontbrekende_Data
+
+	column Onderbouwing
+		dataType: string
+		lineageTag: 374cd01e-818b-48d5-b143-29ef08195cba
+		summarizeBy: none
+		sourceColumn: Onderbouwing
+
+	column Wijk_Waarde
+		dataType: double
+		lineageTag: a2fb5cab-8e71-418a-9ff5-b566747fae19
+		summarizeBy: none
+		sourceColumn: Wijk_Waarde
+
+	column Wijk_Target
+		dataType: double
+		lineageTag: 5f623136-5070-4526-8d55-00c84a822b2b
+		summarizeBy: none
+		sourceColumn: Wijk_Target
+
+	column Wijk_Waarde_VJ
+		dataType: double
+		lineageTag: fc08648a-88c5-4df2-a403-7fdc85ba38bb
+		summarizeBy: none
+		sourceColumn: Wijk_Waarde_VJ
+
+	partition AI_Verdieping = m
+		mode: import
+		source =
+				let
+				    Bron = LeesAI("deep-dives"),
+				    Tabel = Table.FromRecords(Bron),
+				    Typen = Table.TransformColumnTypes(Tabel, {{"Context_ID", type text}, {"Peilmaand", type date}, {"KPI_ID", Int64.Type}, {"KPI_Code", type text}, {"Scope", type text}, {"Scope_Omschrijving", type text}, {"Bron", type text}, {"Model", type text}, {"Gegenereerd_Op", type text}, {"Review_Status", type text}, {"Bron_Hash", type text}, {"Generatie_Methode", type text}, {"Focus_Wijk_ID", Int64.Type}, {"Focus_Wijk", type text}, {"Observatie", type text}, {"Hypothese", type text}, {"Ontbrekende_Data", type text}, {"Onderbouwing", type text}, {"Wijk_Waarde", type number}, {"Wijk_Target", type number}, {"Wijk_Waarde_VJ", type number}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table
+

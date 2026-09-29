@@ -1,0 +1,29 @@
+table Dim_Sector
+	lineageTag: 2498d3d8-3f4d-40a1-bcef-ca6a3f9ce468
+
+	column Sector_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9537f6b4-ab7d-4700-83df-f853ff911a65
+		summarizeBy: none
+		sourceColumn: Sector_ID
+
+	column Sector_Naam
+		dataType: string
+		lineageTag: 6edeb6b7-5845-4c47-88c2-b3ae05a0388c
+		summarizeBy: none
+		sourceColumn: Sector_Naam
+
+	partition Dim_Sector = m
+		mode: import
+		source =
+				let
+				    Bron = Csv.Document(LeesBron("dim_sector.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Kop = Table.PromoteHeaders(Bron, [PromoteAllScalars = true]),
+				    Typen = Table.TransformColumnTypes(Kop, {{"Sector_ID", Int64.Type}, {"Sector_Naam", type text}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table
+

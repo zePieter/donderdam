@@ -1,0 +1,1481 @@
+{
+  "instruction": "Je bent een Nederlandstalige BI-analist voor de fictieve gemeente Donderdam.\nOnderzoek de meegeleverde berekende cijfers: gemeentetotaal, acht wijken en hun tijdreeksen.\nLever drie complementaire toepassingen op: een inzicht over het gemeentetotaal of een terugkerend patroon;\neen verdieping die een aantoonbaar opvallende wijk aanwijst; drie verschillende mogelijke vervolgstappen.\nGrond iedere observatie in de data. Verzin geen oorzaken, bronnen, gebeurtenissen of bewezen effecten.\nEen verklaring is uitsluitend een hypothese, nooit een feit. Begin de hypothese met 'Hypothese:'.\nVermeld welke ontbrekende gegevens nodig zijn om de hypothese te toetsen.\nSchrijf geen getallen of percentages in tekstvelden: die worden naast jouw tekst uit de rekenlaag getoond.\nGebruik 'gemeente' en/of 'wijk:1' t/m 'wijk:8' als evidence_ids en kies een bestaande wijk_id.\nEen aanbeveling is een voorstel om te onderzoeken, geen automatisch uit te voeren actie.\nGebruik korte heldere Nederlandse zinnen. Geen begroeting of Markdown. Antwoord volgens het JSON-schema.",
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "insight": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "gemeente",
+                "wijk:1",
+                "wijk:2",
+                "wijk:3",
+                "wijk:4",
+                "wijk:5",
+                "wijk:6",
+                "wijk:7",
+                "wijk:8"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 3
+          }
+        },
+        "required": [
+          "title",
+          "text",
+          "evidence_ids"
+        ],
+        "additionalProperties": false
+      },
+      "deep_dive": {
+        "type": "object",
+        "properties": {
+          "wijk_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8
+          },
+          "observation": {
+            "type": "string"
+          },
+          "hypothesis": {
+            "type": "string"
+          },
+          "missing_data": {
+            "type": "string"
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "gemeente",
+                "wijk:1",
+                "wijk:2",
+                "wijk:3",
+                "wijk:4",
+                "wijk:5",
+                "wijk:6",
+                "wijk:7",
+                "wijk:8"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 3
+          }
+        },
+        "required": [
+          "wijk_id",
+          "observation",
+          "hypothesis",
+          "missing_data",
+          "evidence_ids"
+        ],
+        "additionalProperties": false
+      },
+      "recommendations": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "suggestion": {
+              "type": "string"
+            },
+            "check": {
+              "type": "string"
+            },
+            "evidence_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "gemeente",
+                  "wijk:1",
+                  "wijk:2",
+                  "wijk:3",
+                  "wijk:4",
+                  "wijk:5",
+                  "wijk:6",
+                  "wijk:7",
+                  "wijk:8"
+                ]
+              },
+              "minItems": 1,
+              "maxItems": 3
+            }
+          },
+          "required": [
+            "title",
+            "suggestion",
+            "check",
+            "evidence_ids"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "insight",
+      "deep_dive",
+      "recommendations"
+    ],
+    "additionalProperties": false
+  },
+  "data": {
+    "context_id": "2026-07_WLH",
+    "peilmaand": "2026-07-01",
+    "kpi_id": 3,
+    "kpi_code": "WLH",
+    "kpi_naam": "Werkloosheid",
+    "eenheid": "%",
+    "scope": "gemeente",
+    "scope_description": "Gemeente Donderdam, alle acht wijken",
+    "synthetic_data": true,
+    "source_hash": "563d43586051631e7799e87e92cab5f4551fe8bb986471f7c862a8183d9a7d7f",
+    "municipality": {
+      "evidence_id": "gemeente",
+      "value": 0.08148045850020716,
+      "target": 0.07,
+      "annual_target": 0.07,
+      "numerator": 1770,
+      "denominator": 21723,
+      "unfavorable_gap": 0.011480458500207152,
+      "period_definition": "stand in peilmaand",
+      "previous_year": 0.0759616719900014,
+      "change": 0.5518786510205764,
+      "change_unit": "procentpunt",
+      "history": [
+        {
+          "month": "2025-07-01",
+          "value": 0.0759616719900014,
+          "target": 0.07,
+          "annual_target": 0.07,
+          "numerator": 1641,
+          "denominator": 21603,
+          "unfavorable_gap": 0.005961671990001388,
+          "period_definition": "stand in peilmaand"
+        },
+        {
+          "month": "2025-08-01",
+          "value": 0.07450599287333981,
+          "target": 0.07,
+          "annual_target": 0.07,
+          "numerator": 1610,
+          "denominator": 21609,
+          "unfavorable_gap": 0.004505992873339804,
+          "period_definition": "stand in peilmaand"
+        },
+        {
+          "month": "2025-09-01",
+          "value": 0.07609399574428717,
+          "target": 0.07,
+          "annual_target": 0.07,
+          "numerator": 1645,
+          "denominator": 21618,
+          "unfavorable_gap": 0.0060939957442871645,
+          "period_definition": "stand in peilmaand"
+        },
+        {
+          "month": "2025-10-01",
+          "value": 0.07648908620051795,
+          "target": 0.07,
+          "annual_target": 0.07,
+          "numerator": 1654,
+          "denominator": 21624,
+          "unfavorable_gap": 0.006489086200517941,
+          "period_definition": "stand in peilmaand"
+        },
+        {
+          "month": "2025-11-01",
+          "value": 0.07690174692670303,
+          "target": 0.07,
+          "annual_target": 0.07,
+          "numerator": 1664,
+          "denominator": 21638,
+          "unfavorable_gap": 0.00690174692670302,
+          "period_definition": "stand in peilmaand"
+        },
+        {
+          "month": "2025-12-01",
+          "value": 0.07586047586047585,
+          "target": 0.07,
+          "annual_target": 0.07,
+          "numerator": 1642,
+          "denominator": 21645,
+          "unfavorable_gap": 0.005860475860475847,
+          "period_definition": "stand in peilmaand"
+        },
+        {
+          "month": "2026-01-01",
+          "value": 0.07748429996305874,
+          "target": 0.07,
+          "annual_target": 0.07,
+          "numerator": 1678,
+          "denominator": 21656,
+          "unfavorable_gap": 0.00748429996305873,
+          "period_definition": "stand in peilmaand"
+        },
+        {
+          "month": "2026-02-01",
+          "value": 0.07775726811259806,
+          "target": 0.07,
+          "annual_target": 0.07,
+          "numerator": 1685,
+          "denominator": 21670,
+          "unfavorable_gap": 0.007757268112598054,
+          "period_definition": "stand in peilmaand"
+        },
+        {
+          "month": "2026-03-01",
+          "value": 0.07965132367862743,
+          "target": 0.07,
+          "annual_target": 0.07,
+          "numerator": 1727,
+          "denominator": 21682,
+          "unfavorable_gap": 0.009651323678627421,
+          "period_definition": "stand in peilmaand"
+        },
+        {
+          "month": "2026-04-01",
+          "value": 0.07790890650931219,
+          "target": 0.07,
+          "annual_target": 0.07,
+          "numerator": 1690,
+          "denominator": 21692,
+          "unfavorable_gap": 0.007908906509312183,
+          "period_definition": "stand in peilmaand"
+        },
+        {
+          "month": "2026-05-01",
+          "value": 0.08031517832457838,
+          "target": 0.07,
+          "annual_target": 0.07,
+          "numerator": 1743,
+          "denominator": 21702,
+          "unfavorable_gap": 0.010315178324578372,
+          "period_definition": "stand in peilmaand"
+        },
+        {
+          "month": "2026-06-01",
+          "value": 0.08010133578995854,
+          "target": 0.07,
+          "annual_target": 0.07,
+          "numerator": 1739,
+          "denominator": 21710,
+          "unfavorable_gap": 0.010101335789958532,
+          "period_definition": "stand in peilmaand"
+        },
+        {
+          "month": "2026-07-01",
+          "value": 0.08148045850020716,
+          "target": 0.07,
+          "annual_target": 0.07,
+          "numerator": 1770,
+          "denominator": 21723,
+          "unfavorable_gap": 0.011480458500207152,
+          "period_definition": "stand in peilmaand"
+        }
+      ]
+    },
+    "wards": [
+      {
+        "evidence_id": "wijk:1",
+        "wijk_id": 1,
+        "wijk_naam": "Groenhof",
+        "value": 0.080973008997001,
+        "target": 0.07,
+        "annual_target": 0.07,
+        "numerator": 243,
+        "denominator": 3001,
+        "unfavorable_gap": 0.010973008997000988,
+        "period_definition": "stand in peilmaand",
+        "previous_year": 0.07580862533692723,
+        "change": 0.5164383660073768,
+        "change_unit": "procentpunt",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 0.07580862533692723,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 225,
+            "denominator": 2968,
+            "unfavorable_gap": 0.00580862533692722,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 0.07676767676767676,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 228,
+            "denominator": 2970,
+            "unfavorable_gap": 0.006767676767676756,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 0.0734006734006734,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 218,
+            "denominator": 2970,
+            "unfavorable_gap": 0.00340067340067339,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 0.07798319327731093,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 232,
+            "denominator": 2975,
+            "unfavorable_gap": 0.007983193277310924,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 0.07922121517287681,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 236,
+            "denominator": 2979,
+            "unfavorable_gap": 0.009221215172876801,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 0.07749077490774908,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 231,
+            "denominator": 2981,
+            "unfavorable_gap": 0.007490774907749076,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 0.0777479892761394,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 232,
+            "denominator": 2984,
+            "unfavorable_gap": 0.0077479892761394,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 0.07200267916945746,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 215,
+            "denominator": 2986,
+            "unfavorable_gap": 0.0020026791694574553,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 0.07895617263298763,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 236,
+            "denominator": 2989,
+            "unfavorable_gap": 0.008956172632987619,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 0.07520053475935828,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 225,
+            "denominator": 2992,
+            "unfavorable_gap": 0.005200534759358277,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 0.07612687813021703,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 228,
+            "denominator": 2995,
+            "unfavorable_gap": 0.00612687813021702,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 0.07671781187458306,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 230,
+            "denominator": 2998,
+            "unfavorable_gap": 0.006717811874583049,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 0.080973008997001,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 243,
+            "denominator": 3001,
+            "unfavorable_gap": 0.010973008997000988,
+            "period_definition": "stand in peilmaand"
+          }
+        ]
+      },
+      {
+        "evidence_id": "wijk:2",
+        "wijk_id": 2,
+        "wijk_naam": "Rietzoom",
+        "value": 0.07444359171143515,
+        "target": 0.07,
+        "annual_target": 0.07,
+        "numerator": 194,
+        "denominator": 2606,
+        "unfavorable_gap": 0.004443591711435144,
+        "period_definition": "stand in peilmaand",
+        "previous_year": 0.07949626131444314,
+        "change": -0.5052669603007987,
+        "change_unit": "procentpunt",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 0.07949626131444314,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 202,
+            "denominator": 2541,
+            "unfavorable_gap": 0.00949626131444313,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 0.07387033398821218,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 188,
+            "denominator": 2545,
+            "unfavorable_gap": 0.0038703339882121685,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 0.08,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 204,
+            "denominator": 2550,
+            "unfavorable_gap": 0.009999999999999995,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 0.07165231010180109,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 183,
+            "denominator": 2554,
+            "unfavorable_gap": 0.0016523101018010855,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 0.07692307692307693,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 197,
+            "denominator": 2561,
+            "unfavorable_gap": 0.006923076923076921,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 0.0759937646141855,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 195,
+            "denominator": 2566,
+            "unfavorable_gap": 0.005993764614185493,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 0.07662388175807079,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 197,
+            "denominator": 2571,
+            "unfavorable_gap": 0.006623881758070785,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 0.07838571982925883,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 202,
+            "denominator": 2577,
+            "unfavorable_gap": 0.008385719829258828,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 0.07591014717273431,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 196,
+            "denominator": 2582,
+            "unfavorable_gap": 0.005910147172734304,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 0.07998454404945904,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 207,
+            "denominator": 2588,
+            "unfavorable_gap": 0.009984544049459032,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 0.07745664739884393,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 201,
+            "denominator": 2595,
+            "unfavorable_gap": 0.007456647398843927,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 0.07574009996155324,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 197,
+            "denominator": 2601,
+            "unfavorable_gap": 0.005740099961553238,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 0.07444359171143515,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 194,
+            "denominator": 2606,
+            "unfavorable_gap": 0.004443591711435144,
+            "period_definition": "stand in peilmaand"
+          }
+        ]
+      },
+      {
+        "evidence_id": "wijk:3",
+        "wijk_id": 3,
+        "wijk_naam": "Noorderhaven",
+        "value": 0.07695073714491191,
+        "target": 0.07,
+        "annual_target": 0.07,
+        "numerator": 214,
+        "denominator": 2781,
+        "unfavorable_gap": 0.0069507371449119,
+        "period_definition": "stand in peilmaand",
+        "previous_year": 0.07054545454545455,
+        "change": 0.6405282599457357,
+        "change_unit": "procentpunt",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 0.07054545454545455,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 194,
+            "denominator": 2750,
+            "unfavorable_gap": 0.0005454545454545434,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 0.07088331515812432,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 195,
+            "denominator": 2751,
+            "unfavorable_gap": 0.0008833151581243148,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 0.07915758896151052,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 218,
+            "denominator": 2754,
+            "unfavorable_gap": 0.009157588961510518,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 0.07254261878853827,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 200,
+            "denominator": 2757,
+            "unfavorable_gap": 0.002542618788538259,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 0.0782608695652174,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 216,
+            "denominator": 2760,
+            "unfavorable_gap": 0.00826086956521739,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 0.07279971024990946,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 201,
+            "denominator": 2761,
+            "unfavorable_gap": 0.002799710249909451,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 0.07564241766196164,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 209,
+            "denominator": 2763,
+            "unfavorable_gap": 0.005642417661961635,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 0.07661727502710516,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 212,
+            "denominator": 2767,
+            "unfavorable_gap": 0.006617275027105157,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 0.07542403464453266,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 209,
+            "denominator": 2771,
+            "unfavorable_gap": 0.005424034644532658,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 0.07606344628695025,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 211,
+            "denominator": 2774,
+            "unfavorable_gap": 0.0060634462869502415,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 0.07963963963963964,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 221,
+            "denominator": 2775,
+            "unfavorable_gap": 0.009639639639639638,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 0.08246308966510622,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 229,
+            "denominator": 2777,
+            "unfavorable_gap": 0.012463089665106217,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 0.07695073714491191,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 214,
+            "denominator": 2781,
+            "unfavorable_gap": 0.0069507371449119,
+            "period_definition": "stand in peilmaand"
+          }
+        ]
+      },
+      {
+        "evidence_id": "wijk:4",
+        "wijk_id": 4,
+        "wijk_naam": "Binnenstede",
+        "value": 0.07939802802283343,
+        "target": 0.07,
+        "annual_target": 0.07,
+        "numerator": 306,
+        "denominator": 3854,
+        "unfavorable_gap": 0.009398028022833418,
+        "period_definition": "stand in peilmaand",
+        "previous_year": 0.07493472584856396,
+        "change": 0.44633021742694623,
+        "change_unit": "procentpunt",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 0.07493472584856396,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 287,
+            "denominator": 3830,
+            "unfavorable_gap": 0.004934725848563956,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 0.07172665623369849,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 275,
+            "denominator": 3834,
+            "unfavorable_gap": 0.0017266562336984842,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 0.0760812923397603,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 292,
+            "denominator": 3838,
+            "unfavorable_gap": 0.006081292339760291,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 0.08075019536337588,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 310,
+            "denominator": 3839,
+            "unfavorable_gap": 0.010750195363375875,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 0.07626236335242062,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 293,
+            "denominator": 3842,
+            "unfavorable_gap": 0.0062623633524206135,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 0.07860489328474753,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 302,
+            "denominator": 3842,
+            "unfavorable_gap": 0.00860489328474752,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 0.07622268470343392,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 293,
+            "denominator": 3844,
+            "unfavorable_gap": 0.0062226847034339144,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 0.07588357588357589,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 292,
+            "denominator": 3848,
+            "unfavorable_gap": 0.005883575883575881,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 0.07846193816575733,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 302,
+            "denominator": 3849,
+            "unfavorable_gap": 0.008461938165757327,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 0.0722077922077922,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 278,
+            "denominator": 3850,
+            "unfavorable_gap": 0.0022077922077922,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 0.07896103896103897,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 304,
+            "denominator": 3850,
+            "unfavorable_gap": 0.008961038961038961,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 0.07712282524019735,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 297,
+            "denominator": 3851,
+            "unfavorable_gap": 0.007122825240197347,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 0.07939802802283343,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 306,
+            "denominator": 3854,
+            "unfavorable_gap": 0.009398028022833418,
+            "period_definition": "stand in peilmaand"
+          }
+        ]
+      },
+      {
+        "evidence_id": "wijk:5",
+        "wijk_id": 5,
+        "wijk_naam": "De Havenmeent",
+        "value": 0.07863636363636364,
+        "target": 0.07,
+        "annual_target": 0.07,
+        "numerator": 173,
+        "denominator": 2200,
+        "unfavorable_gap": 0.008636363636363636,
+        "period_definition": "stand in peilmaand",
+        "previous_year": 0.07479463899697363,
+        "change": 0.3841724639390018,
+        "change_unit": "procentpunt",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 0.07479463899697363,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 173,
+            "denominator": 2313,
+            "unfavorable_gap": 0.004794638996973619,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 0.07508680555555555,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 173,
+            "denominator": 2304,
+            "unfavorable_gap": 0.005086805555555546,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 0.06934147405146097,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 159,
+            "denominator": 2293,
+            "unfavorable_gap": -0.0006585259485390321,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 0.07971966710468681,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 182,
+            "denominator": 2283,
+            "unfavorable_gap": 0.009719667104686802,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 0.07746478873239436,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 176,
+            "denominator": 2272,
+            "unfavorable_gap": 0.0074647887323943535,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 0.07685512367491167,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 174,
+            "denominator": 2264,
+            "unfavorable_gap": 0.006855123674911659,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 0.07538802660753881,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 170,
+            "denominator": 2255,
+            "unfavorable_gap": 0.005388026607538801,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 0.07836153161175423,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 176,
+            "denominator": 2246,
+            "unfavorable_gap": 0.008361531611754222,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 0.07651006711409396,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 171,
+            "denominator": 2235,
+            "unfavorable_gap": 0.006510067114093951,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 0.07861635220125786,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 175,
+            "denominator": 2226,
+            "unfavorable_gap": 0.008616352201257851,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 0.07713125845737483,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 171,
+            "denominator": 2217,
+            "unfavorable_gap": 0.00713125845737482,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 0.0756340579710145,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 167,
+            "denominator": 2208,
+            "unfavorable_gap": 0.005634057971014489,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 0.07863636363636364,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 173,
+            "denominator": 2200,
+            "unfavorable_gap": 0.008636363636363636,
+            "period_definition": "stand in peilmaand"
+          }
+        ]
+      },
+      {
+        "evidence_id": "wijk:6",
+        "wijk_id": 6,
+        "wijk_naam": "Zuidrand",
+        "value": 0.08279282716520411,
+        "target": 0.07,
+        "annual_target": 0.07,
+        "numerator": 217,
+        "denominator": 2621,
+        "unfavorable_gap": 0.012792827165204107,
+        "period_definition": "stand in peilmaand",
+        "previous_year": 0.07973551147413457,
+        "change": 0.305731569106954,
+        "change_unit": "procentpunt",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 0.07973551147413457,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 205,
+            "denominator": 2571,
+            "unfavorable_gap": 0.009735511474134567,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 0.07766990291262135,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 200,
+            "denominator": 2575,
+            "unfavorable_gap": 0.007669902912621346,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 0.07632700503680744,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 197,
+            "denominator": 2581,
+            "unfavorable_gap": 0.006327005036807429,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 0.0769825918762089,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 199,
+            "denominator": 2585,
+            "unfavorable_gap": 0.006982591876208893,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 0.07148377125193199,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 185,
+            "denominator": 2588,
+            "unfavorable_gap": 0.001483771251931984,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 0.0717315850366371,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 186,
+            "denominator": 2593,
+            "unfavorable_gap": 0.00173158503663709,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 0.07428791377983064,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 193,
+            "denominator": 2598,
+            "unfavorable_gap": 0.004287913779830635,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 0.07763259031514219,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 202,
+            "denominator": 2602,
+            "unfavorable_gap": 0.007632590315142185,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 0.0748273215656178,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 195,
+            "denominator": 2606,
+            "unfavorable_gap": 0.004827321565617798,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 0.07279693486590039,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 190,
+            "denominator": 2610,
+            "unfavorable_gap": 0.00279693486590038,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 0.07498087222647284,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 196,
+            "denominator": 2614,
+            "unfavorable_gap": 0.004980872226472838,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 0.07677616501145913,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 201,
+            "denominator": 2618,
+            "unfavorable_gap": 0.006776165011459126,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 0.08279282716520411,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 217,
+            "denominator": 2621,
+            "unfavorable_gap": 0.012792827165204107,
+            "period_definition": "stand in peilmaand"
+          }
+        ]
+      },
+      {
+        "evidence_id": "wijk:7",
+        "wijk_id": 7,
+        "wijk_naam": "Steenbergkwartier",
+        "value": 0.07333333333333333,
+        "target": 0.07,
+        "annual_target": 0.07,
+        "numerator": 198,
+        "denominator": 2700,
+        "unfavorable_gap": 0.003333333333333327,
+        "period_definition": "stand in peilmaand",
+        "previous_year": 0.07907497202536368,
+        "change": -0.5741638692030343,
+        "change_unit": "procentpunt",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 0.07907497202536368,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 212,
+            "denominator": 2681,
+            "unfavorable_gap": 0.00907497202536367,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 0.07795598657217456,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 209,
+            "denominator": 2681,
+            "unfavorable_gap": 0.007955986572174556,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 0.07870197687430064,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 211,
+            "denominator": 2681,
+            "unfavorable_gap": 0.008701976874300632,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 0.0742260350615442,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 199,
+            "denominator": 2681,
+            "unfavorable_gap": 0.004226035061544189,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 0.08122205663189269,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 218,
+            "denominator": 2684,
+            "unfavorable_gap": 0.011222056631892685,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 0.07523277467411546,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 202,
+            "denominator": 2685,
+            "unfavorable_gap": 0.0052327746741154535,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 0.07406029028656494,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 199,
+            "denominator": 2687,
+            "unfavorable_gap": 0.004060290286564933,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 0.07363332093715136,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 198,
+            "denominator": 2689,
+            "unfavorable_gap": 0.003633320937151352,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 0.07686594875603417,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 207,
+            "denominator": 2693,
+            "unfavorable_gap": 0.0068659487560341625,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 0.07312546399406088,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 197,
+            "denominator": 2694,
+            "unfavorable_gap": 0.0031254639940608703,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 0.07638116425658138,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 206,
+            "denominator": 2697,
+            "unfavorable_gap": 0.006381164256581376,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 0.07193177604746014,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 194,
+            "denominator": 2697,
+            "unfavorable_gap": 0.0019317760474601292,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 0.07333333333333333,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 198,
+            "denominator": 2700,
+            "unfavorable_gap": 0.003333333333333327,
+            "period_definition": "stand in peilmaand"
+          }
+        ]
+      },
+      {
+        "evidence_id": "wijk:8",
+        "wijk_id": 8,
+        "wijk_naam": "Donderdam West",
+        "value": 0.11479591836734694,
+        "target": 0.07,
+        "annual_target": 0.07,
+        "numerator": 225,
+        "denominator": 1960,
+        "unfavorable_gap": 0.044795918367346935,
+        "period_definition": "stand in peilmaand",
+        "previous_year": 0.07337095946639302,
+        "change": 4.142495890095392,
+        "change_unit": "procentpunt",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 0.07337095946639302,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 143,
+            "denominator": 1949,
+            "unfavorable_gap": 0.0033709594663930142,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 0.0728578758337609,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 142,
+            "denominator": 1949,
+            "unfavorable_gap": 0.0028578758337608895,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 0.07483341875961046,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 146,
+            "denominator": 1951,
+            "unfavorable_gap": 0.00483341875961045,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 0.07641025641025641,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 149,
+            "denominator": 1950,
+            "unfavorable_gap": 0.006410256410256401,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 0.07325819672131148,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 143,
+            "denominator": 1952,
+            "unfavorable_gap": 0.0032581967213114738,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 0.07731694828469023,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 151,
+            "denominator": 1953,
+            "unfavorable_gap": 0.0073169482846902195,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 0.09467758444216991,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 185,
+            "denominator": 1954,
+            "unfavorable_gap": 0.0246775844421699,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 0.09616368286445012,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 188,
+            "denominator": 1955,
+            "unfavorable_gap": 0.026163682864450116,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 0.10781808891159939,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 211,
+            "denominator": 1957,
+            "unfavorable_gap": 0.03781808891159938,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 0.10572012257405516,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 207,
+            "denominator": 1958,
+            "unfavorable_gap": 0.03572012257405516,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 0.11026033690658499,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 216,
+            "denominator": 1959,
+            "unfavorable_gap": 0.04026033690658498,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 0.11428571428571428,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 224,
+            "denominator": 1960,
+            "unfavorable_gap": 0.044285714285714275,
+            "period_definition": "stand in peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 0.11479591836734694,
+            "target": 0.07,
+            "annual_target": 0.07,
+            "numerator": 225,
+            "denominator": 1960,
+            "unfavorable_gap": 0.044795918367346935,
+            "period_definition": "stand in peilmaand"
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "Fictieve gegevens, geen echte gemeente.",
+      "Geen gegevens over oorzaken zoals vergunningen, vacatures, huizenprijzen of aannemerscapaciteit.",
+      "Doelen voor stromen zijn lineair over het jaar verdeeld."
+    ]
+  }
+}

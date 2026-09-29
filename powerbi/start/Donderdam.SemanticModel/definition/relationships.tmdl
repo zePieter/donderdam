@@ -1,0 +1,36 @@
+relationship 12f5b948-df4c-56ef-a80c-4af8605b27e2
+	fromColumn: Fact_KPI.Datum
+	toColumn: Dim_Datum.Datum
+
+relationship 79a8a8e9-9857-5789-a098-3b242ed11483
+	fromColumn: Fact_KPI.Wijk_ID
+	toColumn: Dim_Wijk.Wijk_ID
+
+relationship f5ab945a-15c3-559f-a9ff-85078f1f3b34
+	fromColumn: Fact_KPI.KPI_ID
+	toColumn: Dim_KPI.KPI_ID
+
+relationship 2acde53b-9df0-54e2-8124-02a65adc3c51
+	fromColumn: Fact_CO2_Sector.Datum
+	toColumn: Dim_Datum.Datum
+
+relationship b495eaf7-6915-5ec8-b954-afba8e4576f3
+	fromColumn: Fact_CO2_Sector.Wijk_ID
+	toColumn: Dim_Wijk.Wijk_ID
+
+relationship a68aad40-c0f6-5bd3-aa08-244adc29f5d7
+	fromColumn: Fact_CO2_Sector.Sector_ID
+	toColumn: Dim_Sector.Sector_ID
+
+relationship 59fa391b-87b1-558e-80e2-39fb26bac8d4
+	fromColumn: Fact_Target.Datum
+	toColumn: Dim_Datum.Datum
+
+relationship 80c9bd54-2890-5ee7-bcc1-d6416db94f99
+	fromColumn: Fact_Target.Wijk_ID
+	toColumn: Dim_Wijk.Wijk_ID
+
+relationship 8bb7fc3c-9b8d-546c-bb35-333dcdb1c91e
+	fromColumn: Fact_Target.KPI_ID
+	toColumn: Dim_KPI.KPI_ID
+

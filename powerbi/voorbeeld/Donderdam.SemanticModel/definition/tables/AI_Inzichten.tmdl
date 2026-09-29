@@ -1,0 +1,138 @@
+table AI_Inzichten
+	lineageTag: 32c6a0c3-aab4-46d8-95a5-746890f02585
+
+	column Context_ID
+		dataType: string
+		lineageTag: d83f2e54-61e4-4fd7-99e1-1b706fbcbf88
+		summarizeBy: none
+		sourceColumn: Context_ID
+
+	column Peilmaand
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 279a534f-83b2-48cd-867d-a24eb056da66
+		summarizeBy: none
+		sourceColumn: Peilmaand
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column KPI_ID
+		dataType: int64
+		lineageTag: ea1611cc-5491-4a7f-96e0-05a31bf45441
+		summarizeBy: none
+		sourceColumn: KPI_ID
+
+	column KPI_Code
+		dataType: string
+		lineageTag: 96cc14ae-0ec2-41bf-8488-72882e672cb2
+		summarizeBy: none
+		sourceColumn: KPI_Code
+
+	column Scope
+		dataType: string
+		lineageTag: ee4d1005-3fac-4685-b39f-a0658e6ae15f
+		summarizeBy: none
+		sourceColumn: Scope
+
+	column Scope_Omschrijving
+		dataType: string
+		lineageTag: 75530d7f-7d34-45a5-ab68-3bc0151d8126
+		summarizeBy: none
+		sourceColumn: Scope_Omschrijving
+
+	column Bron
+		dataType: string
+		lineageTag: 80e8e38a-2638-4ccb-89ec-038b9e840159
+		summarizeBy: none
+		sourceColumn: Bron
+
+	column Model
+		dataType: string
+		lineageTag: 90a86082-e0a8-45df-a601-2855c406ccb3
+		summarizeBy: none
+		sourceColumn: Model
+
+	column Gegenereerd_Op
+		dataType: string
+		lineageTag: e6c7cfb0-ff66-413b-b493-f3c95f4ef6dc
+		summarizeBy: none
+		sourceColumn: Gegenereerd_Op
+
+	column Review_Status
+		dataType: string
+		lineageTag: f923c802-45c1-4244-9c49-625b20580c7c
+		summarizeBy: none
+		sourceColumn: Review_Status
+
+	column Bron_Hash
+		dataType: string
+		lineageTag: 4579d09e-863c-42ed-bf03-dccde822d767
+		summarizeBy: none
+		sourceColumn: Bron_Hash
+
+	column Generatie_Methode
+		dataType: string
+		lineageTag: ac61686f-7076-4a1b-95ff-ec773b6c6565
+		summarizeBy: none
+		sourceColumn: Generatie_Methode
+
+	column Titel
+		dataType: string
+		lineageTag: 0f1a4a2f-ed34-48d6-8292-5ee3ae1b93e3
+		summarizeBy: none
+		sourceColumn: Titel
+
+	column Inzicht
+		dataType: string
+		lineageTag: 103ffd7e-21f3-437b-a3e0-33ef89d2bef0
+		summarizeBy: none
+		sourceColumn: Inzicht
+
+	column Onderbouwing
+		dataType: string
+		lineageTag: e288eb58-d2b7-4e82-8f20-ea945f1ee7fa
+		summarizeBy: none
+		sourceColumn: Onderbouwing
+
+	column Waarde
+		dataType: double
+		lineageTag: a0145577-a87b-4219-9171-1a13c35ffd4d
+		summarizeBy: none
+		sourceColumn: Waarde
+
+	column Target
+		dataType: double
+		lineageTag: 7b240901-dd40-4c28-aac6-1f24c3b8bdbb
+		summarizeBy: none
+		sourceColumn: Target
+
+	column Waarde_VJ
+		dataType: double
+		lineageTag: 7f262d52-45d8-4048-8aba-5da9ecaa6a93
+		summarizeBy: none
+		sourceColumn: Waarde_VJ
+
+	column Eenheid
+		dataType: string
+		lineageTag: a5aa92ba-8c04-4516-9369-69b809a656f3
+		summarizeBy: none
+		sourceColumn: Eenheid
+
+	column Periode_Definitie
+		dataType: string
+		lineageTag: f4fd205c-8545-41f0-ba51-c71c729eb679
+		summarizeBy: none
+		sourceColumn: Periode_Definitie
+
+	partition AI_Inzichten = m
+		mode: import
+		source =
+				let
+				    Bron = LeesAI("insights"),
+				    Tabel = Table.FromRecords(Bron),
+				    Typen = Table.TransformColumnTypes(Tabel, {{"Context_ID", type text}, {"Peilmaand", type date}, {"KPI_ID", Int64.Type}, {"KPI_Code", type text}, {"Scope", type text}, {"Scope_Omschrijving", type text}, {"Bron", type text}, {"Model", type text}, {"Gegenereerd_Op", type text}, {"Review_Status", type text}, {"Bron_Hash", type text}, {"Generatie_Methode", type text}, {"Titel", type text}, {"Inzicht", type text}, {"Onderbouwing", type text}, {"Waarde", type number}, {"Target", type number}, {"Waarde_VJ", type number}, {"Eenheid", type text}, {"Periode_Definitie", type text}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table
+

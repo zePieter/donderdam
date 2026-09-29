@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Donderdam"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "eee5db4e-b943-4ef6-888a-4a8ae73a061b"
+  }
+}

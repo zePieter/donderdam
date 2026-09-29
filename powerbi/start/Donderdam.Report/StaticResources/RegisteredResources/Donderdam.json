@@ -1,0 +1,94 @@
+{
+  "name": "Donderdam AI-infused",
+  "dataColors": [
+    "#4A9FA0",
+    "#E8603C",
+    "#3BAA5C",
+    "#EF9F27",
+    "#C06A9E",
+    "#6B6259",
+    "#A7C957",
+    "#8FB8DE"
+  ],
+  "background": "#F2EEE5",
+  "foreground": "#3A3A3A",
+  "tableAccent": "#4A9FA0",
+  "good": "#3BAA5C",
+  "neutral": "#EF9F27",
+  "bad": "#E8603C",
+  "maximum": "#3BAA5C",
+  "center": "#EF9F27",
+  "minimum": "#E8603C",
+  "textClasses": {
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "color": "#3A3A3A"
+    },
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 14,
+      "color": "#3A3A3A"
+    },
+    "header": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 12,
+      "color": "#3A3A3A"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 10,
+      "color": "#3A3A3A"
+    }
+  },
+  "visualStyles": {
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#E8E0D0"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "outspace": [
+          {
+            "color": {
+              "solid": {
+                "color": "#E8E0D0"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#F2EEE5"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": false,
+            "radius": 14
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": false
+          }
+        ]
+      }
+    }
+  }
+}

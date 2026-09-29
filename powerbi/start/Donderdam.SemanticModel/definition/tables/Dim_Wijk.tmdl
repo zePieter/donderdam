@@ -1,0 +1,29 @@
+table Dim_Wijk
+	lineageTag: b41b0b31-df36-4670-8e25-61982ef3390c
+
+	column Wijk_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 699637bd-0141-4352-9675-c8d65928d231
+		summarizeBy: none
+		sourceColumn: Wijk_ID
+
+	column Wijk_Naam
+		dataType: string
+		lineageTag: 8eab3e2e-82db-4d38-b089-226cec52aad8
+		summarizeBy: none
+		sourceColumn: Wijk_Naam
+
+	partition Dim_Wijk = m
+		mode: import
+		source =
+				let
+				    Bron = Csv.Document(LeesBron("dim_wijk.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Kop = Table.PromoteHeaders(Bron, [PromoteAllScalars = true]),
+				    Typen = Table.TransformColumnTypes(Kop, {{"Wijk_ID", Int64.Type}, {"Wijk_Naam", type text}}, "en-US")
+				in
+				    Typen
+
+	annotation PBI_ResultType = Table
+

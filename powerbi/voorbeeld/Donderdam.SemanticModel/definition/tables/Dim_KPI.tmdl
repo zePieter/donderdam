@@ -1,0 +1,85 @@
+/// KPI-definities uit de bron; vaste AI-vervolgvragen buiten de workshopbasis.
+table Dim_KPI
+	lineageTag: 99596928-b237-477f-b704-84e2b4f228b3
+
+	column KPI_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 967b5b49-e77b-40ce-86a8-ea5529bd28c7
+		summarizeBy: none
+		sourceColumn: KPI_ID
+
+	column KPI_Code
+		dataType: string
+		lineageTag: 7970e750-50e4-4cc6-b37a-269b20437b50
+		summarizeBy: none
+		sourceColumn: KPI_Code
+
+	column KPI_Naam
+		dataType: string
+		lineageTag: 5ab80ce9-7f62-4d12-842f-a08f503afc76
+		summarizeBy: none
+		sourceColumn: KPI_Naam
+		sortByColumn: Volgorde
+
+	column Eenheid
+		dataType: string
+		lineageTag: c5be3d22-9758-430b-a122-025d041910af
+		summarizeBy: none
+		sourceColumn: Eenheid
+
+	column Aggregatie
+		dataType: string
+		lineageTag: 3f6b286b-8c35-4ba6-8fd9-6d50c1d7a2e6
+		summarizeBy: none
+		sourceColumn: Aggregatie
+
+	column Is_Ratio
+		dataType: int64
+		formatString: 0
+		lineageTag: a2d92200-27bc-4697-9836-7bf9da02a6a9
+		summarizeBy: none
+		sourceColumn: Is_Ratio
+
+	column Hoger_Is_Beter
+		dataType: int64
+		formatString: 0
+		lineageTag: d8f18e0e-87a5-4890-869c-47440821769f
+		summarizeBy: none
+		sourceColumn: Hoger_Is_Beter
+
+	column Thema
+		dataType: string
+		lineageTag: 3bf6f8b6-e1c1-4d5a-8cf8-169db024addb
+		summarizeBy: none
+		sourceColumn: Thema
+
+	column Volgorde
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 08559389-5b6b-40cd-922c-414f5dfac819
+		summarizeBy: none
+		sourceColumn: Volgorde
+
+	/// Rekenkolom: 1 voor KPI's in procenten (trend in procentpunt).
+	column Is_Percentage = IF ( Dim_KPI[Eenheid] = "%", 1, 0 )
+		dataType: int64
+		formatString: 0
+		lineageTag: da568209-c526-4612-ac1a-2b4c0fd92919
+		summarizeBy: none
+
+	partition Dim_KPI = m
+		mode: import
+		source =
+				let
+				    Bron = Csv.Document(LeesBron("dim_kpi.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Kop = Table.PromoteHeaders(Bron, [PromoteAllScalars = true]),
+				    Typen = Table.TransformColumnTypes(Kop, {{"KPI_ID", Int64.Type}, {"KPI_Code", type text}, {"KPI_Naam", type text}, {"Eenheid", type text}, {"Aggregatie", type text}, {"Is_Ratio", Int64.Type}, {"Hoger_Is_Beter", Int64.Type}, {"Thema", type text}, {"Volgorde", Int64.Type}}, "en-US"),
+				    Benoemd = Table.TransformColumns(Typen, {{"KPI_Naam", each if _ = "Bevolkingsgroei" then "Inwoners" else if _ = "Energieverbruik per huishouden" then "Gemiddeld maandverbruik per huishouden" else _, type text}})
+				in
+				    Benoemd
+
+	annotation PBI_ResultType = Table
+

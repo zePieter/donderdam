@@ -1,0 +1,79 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "Werkplaats",
+  "displayName": "Werkplaats",
+  "displayOption": "FitToPage",
+  "height": 730,
+  "width": 1280,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#E8E0D0'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "wijken",
+      "target": "kop",
+      "type": "NoFilter"
+    },
+    {
+      "source": "wijken",
+      "target": "subkop",
+      "type": "NoFilter"
+    },
+    {
+      "source": "wijken",
+      "target": "kpi",
+      "type": "NoFilter"
+    },
+    {
+      "source": "wijken",
+      "target": "maand",
+      "type": "NoFilter"
+    },
+    {
+      "source": "wijken",
+      "target": "context",
+      "type": "NoFilter"
+    },
+    {
+      "source": "wijken",
+      "target": "kaart0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "wijken",
+      "target": "kaart1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "wijken",
+      "target": "kaart2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "wijken",
+      "target": "ai_plek",
+      "type": "NoFilter"
+    },
+    {
+      "source": "wijken",
+      "target": "voet",
+      "type": "NoFilter"
+    }
+  ]
+}

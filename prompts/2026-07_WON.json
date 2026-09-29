@@ -1,0 +1,1481 @@
+{
+  "instruction": "Je bent een Nederlandstalige BI-analist voor de fictieve gemeente Donderdam.\nOnderzoek de meegeleverde berekende cijfers: gemeentetotaal, acht wijken en hun tijdreeksen.\nLever drie complementaire toepassingen op: een inzicht over het gemeentetotaal of een terugkerend patroon;\neen verdieping die een aantoonbaar opvallende wijk aanwijst; drie verschillende mogelijke vervolgstappen.\nGrond iedere observatie in de data. Verzin geen oorzaken, bronnen, gebeurtenissen of bewezen effecten.\nEen verklaring is uitsluitend een hypothese, nooit een feit. Begin de hypothese met 'Hypothese:'.\nVermeld welke ontbrekende gegevens nodig zijn om de hypothese te toetsen.\nSchrijf geen getallen of percentages in tekstvelden: die worden naast jouw tekst uit de rekenlaag getoond.\nGebruik 'gemeente' en/of 'wijk:1' t/m 'wijk:8' als evidence_ids en kies een bestaande wijk_id.\nEen aanbeveling is een voorstel om te onderzoeken, geen automatisch uit te voeren actie.\nGebruik korte heldere Nederlandse zinnen. Geen begroeting of Markdown. Antwoord volgens het JSON-schema.",
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "insight": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "gemeente",
+                "wijk:1",
+                "wijk:2",
+                "wijk:3",
+                "wijk:4",
+                "wijk:5",
+                "wijk:6",
+                "wijk:7",
+                "wijk:8"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 3
+          }
+        },
+        "required": [
+          "title",
+          "text",
+          "evidence_ids"
+        ],
+        "additionalProperties": false
+      },
+      "deep_dive": {
+        "type": "object",
+        "properties": {
+          "wijk_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8
+          },
+          "observation": {
+            "type": "string"
+          },
+          "hypothesis": {
+            "type": "string"
+          },
+          "missing_data": {
+            "type": "string"
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "gemeente",
+                "wijk:1",
+                "wijk:2",
+                "wijk:3",
+                "wijk:4",
+                "wijk:5",
+                "wijk:6",
+                "wijk:7",
+                "wijk:8"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 3
+          }
+        },
+        "required": [
+          "wijk_id",
+          "observation",
+          "hypothesis",
+          "missing_data",
+          "evidence_ids"
+        ],
+        "additionalProperties": false
+      },
+      "recommendations": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "suggestion": {
+              "type": "string"
+            },
+            "check": {
+              "type": "string"
+            },
+            "evidence_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "gemeente",
+                  "wijk:1",
+                  "wijk:2",
+                  "wijk:3",
+                  "wijk:4",
+                  "wijk:5",
+                  "wijk:6",
+                  "wijk:7",
+                  "wijk:8"
+                ]
+              },
+              "minItems": 1,
+              "maxItems": 3
+            }
+          },
+          "required": [
+            "title",
+            "suggestion",
+            "check",
+            "evidence_ids"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "insight",
+      "deep_dive",
+      "recommendations"
+    ],
+    "additionalProperties": false
+  },
+  "data": {
+    "context_id": "2026-07_WON",
+    "peilmaand": "2026-07-01",
+    "kpi_id": 2,
+    "kpi_code": "WON",
+    "kpi_naam": "Nieuwe woningen",
+    "eenheid": "woningen",
+    "scope": "gemeente",
+    "scope_description": "Gemeente Donderdam, alle acht wijken",
+    "synthetic_data": true,
+    "source_hash": "563d43586051631e7799e87e92cab5f4551fe8bb986471f7c862a8183d9a7d7f",
+    "municipality": {
+      "evidence_id": "gemeente",
+      "value": 79,
+      "target": 93.33333333333333,
+      "annual_target": 160,
+      "numerator": 79,
+      "denominator": 56,
+      "unfavorable_gap": 14.333333333333329,
+      "period_definition": "som januari t/m peilmaand",
+      "previous_year": 91,
+      "change": -13.186813186813184,
+      "change_unit": "procent",
+      "history": [
+        {
+          "month": "2025-07-01",
+          "value": 91,
+          "target": 88.66666666666667,
+          "annual_target": 152,
+          "numerator": 91,
+          "denominator": 56,
+          "unfavorable_gap": -2.3333333333333286,
+          "period_definition": "som januari t/m peilmaand"
+        },
+        {
+          "month": "2025-08-01",
+          "value": 105,
+          "target": 101.33333333333333,
+          "annual_target": 152,
+          "numerator": 105,
+          "denominator": 64,
+          "unfavorable_gap": -3.6666666666666714,
+          "period_definition": "som januari t/m peilmaand"
+        },
+        {
+          "month": "2025-09-01",
+          "value": 118,
+          "target": 114,
+          "annual_target": 152,
+          "numerator": 118,
+          "denominator": 72,
+          "unfavorable_gap": -4,
+          "period_definition": "som januari t/m peilmaand"
+        },
+        {
+          "month": "2025-10-01",
+          "value": 129,
+          "target": 126.66666666666667,
+          "annual_target": 152,
+          "numerator": 129,
+          "denominator": 80,
+          "unfavorable_gap": -2.3333333333333286,
+          "period_definition": "som januari t/m peilmaand"
+        },
+        {
+          "month": "2025-11-01",
+          "value": 143,
+          "target": 139.33333333333334,
+          "annual_target": 152,
+          "numerator": 143,
+          "denominator": 88,
+          "unfavorable_gap": -3.666666666666657,
+          "period_definition": "som januari t/m peilmaand"
+        },
+        {
+          "month": "2025-12-01",
+          "value": 152,
+          "target": 152,
+          "annual_target": 152,
+          "numerator": 152,
+          "denominator": 96,
+          "unfavorable_gap": 0,
+          "period_definition": "som januari t/m peilmaand"
+        },
+        {
+          "month": "2026-01-01",
+          "value": 15,
+          "target": 13.333333333333334,
+          "annual_target": 160,
+          "numerator": 15,
+          "denominator": 8,
+          "unfavorable_gap": -1.666666666666666,
+          "period_definition": "som januari t/m peilmaand"
+        },
+        {
+          "month": "2026-02-01",
+          "value": 24,
+          "target": 26.666666666666668,
+          "annual_target": 160,
+          "numerator": 24,
+          "denominator": 16,
+          "unfavorable_gap": 2.666666666666668,
+          "period_definition": "som januari t/m peilmaand"
+        },
+        {
+          "month": "2026-03-01",
+          "value": 40,
+          "target": 40,
+          "annual_target": 160,
+          "numerator": 40,
+          "denominator": 24,
+          "unfavorable_gap": 0,
+          "period_definition": "som januari t/m peilmaand"
+        },
+        {
+          "month": "2026-04-01",
+          "value": 48,
+          "target": 53.333333333333336,
+          "annual_target": 160,
+          "numerator": 48,
+          "denominator": 32,
+          "unfavorable_gap": 5.333333333333336,
+          "period_definition": "som januari t/m peilmaand"
+        },
+        {
+          "month": "2026-05-01",
+          "value": 56,
+          "target": 66.66666666666667,
+          "annual_target": 160,
+          "numerator": 56,
+          "denominator": 40,
+          "unfavorable_gap": 10.666666666666671,
+          "period_definition": "som januari t/m peilmaand"
+        },
+        {
+          "month": "2026-06-01",
+          "value": 70,
+          "target": 80,
+          "annual_target": 160,
+          "numerator": 70,
+          "denominator": 48,
+          "unfavorable_gap": 10,
+          "period_definition": "som januari t/m peilmaand"
+        },
+        {
+          "month": "2026-07-01",
+          "value": 79,
+          "target": 93.33333333333333,
+          "annual_target": 160,
+          "numerator": 79,
+          "denominator": 56,
+          "unfavorable_gap": 14.333333333333329,
+          "period_definition": "som januari t/m peilmaand"
+        }
+      ]
+    },
+    "wards": [
+      {
+        "evidence_id": "wijk:1",
+        "wijk_id": 1,
+        "wijk_naam": "Groenhof",
+        "value": 10,
+        "target": 11.666666666666666,
+        "annual_target": 20,
+        "numerator": 10,
+        "denominator": 7,
+        "unfavorable_gap": 1.666666666666666,
+        "period_definition": "som januari t/m peilmaand",
+        "previous_year": 13,
+        "change": -23.076923076923073,
+        "change_unit": "procent",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 13,
+            "target": 11.083333333333334,
+            "annual_target": 19,
+            "numerator": 13,
+            "denominator": 7,
+            "unfavorable_gap": -1.916666666666666,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 14,
+            "target": 12.666666666666666,
+            "annual_target": 19,
+            "numerator": 14,
+            "denominator": 8,
+            "unfavorable_gap": -1.333333333333334,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 16,
+            "target": 14.25,
+            "annual_target": 19,
+            "numerator": 16,
+            "denominator": 9,
+            "unfavorable_gap": -1.75,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 17,
+            "target": 15.833333333333334,
+            "annual_target": 19,
+            "numerator": 17,
+            "denominator": 10,
+            "unfavorable_gap": -1.166666666666666,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 18,
+            "target": 17.416666666666668,
+            "annual_target": 19,
+            "numerator": 18,
+            "denominator": 11,
+            "unfavorable_gap": -0.5833333333333321,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 19,
+            "target": 19,
+            "annual_target": 19,
+            "numerator": 19,
+            "denominator": 12,
+            "unfavorable_gap": 0,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 2,
+            "target": 1.6666666666666667,
+            "annual_target": 20,
+            "numerator": 2,
+            "denominator": 1,
+            "unfavorable_gap": -0.33333333333333326,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 2,
+            "target": 3.3333333333333335,
+            "annual_target": 20,
+            "numerator": 2,
+            "denominator": 2,
+            "unfavorable_gap": 1.3333333333333335,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 6,
+            "target": 5,
+            "annual_target": 20,
+            "numerator": 6,
+            "denominator": 3,
+            "unfavorable_gap": -1,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 8,
+            "target": 6.666666666666667,
+            "annual_target": 20,
+            "numerator": 8,
+            "denominator": 4,
+            "unfavorable_gap": -1.333333333333333,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 8,
+            "target": 8.333333333333334,
+            "annual_target": 20,
+            "numerator": 8,
+            "denominator": 5,
+            "unfavorable_gap": 0.3333333333333339,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 9,
+            "target": 10,
+            "annual_target": 20,
+            "numerator": 9,
+            "denominator": 6,
+            "unfavorable_gap": 1,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 10,
+            "target": 11.666666666666666,
+            "annual_target": 20,
+            "numerator": 10,
+            "denominator": 7,
+            "unfavorable_gap": 1.666666666666666,
+            "period_definition": "som januari t/m peilmaand"
+          }
+        ]
+      },
+      {
+        "evidence_id": "wijk:2",
+        "wijk_id": 2,
+        "wijk_naam": "Rietzoom",
+        "value": 23,
+        "target": 23.333333333333332,
+        "annual_target": 40,
+        "numerator": 23,
+        "denominator": 7,
+        "unfavorable_gap": 0.33333333333333215,
+        "period_definition": "som januari t/m peilmaand",
+        "previous_year": 21,
+        "change": 9.523809523809534,
+        "change_unit": "procent",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 21,
+            "target": 22.166666666666668,
+            "annual_target": 38,
+            "numerator": 21,
+            "denominator": 7,
+            "unfavorable_gap": 1.1666666666666679,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 24,
+            "target": 25.333333333333332,
+            "annual_target": 38,
+            "numerator": 24,
+            "denominator": 8,
+            "unfavorable_gap": 1.3333333333333321,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 28,
+            "target": 28.5,
+            "annual_target": 38,
+            "numerator": 28,
+            "denominator": 9,
+            "unfavorable_gap": 0.5,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 31,
+            "target": 31.666666666666668,
+            "annual_target": 38,
+            "numerator": 31,
+            "denominator": 10,
+            "unfavorable_gap": 0.6666666666666679,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 35,
+            "target": 34.833333333333336,
+            "annual_target": 38,
+            "numerator": 35,
+            "denominator": 11,
+            "unfavorable_gap": -0.1666666666666643,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 38,
+            "target": 38,
+            "annual_target": 38,
+            "numerator": 38,
+            "denominator": 12,
+            "unfavorable_gap": 0,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 2,
+            "target": 3.3333333333333335,
+            "annual_target": 40,
+            "numerator": 2,
+            "denominator": 1,
+            "unfavorable_gap": 1.3333333333333335,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 4,
+            "target": 6.666666666666667,
+            "annual_target": 40,
+            "numerator": 4,
+            "denominator": 2,
+            "unfavorable_gap": 2.666666666666667,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 10,
+            "target": 10,
+            "annual_target": 40,
+            "numerator": 10,
+            "denominator": 3,
+            "unfavorable_gap": 0,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 12,
+            "target": 13.333333333333334,
+            "annual_target": 40,
+            "numerator": 12,
+            "denominator": 4,
+            "unfavorable_gap": 1.333333333333334,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 14,
+            "target": 16.666666666666668,
+            "annual_target": 40,
+            "numerator": 14,
+            "denominator": 5,
+            "unfavorable_gap": 2.666666666666668,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 19,
+            "target": 20,
+            "annual_target": 40,
+            "numerator": 19,
+            "denominator": 6,
+            "unfavorable_gap": 1,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 23,
+            "target": 23.333333333333332,
+            "annual_target": 40,
+            "numerator": 23,
+            "denominator": 7,
+            "unfavorable_gap": 0.33333333333333215,
+            "period_definition": "som januari t/m peilmaand"
+          }
+        ]
+      },
+      {
+        "evidence_id": "wijk:3",
+        "wijk_id": 3,
+        "wijk_naam": "Noorderhaven",
+        "value": 11,
+        "target": 11.666666666666666,
+        "annual_target": 20,
+        "numerator": 11,
+        "denominator": 7,
+        "unfavorable_gap": 0.6666666666666661,
+        "period_definition": "som januari t/m peilmaand",
+        "previous_year": 12,
+        "change": -8.333333333333337,
+        "change_unit": "procent",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 12,
+            "target": 11.083333333333334,
+            "annual_target": 19,
+            "numerator": 12,
+            "denominator": 7,
+            "unfavorable_gap": -0.9166666666666661,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 13,
+            "target": 12.666666666666666,
+            "annual_target": 19,
+            "numerator": 13,
+            "denominator": 8,
+            "unfavorable_gap": -0.3333333333333339,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 16,
+            "target": 14.25,
+            "annual_target": 19,
+            "numerator": 16,
+            "denominator": 9,
+            "unfavorable_gap": -1.75,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 17,
+            "target": 15.833333333333334,
+            "annual_target": 19,
+            "numerator": 17,
+            "denominator": 10,
+            "unfavorable_gap": -1.166666666666666,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 18,
+            "target": 17.416666666666668,
+            "annual_target": 19,
+            "numerator": 18,
+            "denominator": 11,
+            "unfavorable_gap": -0.5833333333333321,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 19,
+            "target": 19,
+            "annual_target": 19,
+            "numerator": 19,
+            "denominator": 12,
+            "unfavorable_gap": 0,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 2,
+            "target": 1.6666666666666667,
+            "annual_target": 20,
+            "numerator": 2,
+            "denominator": 1,
+            "unfavorable_gap": -0.33333333333333326,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 5,
+            "target": 3.3333333333333335,
+            "annual_target": 20,
+            "numerator": 5,
+            "denominator": 2,
+            "unfavorable_gap": -1.6666666666666665,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 5,
+            "target": 5,
+            "annual_target": 20,
+            "numerator": 5,
+            "denominator": 3,
+            "unfavorable_gap": 0,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 6,
+            "target": 6.666666666666667,
+            "annual_target": 20,
+            "numerator": 6,
+            "denominator": 4,
+            "unfavorable_gap": 0.666666666666667,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 7,
+            "target": 8.333333333333334,
+            "annual_target": 20,
+            "numerator": 7,
+            "denominator": 5,
+            "unfavorable_gap": 1.333333333333334,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 11,
+            "target": 10,
+            "annual_target": 20,
+            "numerator": 11,
+            "denominator": 6,
+            "unfavorable_gap": -1,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 11,
+            "target": 11.666666666666666,
+            "annual_target": 20,
+            "numerator": 11,
+            "denominator": 7,
+            "unfavorable_gap": 0.6666666666666661,
+            "period_definition": "som januari t/m peilmaand"
+          }
+        ]
+      },
+      {
+        "evidence_id": "wijk:4",
+        "wijk_id": 4,
+        "wijk_naam": "Binnenstede",
+        "value": 8,
+        "target": 8.75,
+        "annual_target": 15,
+        "numerator": 8,
+        "denominator": 7,
+        "unfavorable_gap": 0.75,
+        "period_definition": "som januari t/m peilmaand",
+        "previous_year": 6,
+        "change": 33.33333333333333,
+        "change_unit": "procent",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 6,
+            "target": 8.166666666666666,
+            "annual_target": 14,
+            "numerator": 6,
+            "denominator": 7,
+            "unfavorable_gap": 2.166666666666666,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 10,
+            "target": 9.333333333333334,
+            "annual_target": 14,
+            "numerator": 10,
+            "denominator": 8,
+            "unfavorable_gap": -0.6666666666666661,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 10,
+            "target": 10.5,
+            "annual_target": 14,
+            "numerator": 10,
+            "denominator": 9,
+            "unfavorable_gap": 0.5,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 13,
+            "target": 11.666666666666666,
+            "annual_target": 14,
+            "numerator": 13,
+            "denominator": 10,
+            "unfavorable_gap": -1.333333333333334,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 14,
+            "target": 12.833333333333334,
+            "annual_target": 14,
+            "numerator": 14,
+            "denominator": 11,
+            "unfavorable_gap": -1.166666666666666,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 14,
+            "target": 14,
+            "annual_target": 14,
+            "numerator": 14,
+            "denominator": 12,
+            "unfavorable_gap": 0,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 3,
+            "target": 1.25,
+            "annual_target": 15,
+            "numerator": 3,
+            "denominator": 1,
+            "unfavorable_gap": -1.75,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 4,
+            "target": 2.5,
+            "annual_target": 15,
+            "numerator": 4,
+            "denominator": 2,
+            "unfavorable_gap": -1.5,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 4,
+            "target": 3.75,
+            "annual_target": 15,
+            "numerator": 4,
+            "denominator": 3,
+            "unfavorable_gap": -0.25,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 4,
+            "target": 5,
+            "annual_target": 15,
+            "numerator": 4,
+            "denominator": 4,
+            "unfavorable_gap": 1,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 4,
+            "target": 6.25,
+            "annual_target": 15,
+            "numerator": 4,
+            "denominator": 5,
+            "unfavorable_gap": 2.25,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 6,
+            "target": 7.5,
+            "annual_target": 15,
+            "numerator": 6,
+            "denominator": 6,
+            "unfavorable_gap": 1.5,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 8,
+            "target": 8.75,
+            "annual_target": 15,
+            "numerator": 8,
+            "denominator": 7,
+            "unfavorable_gap": 0.75,
+            "period_definition": "som januari t/m peilmaand"
+          }
+        ]
+      },
+      {
+        "evidence_id": "wijk:5",
+        "wijk_id": 5,
+        "wijk_naam": "De Havenmeent",
+        "value": 4,
+        "target": 5.833333333333333,
+        "annual_target": 10,
+        "numerator": 4,
+        "denominator": 7,
+        "unfavorable_gap": 1.833333333333333,
+        "period_definition": "som januari t/m peilmaand",
+        "previous_year": 6,
+        "change": -33.333333333333336,
+        "change_unit": "procent",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 6,
+            "target": 5.833333333333333,
+            "annual_target": 10,
+            "numerator": 6,
+            "denominator": 7,
+            "unfavorable_gap": -0.16666666666666696,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 7,
+            "target": 6.666666666666667,
+            "annual_target": 10,
+            "numerator": 7,
+            "denominator": 8,
+            "unfavorable_gap": -0.33333333333333304,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 8,
+            "target": 7.5,
+            "annual_target": 10,
+            "numerator": 8,
+            "denominator": 9,
+            "unfavorable_gap": -0.5,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 8,
+            "target": 8.333333333333334,
+            "annual_target": 10,
+            "numerator": 8,
+            "denominator": 10,
+            "unfavorable_gap": 0.3333333333333339,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 9,
+            "target": 9.166666666666666,
+            "annual_target": 10,
+            "numerator": 9,
+            "denominator": 11,
+            "unfavorable_gap": 0.16666666666666607,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 10,
+            "target": 10,
+            "annual_target": 10,
+            "numerator": 10,
+            "denominator": 12,
+            "unfavorable_gap": 0,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 1,
+            "target": 0.8333333333333334,
+            "annual_target": 10,
+            "numerator": 1,
+            "denominator": 1,
+            "unfavorable_gap": -0.16666666666666663,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 1,
+            "target": 1.6666666666666667,
+            "annual_target": 10,
+            "numerator": 1,
+            "denominator": 2,
+            "unfavorable_gap": 0.6666666666666667,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 2,
+            "target": 2.5,
+            "annual_target": 10,
+            "numerator": 2,
+            "denominator": 3,
+            "unfavorable_gap": 0.5,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 3,
+            "target": 3.3333333333333335,
+            "annual_target": 10,
+            "numerator": 3,
+            "denominator": 4,
+            "unfavorable_gap": 0.3333333333333335,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 3,
+            "target": 4.166666666666667,
+            "annual_target": 10,
+            "numerator": 3,
+            "denominator": 5,
+            "unfavorable_gap": 1.166666666666667,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 4,
+            "target": 5,
+            "annual_target": 10,
+            "numerator": 4,
+            "denominator": 6,
+            "unfavorable_gap": 1,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 4,
+            "target": 5.833333333333333,
+            "annual_target": 10,
+            "numerator": 4,
+            "denominator": 7,
+            "unfavorable_gap": 1.833333333333333,
+            "period_definition": "som januari t/m peilmaand"
+          }
+        ]
+      },
+      {
+        "evidence_id": "wijk:6",
+        "wijk_id": 6,
+        "wijk_naam": "Zuidrand",
+        "value": 12,
+        "target": 17.5,
+        "annual_target": 30,
+        "numerator": 12,
+        "denominator": 7,
+        "unfavorable_gap": 5.5,
+        "period_definition": "som januari t/m peilmaand",
+        "previous_year": 20,
+        "change": -40,
+        "change_unit": "procent",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 20,
+            "target": 16.333333333333332,
+            "annual_target": 28,
+            "numerator": 20,
+            "denominator": 7,
+            "unfavorable_gap": -3.666666666666668,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 22,
+            "target": 18.666666666666668,
+            "annual_target": 28,
+            "numerator": 22,
+            "denominator": 8,
+            "unfavorable_gap": -3.333333333333332,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 24,
+            "target": 21,
+            "annual_target": 28,
+            "numerator": 24,
+            "denominator": 9,
+            "unfavorable_gap": -3,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 24,
+            "target": 23.333333333333332,
+            "annual_target": 28,
+            "numerator": 24,
+            "denominator": 10,
+            "unfavorable_gap": -0.6666666666666679,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 28,
+            "target": 25.666666666666668,
+            "annual_target": 28,
+            "numerator": 28,
+            "denominator": 11,
+            "unfavorable_gap": -2.333333333333332,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 28,
+            "target": 28,
+            "annual_target": 28,
+            "numerator": 28,
+            "denominator": 12,
+            "unfavorable_gap": 0,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 4,
+            "target": 2.5,
+            "annual_target": 30,
+            "numerator": 4,
+            "denominator": 1,
+            "unfavorable_gap": -1.5,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 6,
+            "target": 5,
+            "annual_target": 30,
+            "numerator": 6,
+            "denominator": 2,
+            "unfavorable_gap": -1,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 9,
+            "target": 7.5,
+            "annual_target": 30,
+            "numerator": 9,
+            "denominator": 3,
+            "unfavorable_gap": -1.5,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 10,
+            "target": 10,
+            "annual_target": 30,
+            "numerator": 10,
+            "denominator": 4,
+            "unfavorable_gap": 0,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 11,
+            "target": 12.5,
+            "annual_target": 30,
+            "numerator": 11,
+            "denominator": 5,
+            "unfavorable_gap": 1.5,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 11,
+            "target": 15,
+            "annual_target": 30,
+            "numerator": 11,
+            "denominator": 6,
+            "unfavorable_gap": 4,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 12,
+            "target": 17.5,
+            "annual_target": 30,
+            "numerator": 12,
+            "denominator": 7,
+            "unfavorable_gap": 5.5,
+            "period_definition": "som januari t/m peilmaand"
+          }
+        ]
+      },
+      {
+        "evidence_id": "wijk:7",
+        "wijk_id": 7,
+        "wijk_naam": "Steenbergkwartier",
+        "value": 9,
+        "target": 8.75,
+        "annual_target": 15,
+        "numerator": 9,
+        "denominator": 7,
+        "unfavorable_gap": -0.25,
+        "period_definition": "som januari t/m peilmaand",
+        "previous_year": 8,
+        "change": 12.5,
+        "change_unit": "procent",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 8,
+            "target": 8.166666666666666,
+            "annual_target": 14,
+            "numerator": 8,
+            "denominator": 7,
+            "unfavorable_gap": 0.16666666666666607,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 9,
+            "target": 9.333333333333334,
+            "annual_target": 14,
+            "numerator": 9,
+            "denominator": 8,
+            "unfavorable_gap": 0.3333333333333339,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 9,
+            "target": 10.5,
+            "annual_target": 14,
+            "numerator": 9,
+            "denominator": 9,
+            "unfavorable_gap": 1.5,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 11,
+            "target": 11.666666666666666,
+            "annual_target": 14,
+            "numerator": 11,
+            "denominator": 10,
+            "unfavorable_gap": 0.6666666666666661,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 12,
+            "target": 12.833333333333334,
+            "annual_target": 14,
+            "numerator": 12,
+            "denominator": 11,
+            "unfavorable_gap": 0.8333333333333339,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 14,
+            "target": 14,
+            "annual_target": 14,
+            "numerator": 14,
+            "denominator": 12,
+            "unfavorable_gap": 0,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 1,
+            "target": 1.25,
+            "annual_target": 15,
+            "numerator": 1,
+            "denominator": 1,
+            "unfavorable_gap": 0.25,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 1,
+            "target": 2.5,
+            "annual_target": 15,
+            "numerator": 1,
+            "denominator": 2,
+            "unfavorable_gap": 1.5,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 3,
+            "target": 3.75,
+            "annual_target": 15,
+            "numerator": 3,
+            "denominator": 3,
+            "unfavorable_gap": 0.75,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 4,
+            "target": 5,
+            "annual_target": 15,
+            "numerator": 4,
+            "denominator": 4,
+            "unfavorable_gap": 1,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 7,
+            "target": 6.25,
+            "annual_target": 15,
+            "numerator": 7,
+            "denominator": 5,
+            "unfavorable_gap": -0.75,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 8,
+            "target": 7.5,
+            "annual_target": 15,
+            "numerator": 8,
+            "denominator": 6,
+            "unfavorable_gap": -0.5,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 9,
+            "target": 8.75,
+            "annual_target": 15,
+            "numerator": 9,
+            "denominator": 7,
+            "unfavorable_gap": -0.25,
+            "period_definition": "som januari t/m peilmaand"
+          }
+        ]
+      },
+      {
+        "evidence_id": "wijk:8",
+        "wijk_id": 8,
+        "wijk_naam": "Donderdam West",
+        "value": 2,
+        "target": 5.833333333333333,
+        "annual_target": 10,
+        "numerator": 2,
+        "denominator": 7,
+        "unfavorable_gap": 3.833333333333333,
+        "period_definition": "som januari t/m peilmaand",
+        "previous_year": 5,
+        "change": -60,
+        "change_unit": "procent",
+        "history": [
+          {
+            "month": "2025-07-01",
+            "value": 5,
+            "target": 5.833333333333333,
+            "annual_target": 10,
+            "numerator": 5,
+            "denominator": 7,
+            "unfavorable_gap": 0.833333333333333,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-08-01",
+            "value": 6,
+            "target": 6.666666666666667,
+            "annual_target": 10,
+            "numerator": 6,
+            "denominator": 8,
+            "unfavorable_gap": 0.666666666666667,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-09-01",
+            "value": 7,
+            "target": 7.5,
+            "annual_target": 10,
+            "numerator": 7,
+            "denominator": 9,
+            "unfavorable_gap": 0.5,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-10-01",
+            "value": 8,
+            "target": 8.333333333333334,
+            "annual_target": 10,
+            "numerator": 8,
+            "denominator": 10,
+            "unfavorable_gap": 0.3333333333333339,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-11-01",
+            "value": 9,
+            "target": 9.166666666666666,
+            "annual_target": 10,
+            "numerator": 9,
+            "denominator": 11,
+            "unfavorable_gap": 0.16666666666666607,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2025-12-01",
+            "value": 10,
+            "target": 10,
+            "annual_target": 10,
+            "numerator": 10,
+            "denominator": 12,
+            "unfavorable_gap": 0,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-01-01",
+            "value": 0,
+            "target": 0.8333333333333334,
+            "annual_target": 10,
+            "numerator": 0,
+            "denominator": 1,
+            "unfavorable_gap": 0.8333333333333334,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-02-01",
+            "value": 1,
+            "target": 1.6666666666666667,
+            "annual_target": 10,
+            "numerator": 1,
+            "denominator": 2,
+            "unfavorable_gap": 0.6666666666666667,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-03-01",
+            "value": 1,
+            "target": 2.5,
+            "annual_target": 10,
+            "numerator": 1,
+            "denominator": 3,
+            "unfavorable_gap": 1.5,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-04-01",
+            "value": 1,
+            "target": 3.3333333333333335,
+            "annual_target": 10,
+            "numerator": 1,
+            "denominator": 4,
+            "unfavorable_gap": 2.3333333333333335,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-05-01",
+            "value": 2,
+            "target": 4.166666666666667,
+            "annual_target": 10,
+            "numerator": 2,
+            "denominator": 5,
+            "unfavorable_gap": 2.166666666666667,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-06-01",
+            "value": 2,
+            "target": 5,
+            "annual_target": 10,
+            "numerator": 2,
+            "denominator": 6,
+            "unfavorable_gap": 3,
+            "period_definition": "som januari t/m peilmaand"
+          },
+          {
+            "month": "2026-07-01",
+            "value": 2,
+            "target": 5.833333333333333,
+            "annual_target": 10,
+            "numerator": 2,
+            "denominator": 7,
+            "unfavorable_gap": 3.833333333333333,
+            "period_definition": "som januari t/m peilmaand"
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "Fictieve gegevens, geen echte gemeente.",
+      "Geen gegevens over oorzaken zoals vergunningen, vacatures, huizenprijzen of aannemerscapaciteit.",
+      "Doelen voor stromen zijn lineair over het jaar verdeeld."
+    ]
+  }
+}
