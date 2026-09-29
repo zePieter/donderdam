@@ -17,8 +17,8 @@ Maak twee of drie gemengde groepjes. Verdeel binnen het groepje: iemand bedient 
 
 1. Pak de zip uit en open `Donderdam.pbip`. Klik **Home → Refresh**; vraagt Power BI om toegang, kies **Anonymous → Connect**. De BI-data komt van de workshopsite, er is geen map of pad in te stellen. Kies **Nieuwe woningen** en **aug 2026**; verwacht **91**, doel **107**.
 2. Kies **Home → Get data → Web** en plak de URL van jullie smaak hieronder. Klik **Transform data**.
-3. Zien jullie een lijst? Kies **To Table**, bevestig en klik de dubbele pijl in de kolomkop om alle recordvelden uit te vouwen. Haal het vinkje bij kolomnaam als prefix weg. Als Desktop al een tabel toont, is dit niet nodig.
-4. Hernoem de query volgens de tabel hieronder. Zet **Peilmaand** op **Date**, **KPI_ID** op **Whole number** en tekstvelden op **Text**. Gebruik **Close & Apply**.
+3. Power Query zet de JSON meestal zelf om: je ziet 9 rijen (bij aanbevelingen 27) en rechts de stappen *Converted to table*, *Expanded Column1* en *Changed column type*. Zie je toch alleen het woord **List**? Kies dan **To Table**, bevestig, klik de dubbele pijl in de kolomkop en haal het vinkje bij *Use original column name as prefix* weg.
+4. Hernoem de query rechts bij **Name** (staat op "Query") volgens de tabel hieronder. Controleer de kolomtypen: **Peilmaand** kalendericoon (Date), **KPI_ID** **1²3** (Whole number). Klik op het icoon als het anders is. Gebruik **Close & Apply**.
 5. Ga naar **Model view → Manage relationships → New**. Leg twee actieve relaties: jullie tabel `[KPI_ID]` → `Dim_KPI[KPI_ID]`, en `[Peilmaand]` → `Dim_Datum[Datum]`. Beide **Many to one (*:1)** en **Single**. De dimensies filteren de AI-tabel. Controleer of Desktop geen ongewenste automatische relaties heeft toegevoegd.
 6. Maak jullie visual. Gebruik de bestaande KPI- en maandslicer. Kies alleen juni, juli of augustus 2026 en WON, WLH of CO2 voor AI.
 
